@@ -1,0 +1,7 @@
+<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", size: "100x100" %>
+<p><%= @user.user_name %></p>
+<p><%= @user.email %></p>
+<p><%= @user.postal_code %></p>
+<p><%= @user.address %></p>
+
+<%= link_to "編集する", edit_user_path(@user.id) %>

@@ -1,0 +1,5 @@
+<p>退会するとサイトの一部は引き続きアカウントなしで閲覧は可能ですが、投稿することやお気に入りに登録しているものが見れなくなります。
+それでも退会を希望する場合は「退会する」をクリックください。</p>
+
+<%= link_to "戻る", user_path(current_user), class: "btn btn-dark" %>
+<%=link_to "退会する", users_withdraw_path, method: :patch, class:"btn btn-danger" %>

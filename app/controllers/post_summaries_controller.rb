@@ -1,0 +1,2 @@
+class PostSummariesController < ApplicationController
+end
