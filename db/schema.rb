@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_04_131107) do
+ActiveRecord::Schema.define(version: 2021_11_06_103328) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -55,10 +55,18 @@ ActiveRecord::Schema.define(version: 2021_11_04_131107) do
 
   create_table "post_houses", force: :cascade do |t|
     t.integer "post_summary_id"
-    t.text "URL"
+    t.text "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_summary_id"], name: "index_post_houses_on_post_summary_id"
+  end
+
+  create_table "post_images", force: :cascade do |t|
+    t.string "image_id"
+    t.integer "post_summary_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_summary_id"], name: "index_post_images_on_post_summary_id"
   end
 
   create_table "post_outsides", force: :cascade do |t|
@@ -73,10 +81,9 @@ ActiveRecord::Schema.define(version: 2021_11_04_131107) do
     t.integer "user_id"
     t.integer "post_house_id"
     t.integer "post_outside_id"
+    t.string "title"
     t.string "headline"
     t.text "introduction"
-    t.string "title"
-    t.string "image_id"
     t.integer "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
