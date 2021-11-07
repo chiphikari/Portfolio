@@ -1,0 +1,31 @@
+<h3>投稿しよう</h3>
+<%= form_with model:@post_summary, local:true do |f| %>
+
+<%= f.select :category, [["動画・映画", "動画・映画"], ["本・書籍","本・書籍"],["その他","その他"]], {include_blank: "選択してください"}, class: "form-control" %>
+
+  <div class= "form-group">
+    <label>タイトル</label>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+  <div class= "form-group">
+    <label>画像</label>
+    <%= f.attachment_field :post_images_images, multiple: true, class: "form-control" %>
+  </div>
+  <div class= "form-group">
+    <label>見出し</label>
+    <%= f.text_field :headline, class: "form-control" %>
+  </div>
+  <div class= "form-group">
+    <label>紹介文</label>
+    <%= f.text_area :introduction, class: "form-control" %>
+  </div>
+  <%= f.fields_for :post_house do |s| %>
+    <div class= "form-group">
+      <label>リンク</label>
+      <%= s.text_field :link, class: "form-control" %>
+    </div>
+  <% end %>
+
+  <%= f.submit "追加", class: "btn btn-primary" %>
+
+<% end %>

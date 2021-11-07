@@ -9,13 +9,22 @@ class PostSummary < ApplicationRecord
   has_many :post_images, dependent: :destroy
   accepts_attachments_for :post_images, attachment: :image, append: true
 
+  # enum category: {
+  #   video: 0,
+  #   book: 1,
+  #   other: 2,
+  #   place: 3,
+  #   cafe: 4,
+  #   walk: 5
+  # }
+  
   enum category: {
-    video: 0,
-    book: 1,
-    other: 2,
-    place: 3,
-    cafe: 4,
-    walk: 5
+    動画・映画: 0,
+    本・書籍: 1,
+    その他: 2,
+    隠れおすすめスポット: 3,
+    隠れ喫茶店: 4,
+    おすすめ散歩: 5
   }
 
 end

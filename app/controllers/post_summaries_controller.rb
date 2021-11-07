@@ -1,10 +1,18 @@
 class PostSummariesController < ApplicationController
     def new
+        
+    end
+
+    def post_house
         @post_summary = PostSummary.new
         @post_summary.build_post_house
-        @post_summary.build_post_outside
-
     end
+
+    def post_outside
+        @post_summary = PostSummary.new
+        @post_summary.build_post_outside
+    end
+
 
     def create
         post_summary = PostSummary.new(post_summary_params)
@@ -15,6 +23,10 @@ class PostSummariesController < ApplicationController
         else
             # todo
         end
+    end
+
+    def show
+        @post_summary = PostSummary.find(params[:id])
     end
 
     private

@@ -7,7 +7,13 @@ Rails.application.routes.draw do
     get '/users/withdraw' => 'users#withdraw'
     patch '/users/withdraw' => 'users#withdraw'
 
-    resources :post_summaries
+    resources :post_summaries do
+        collection do
+            get :post_house
+            get :post_outside
+        end
+    end
+
 
     devise_for :admins
 end
