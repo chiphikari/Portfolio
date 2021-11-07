@@ -9,8 +9,8 @@ Rails.application.routes.draw do
 
     resources :post_summaries do
         collection do
-            get :post_house
-            get :post_outside
+            get :house
+            get :outside
         end
     end
 

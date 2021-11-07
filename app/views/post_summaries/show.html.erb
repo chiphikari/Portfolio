@@ -1,3 +1,44 @@
-<h3>詳細</h3>
+<%= flash[:notice] %>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3>投稿一覧</h3>
 
-<%= @post_summary.category %>
+            <div>タイトル</div>
+            <%= @post_summary.title %>
+
+            <div>ヘッドライン</div>
+            <%= @post_summary.headline %>
+
+            <div>投稿画像</div>
+            <% @post_summary.post_images.each do |image| %>
+                <%= attachment_image_tag image, :image, width: "300" %>
+            <% end %>
+
+            <div>紹介</div>
+            <%= @post_summary.introduction %>
+
+            <!--post_houseのテーブルのカラムLinkに値があれば表示-->
+            <% if @post_summary.post_house.present? %>
+                <div>リンク</div>
+                <%= @post_summary.post_house.link %>
+            <% end %>
+
+            <!--post_outsideのテーブルのカラムaddressに値があれば表示-->
+            <% unless @post_summary.post_outside.blank? %>
+                <div>住所</div>
+                <%= @post_summary.post_outside.address %>
+            <% end %>
+
+            <div>投稿者</div>
+            <%= attachment_image_tag @post_summary.user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", size: "100x100" %>
+            <%= @post_summary.user.user_name %>
+
+            <% if @user.id == current_user.id %>
+                <%= link_to "編集する", edit_post_summary_path(@post_summary.id), class: "btn btn-success" %>
+                <%= link_to "削除する", post_summary_path(@post_summary.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+            <% end %>
+
+        </div>
+    </div>
+</div>

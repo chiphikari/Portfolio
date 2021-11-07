@@ -9,6 +9,11 @@ class PostSummary < ApplicationRecord
   has_many :post_images, dependent: :destroy
   accepts_attachments_for :post_images, attachment: :image, append: true
 
+  validates :title, presence: true
+  validates :headline, presence: true
+  validates :introduction, presence: true
+  validates :category, presence: true
+
   # enum category: {
   #   video: 0,
   #   book: 1,
@@ -17,7 +22,7 @@ class PostSummary < ApplicationRecord
   #   cafe: 4,
   #   walk: 5
   # }
-  
+
   enum category: {
     動画・映画: 0,
     本・書籍: 1,

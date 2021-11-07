@@ -1,3 +1,34 @@
 // Place all the styles related to the PostSummaries controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+ .list_design031 {
+  list-style: none;
+  width: 300px;
+}
+
+.list_design031 .animation {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: translate(100px, 0px);
+          transform: translate(100px, 0px);
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  width: 100%;
+}
+
+.list_design031 .animation.is-show {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+
+.list_design031 li {
+  color: #333;
+  border-left: solid 8px #f4a006;
+  background: #eee;
+  margin-bottom: 5px;
+  padding: 0.5rem;
+  width: 25%;
+}

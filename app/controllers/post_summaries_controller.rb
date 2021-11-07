@@ -1,14 +1,20 @@
 class PostSummariesController < ApplicationController
-    def new
-        
+
+    def index
+        # params:[:category]はlink_toの（category: 0..)のcategoryと連携している。なのでparams:[:hoge]としてもlink_toを（hoge: 0..)にしても動作はする
+        @post_summaries = PostSummary.where(category: params[:category])
     end
 
-    def post_house
+    def new
+
+    end
+
+    def house
         @post_summary = PostSummary.new
         @post_summary.build_post_house
     end
 
-    def post_outside
+    def outside
         @post_summary = PostSummary.new
         @post_summary.build_post_outside
     end
@@ -19,14 +25,16 @@ class PostSummariesController < ApplicationController
         # belongs_toでユーザーを関連つけしているためuser.idがnilになる
         post_summary.user = current_user
         if post_summary.save
-          redirect_to post_summary_path(post_summary.id)
+            flash[:notice] = "投稿できました！！"
+            redirect_to post_summary_path(post_summary.id)
         else
-            # todo
+            render :edit
         end
     end
 
     def show
         @post_summary = PostSummary.find(params[:id])
+        @user = @post_summary.user
     end
 
     private
