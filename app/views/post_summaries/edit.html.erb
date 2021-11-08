@@ -1,11 +1,8 @@
 <div class="container">
   <div class="row">
+
     <h3>投稿しよう</h3>
     <%= form_with model:@post_summary, local:true do |f| %>
-
-    <%= f.select :category, [["隠れおすすめスポット", "隠れおすすめスポット"], ["隠れ喫茶店","隠れ喫茶店"],["おすすめ散歩","おすすめ散歩"]], {include_blank: "選択してください"}, class: "form-control" %>
-    <!--日本語化↓-->
-    <!--<= f.select :category, PostSummary.categories.keys.map {|k| [I18n.t("enums.post_summary.category.#{k}"), k]}, {include_blank: "選択してください"} %>-->
 
       <div class= "form-group">
         <label>タイトル</label>
@@ -23,11 +20,23 @@
         <label>紹介文</label>
         <%= f.text_area :introduction, class: "form-control" %>
       </div>
-      <%= f.fields_for :post_outside do |s| %>
-        <div class= "form-group">
-          <label>住所</label>
-          <%= s.text_field :address, placeholder:"住所を入力して下さい", class: "form-control" %>
-        </div>
+
+      <% if @post_summary.post_house.present? %>
+        <%= f.fields_for :post_house do |s| %>
+          <div class= "form-group">
+            <label>リンク</label>
+            <%= s.text_field :link, class: "form-control" %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% unless @post_summary.post_outside.blank? %>
+        <%= f.fields_for :post_outside do |s| %>
+          <div class= "form-group">
+            <label>住所</label>
+            <%= s.text_field :address, class: "form-control" %>
+          </div>
+        <% end %>
       <% end %>
 
       <%= f.submit "追加", class: "btn btn-primary" %>
@@ -35,4 +44,3 @@
     <% end %>
   </div>
 </div>
-

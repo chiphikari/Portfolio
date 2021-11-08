@@ -74,3 +74,7 @@ gem 'rails-i18n', '~> 5.1'
 gem 'enum_help'
 
 gem 'pry-byebug'
+
+gem "dotenv-rails"
+gem "gmaps4rails"
+gem "geocoder"

@@ -9,10 +9,10 @@ class PostSummary < ApplicationRecord
   has_many :post_images, dependent: :destroy
   accepts_attachments_for :post_images, attachment: :image, append: true
 
-  validates :title, presence: true
-  validates :headline, presence: true
-  validates :introduction, presence: true
-  validates :category, presence: true
+  # validates :title, presence: true
+  # validates :headline, presence: true
+  # validates :introduction, presence: true
+  # validates :category, presence: true
 
   # enum category: {
   #   video: 0,

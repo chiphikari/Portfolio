@@ -12,7 +12,7 @@
 
             <div>投稿画像</div>
             <% @post_summary.post_images.each do |image| %>
-                <%= attachment_image_tag image, :image, width: "300" %>
+                <%= attachment_image_tag image, :image, fallback: "noimage.jpg", width: "300" %>
             <% end %>
 
             <div>紹介</div>
@@ -28,12 +28,28 @@
             <% unless @post_summary.post_outside.blank? %>
                 <div>住所</div>
                 <%= @post_summary.post_outside.address %>
+                <div id="map" style='width: 100%; height: 500px;'></div>
+                    <script type="text/javascript">
+                    function initMap(){
+                      // geocoder = new google.maps.Geocoder()
+
+                      map = new google.maps.Map(document.getElementById('map'), {
+                        //latが緯度、lngが経度を示します
+                        center: {lat: <%= @post_summary.post_outside.latitude %>, lng: <%= @post_summary.post_outside.longitude %>},
+                        //数値は0〜21まで指定できます。数値が大きいほど拡大されます
+                        zoom: 12,
+                      });
+                      //positionに指定した座標にピンを表示させます
+                      marker = new google.maps.Marker({
+                        position: {lat: <%= @post_summary.post_outside.latitude %>, lng: <%= @post_summary.post_outside.longitude %>},
+                        map: map
+                      });
+                    }
+                    </script>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
             <% end %>
 
             <div>投稿者</div>
-            <%= attachment_image_tag @post_summary.user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", size: "100x100" %>
-            <%= @post_summary.user.user_name %>
-
             <% if @user.id == current_user.id %>
                 <%= link_to "編集する", edit_post_summary_path(@post_summary.id), class: "btn btn-success" %>
                 <%= link_to "削除する", post_summary_path(@post_summary.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>

@@ -1,6 +1,9 @@
 class PostOutside < ApplicationRecord
   belongs_to :post_summary
-  
-  validate :address, presence: true
-  
+
+  geocoded_by :address
+  after_validation :geocode
+
+  # validate :address, presence: true
+
 end
