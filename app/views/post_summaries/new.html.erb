@@ -1,5 +1,4 @@
 <h3>家で楽しめる投稿</h3>
-<%= javascript_include_tag "post_summaries.js" %>
 
 以下カテゴリーの投稿を希望している方はしたの投稿ボタンをクリックしてください。
 <ul class="list_design031">
@@ -17,3 +16,24 @@
   <li class="animation">おすすめ散歩</li>
 </ul>
 <%= link_to "外で楽しめる投稿", outside_post_summaries_path, class: "btn btn-dark" %>
+
+<!--Javascript-->
+<script type="text/javascript">
+  window.onload = function showElementAnimation() {
+    var element = document.getElementsByClassName('animation');
+    if(!element) return;
+    var showTiming = window.innerHeight > 768 ? 200 : 40; // 要素が出てくるタイミングはここで調整
+    var scrollY = window.pageYOffset;
+    var windowH = window.innerHeight;
+    for(var i=0;i<element.length;i++) { var elemClientRect = element[i].getBoundingClientRect(); var elemY = scrollY + elemClientRect.top; if(scrollY + windowH - showTiming > elemY) {
+        element[i].classList.add('is-show');
+      } else if(scrollY + windowH < elemY) {
+        element[i].classList.remove('is-show');
+      }
+    }
+  }
+  /* global functionshowElementAnimation */
+  window.onload = functionshowElementAnimation();
+  /* global showElementAnimation */
+  window.addEventListener('scroll', showElementAnimation);
+</script>

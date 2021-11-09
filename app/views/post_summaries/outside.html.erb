@@ -27,7 +27,26 @@
         <div class= "form-group">
           <label>住所</label>
           <%= s.text_field :address, placeholder:"住所を入力して下さい", class: "form-control" %>
+          <button id="searchAddressBtn" type="button" value="search">Search</button>
         </div>
+
+        <div id="map" style='width: 100%; height: 500px;'></div>
+            <script type="text/javascript">
+              function initMap(){
+                map = new google.maps.Map(document.getElementById('map'), {
+                    //latが緯度、lngが経度を示す
+                    center: {lat: <%= s.text_field :latitude, readonly:"readonly" %>, lng: <%= s.text_field :longitude, readonly:"readonly" %>},
+                    //数値は0〜21まで指定できる。数値が大きいほど拡大される
+                    zoom: 15,
+                });
+                //positionに指定した座標にピンを表示させる
+                marker = new google.maps.Marker({
+                    position: {lat: <%= s.text_field :latitude, readonly:"readonly" %>, lng: <%= s.text_field :longitude, readonly:"readonly" %>},
+                    map: map
+                });
+                }
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
       <% end %>
 
       <%= f.submit "追加", class: "btn btn-primary" %>
