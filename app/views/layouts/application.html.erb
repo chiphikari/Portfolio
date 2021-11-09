@@ -29,8 +29,8 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <% if user_signed_in? %>
                 <a class="dropdown-item" href="#"><%= link_to "My Page", user_path(current_user) %></a>
-                <a class="dropdown-item" href="#"><%= link_to "New Post" %></a>
-                <a class="dropdown-item" href="#"><%= link_to "Posts List" %></a>
+                <a class="dropdown-item" href="#"><%= link_to "New Post", new_post_summary_path %></a>
+                <a class="dropdown-item" href="#"><%= link_to "Posts List", post_summaries_path %></a>
                 <a class="dropdown-item" href="#"><%= link_to "Logout", destroy_user_session_path, method: :delete %></a>
               <% else %>
                 <a class="dropdown-item" href="#"><%= link_to "Sign up", new_user_registration_path %></a>
