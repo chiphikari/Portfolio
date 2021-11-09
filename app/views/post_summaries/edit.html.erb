@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+
+    <h3>投稿しよう</h3>
+    <%= form_with model:@post_summary, local:true do |f| %>
+
+      <div class= "form-group">
+        <label>タイトル</label>
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+      <div class= "form-group">
+        <label>画像</label>
+        <%= f.attachment_field :post_images_images, multiple: true, class: "form-control" %>
+      </div>
+      <div class= "form-group">
+        <label>見出し</label>
+        <%= f.text_field :headline, class: "form-control" %>
+      </div>
+      <div class= "form-group">
+        <label>紹介文</label>
+        <%= f.text_area :introduction, class: "form-control" %>
+      </div>
+
+      <% if @post_summary.post_house.present? %>
+        <%= f.fields_for :post_house do |s| %>
+          <div class= "form-group">
+            <label>リンク</label>
+            <%= s.text_field :link, class: "form-control" %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% unless @post_summary.post_outside.blank? %>
+        <%= f.fields_for :post_outside do |s| %>
+          <div class= "form-group">
+            <label>住所</label>
+            <%= s.text_field :address, class: "form-control" %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <%= f.submit "更新する", class: "btn btn-primary" %>
+
+    <% end %>
+  </div>
+</div>

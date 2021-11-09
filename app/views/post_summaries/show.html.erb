@@ -1,0 +1,63 @@
+<%= flash[:notice] %>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3>投稿詳細</h3>
+
+            <div>タイトル</div>
+            <%= @post_summary.title %>
+
+            <div>ヘッドライン</div>
+            <%= @post_summary.headline %>
+
+            <div>投稿画像</div>
+            <% if @post_summary.post_images.present? %>
+                <% @post_summary.post_images.each do |image| %>
+                    <%= attachment_image_tag image, :image, fallback: "noimage.jpg", width: "300", class: "default_image" %>
+                <% end %>
+            <% else %>
+              <%= image_tag 'noimage.jpg', width: "300" %>
+            <% end %>
+
+
+            <div>紹介</div>
+            <%= @post_summary.introduction %>
+
+            <!--post_houseのテーブルのカラムLinkに値があれば表示-->
+            <% if @post_summary.post_house.present? %>
+                <div>リンク</div>
+                <%= @post_summary.post_house.link %>
+            <% end %>
+
+            <!--post_outsideのテーブルのカラムaddressに値があれば表示-->
+            <% unless @post_summary.post_outside.blank? %>
+                <div>住所</div>
+                <%= @post_summary.post_outside.address %>
+                <div id="map" style='width: 100%; height: 500px;'></div>
+                    <script type="text/javascript">
+                    function initMap(){
+                      map = new google.maps.Map(document.getElementById('map'), {
+                        //latが緯度、lngが経度を示す
+                        center: {lat: <%= @post_summary.post_outside.latitude %>, lng: <%= @post_summary.post_outside.longitude %>},
+                        //数値は0〜21まで指定できる。数値が大きいほど拡大される
+                        zoom: 15,
+                      });
+                      //positionに指定した座標にピンを表示させる
+                      marker = new google.maps.Marker({
+                        position: {lat: <%= @post_summary.post_outside.latitude %>, lng: <%= @post_summary.post_outside.longitude %>},
+                        map: map
+                      });
+                    }
+                    </script>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
+            <% end %>
+
+            <div>投稿者</div>
+            <% if @user.id == current_user.id %>
+                <%= link_to "編集する", edit_post_summary_path(@post_summary.id), class: "btn btn-success" %>
+                <%= link_to "削除する", post_summary_path(@post_summary.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+            <% end %>
+
+        </div>
+    </div>
+</div>

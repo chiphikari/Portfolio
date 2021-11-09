@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_04_131107) do
+ActiveRecord::Schema.define(version: 2021_11_06_103328) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -25,28 +25,26 @@ ActiveRecord::Schema.define(version: 2021_11_04_131107) do
   end
 
   create_table "bookmarks", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "post_summary_id"
+    t.integer "user_id", null: false
+    t.integer "post_summary_id", null: false
     t.datetime "created_at", null: false
-    t.datetime "update_at"
     t.datetime "updated_at", null: false
     t.index ["post_summary_id"], name: "index_bookmarks_on_post_summary_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
   create_table "contacts", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "phone"
-    t.text "message"
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "phone", null: false
+    t.text "message", null: false
     t.datetime "created_at", null: false
-    t.datetime "update_at"
     t.datetime "updated_at", null: false
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "post_summary_id"
+    t.integer "user_id", null: false
+    t.integer "post_summary_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_summary_id"], name: "index_favorites_on_post_summary_id"
@@ -54,51 +52,54 @@ ActiveRecord::Schema.define(version: 2021_11_04_131107) do
   end
 
   create_table "post_houses", force: :cascade do |t|
-    t.integer "post_summary_id"
-    t.text "URL"
+    t.integer "post_summary_id", null: false
+    t.text "link", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_summary_id"], name: "index_post_houses_on_post_summary_id"
   end
 
+  create_table "post_images", force: :cascade do |t|
+    t.string "image_id"
+    t.integer "post_summary_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_summary_id"], name: "index_post_images_on_post_summary_id"
+  end
+
   create_table "post_outsides", force: :cascade do |t|
-    t.integer "post_summary_id"
-    t.text "address"
+    t.integer "post_summary_id", null: false
+    t.text "address", null: false
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_summary_id"], name: "index_post_outsides_on_post_summary_id"
   end
 
   create_table "post_summaries", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "post_house_id"
-    t.integer "post_outside_id"
-    t.string "headline"
-    t.text "introduction"
-    t.string "title"
-    t.string "image_id"
-    t.integer "category"
+    t.integer "user_id", null: false
+    t.string "title", null: false
+    t.string "headline", null: false
+    t.text "introduction", null: false
+    t.integer "category", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_house_id"], name: "index_post_summaries_on_post_house_id"
-    t.index ["post_outside_id"], name: "index_post_summaries_on_post_outside_id"
     t.index ["user_id"], name: "index_post_summaries_on_user_id"
   end
 
   create_table "post_tags", force: :cascade do |t|
-    t.integer "post_summary_id"
-    t.integer "tag_id"
+    t.integer "post_summary_id", null: false
+    t.integer "tag_id", null: false
     t.datetime "created_at", null: false
-    t.datetime "update_at"
     t.datetime "updated_at", null: false
     t.index ["post_summary_id"], name: "index_post_tags_on_post_summary_id"
     t.index ["tag_id"], name: "index_post_tags_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "tag_name"
+    t.string "tag_name", null: false
     t.datetime "created_at", null: false
-    t.datetime "update_at"
     t.datetime "updated_at", null: false
   end
 

@@ -1,10 +1,8 @@
 class CreatePostHouses < ActiveRecord::Migration[5.2]
   def change
     create_table :post_houses do |t|
-      t.references :post_summary, foreign_key: true
-      t.text :URL
-      t.datetime :created_at
-      t.datetime :updated_at
+      t.references :post_summary, null: false, foreign_key: true
+      t.text :link, null: false
 
       t.timestamps
     end

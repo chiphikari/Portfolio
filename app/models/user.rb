@@ -10,5 +10,6 @@ class User < ApplicationRecord
 
   scope :only_status, -> { where(status: true) }
   attachment :profile_image
+  has_many :post_summaries, dependent: :destroy
 
 end
