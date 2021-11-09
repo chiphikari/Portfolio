@@ -6,10 +6,14 @@
                 <% @post_summaries.each do |post| %>
                     <h4><%= post.title %></h4>
                     <h4><%= post.headline %></h4>
-                    <% post.post_images.each do |image| %>
-                        <%= attachment_image_tag image, :image, fallback: "noimage.jpg", width: "300" %>
+                    <% if post.post_images.present? %>
+                        <% post.post_images.each do |image| %>
+                            <%= attachment_image_tag image, :image, fallback: "noimage.jpg", width: "300" %>
+                        <% end %>
+                    <% else %>
+                      <%= image_tag 'noimage.jpg', width: "300" %>
                     <% end %>
-
+                <div><%= link_to "もっと詳しく見る", post_summary_path(post.id) %></div>
                 <% end %>
             </div>
         </div>

@@ -51,12 +51,16 @@
                     </script>
                     <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
             <% end %>
+            <div>
+                <% if @user.id == current_user.id %>
+                    <%= link_to "編集する", edit_post_summary_path(@post_summary.id), class: "btn btn-success" %>
+                    <%= link_to "削除する", post_summary_path(@post_summary.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+                <% end %>
+            </div>
 
             <div>投稿者</div>
-            <% if @user.id == current_user.id %>
-                <%= link_to "編集する", edit_post_summary_path(@post_summary.id), class: "btn btn-success" %>
-                <%= link_to "削除する", post_summary_path(@post_summary.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
-            <% end %>
+            <p><%= @user.user_name %></p>
+            <%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", size: "100x100" %>
 
         </div>
     </div>

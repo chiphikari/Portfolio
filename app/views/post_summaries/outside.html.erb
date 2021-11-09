@@ -1,57 +1,82 @@
 <div class="container">
   <div class="row">
+    <div class= "col">
     <h3>投稿しよう</h3>
-    <%= form_with model:@post_summary, local:true do |f| %>
+      <%= form_with model:@post_summary, local:true do |f| %>
 
-    <%= f.select :category, [["隠れおすすめスポット", "隠れおすすめスポット"], ["隠れ喫茶店","隠れ喫茶店"],["おすすめ散歩","おすすめ散歩"]], {include_blank: "選択してください"}, class: "form-control" %>
-    <!--日本語化↓-->
-    <!--<= f.select :category, PostSummary.categories.keys.map {|k| [I18n.t("enums.post_summary.category.#{k}"), k]}, {include_blank: "選択してください"} %>-->
+      <%= f.select :category, [["隠れおすすめスポット", "隠れおすすめスポット"], ["隠れ喫茶店","隠れ喫茶店"],["おすすめ散歩","おすすめ散歩"]], {include_blank: "選択してください"}, class: "form-control" %>
+      <!--日本語化↓-->
+      <!--<= f.select :category, PostSummary.categories.keys.map {|k| [I18n.t("enums.post_summary.category.#{k}"), k]}, {include_blank: "選択してください"} %>-->
 
-      <div class= "form-group">
-        <label>タイトル</label>
-        <%= f.text_field :title, class: "form-control" %>
-      </div>
-      <div class= "form-group">
-        <label>画像</label>
-        <%= f.attachment_field :post_images_images, multiple: true, class: "form-control" %>
-      </div>
-      <div class= "form-group">
-        <label>見出し</label>
-        <%= f.text_field :headline, class: "form-control" %>
-      </div>
-      <div class= "form-group">
-        <label>紹介文</label>
-        <%= f.text_area :introduction, class: "form-control" %>
-      </div>
-      <%= f.fields_for :post_outside do |s| %>
         <div class= "form-group">
-          <label>住所</label>
-          <%= s.text_field :address, placeholder:"住所を入力して下さい", class: "form-control" %>
-          <button id="searchAddressBtn" type="button" value="search">Search</button>
+          <label>タイトル</label>
+          <%= f.text_field :title, class: "form-control" %>
         </div>
+        <div class= "form-group">
+          <label>画像</label>
+          <%= f.attachment_field :post_images_images, multiple: true, class: "form-control" %>
+        </div>
+        <div class= "form-group">
+          <label>見出し</label>
+          <%= f.text_field :headline, class: "form-control" %>
+        </div>
+        <div class= "form-group">
+          <label>紹介文</label>
+          <%= f.text_area :introduction, class: "form-control" %>
+        </div>
+        <%= f.fields_for :post_outside do |s| %>
+          <div class= "form-group">
+            <label>住所</label>
+            <%= s.text_field :address, placeholder:"住所を入力して下さい", class: "form-control" %>
+            <button id="searchAddressBtn" type="button" value="search">Search</button>
+          </div>
 
-        <div id="map" style='width: 100%; height: 500px;'></div>
-            <script type="text/javascript">
-              function initMap(){
-                map = new google.maps.Map(document.getElementById('map'), {
-                    //latが緯度、lngが経度を示す
-                    center: {lat: <%= s.text_field :latitude, readonly:"readonly" %>, lng: <%= s.text_field :longitude, readonly:"readonly" %>},
-                    //数値は0〜21まで指定できる。数値が大きいほど拡大される
-                    zoom: 15,
-                });
-                //positionに指定した座標にピンを表示させる
-                marker = new google.maps.Marker({
-                    position: {lat: <%= s.text_field :latitude, readonly:"readonly" %>, lng: <%= s.text_field :longitude, readonly:"readonly" %>},
-                    map: map
-                });
+          <div id="map" style='width: 100%; height: 500px;'></div>
+              <script type="text/javascript">
+                function initMap(){
+                  map = new google.maps.Map(document.getElementById('map'), {
+                      //latが緯度、lngが経度を示す
+                      center: {lat: 35.6585805, lng: 139.7432442},
+                      //数値は0〜21まで指定できる。数値が大きいほど拡大される
+                      zoom: 15,
+                  });
                 }
-            </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
+                $(function(){
+                  $('#searchAddressBtn').click(function() {
+                    var address = $('#post_summary_post_outside_attributes_address').val();
+                    var geocoder = new google.maps.Geocoder();
+                    geocoder.geocode(
+                      {
+                        'address' : address,
+                        'region' : 'jp'
+                      },
+                      function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                          // 住所のデータを取得できた時
+                          // 取得した座標をマップに反映
+                          map.setCenter(results[0].geometry.location);
+                          // 取得した座標をマーカーに反映
+                          var pos = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+                          // gMarkerCenter.setPosition(pos);
+                          var markerCenter = new google.maps.Marker({
+                            position: pos,
+                            map: map,
+                          });
+                        } else {
+                          // 失敗した時
+                          alert('住所検索に失敗しました。<br>住所が正しいか確認してください');
+                        }
+                      });
+                  });
+                });
+              </script>
+              <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
+        <% end %>
+
+        <%= f.submit "追加", class: "btn btn-primary" %>
+
       <% end %>
-
-      <%= f.submit "追加", class: "btn btn-primary" %>
-
-    <% end %>
+    </div>
   </div>
 </div>
 

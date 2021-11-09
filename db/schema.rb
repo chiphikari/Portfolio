@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_06_103328) do
+ActiveRecord::Schema.define(version: 2021_11_09_080833) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -95,6 +95,17 @@ ActiveRecord::Schema.define(version: 2021_11_06_103328) do
     t.datetime "updated_at", null: false
     t.index ["post_summary_id"], name: "index_post_tags_on_post_summary_id"
     t.index ["tag_id"], name: "index_post_tags_on_tag_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "post_summary_id", null: false
+    t.float "score", null: false
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_summary_id"], name: "index_reviews_on_post_summary_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|

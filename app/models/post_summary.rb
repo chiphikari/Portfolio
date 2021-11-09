@@ -1,5 +1,7 @@
 class PostSummary < ApplicationRecord
   belongs_to :user
+  has_many :reviews, dependent: :destroy
+
   has_one :post_house, dependent: :destroy
   accepts_nested_attributes_for :post_house
 
