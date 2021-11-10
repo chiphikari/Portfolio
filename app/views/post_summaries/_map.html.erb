@@ -1,0 +1,51 @@
+<%= f.fields_for :post_outside do |s| %>
+    <div class= "form-group">
+      <label>住所</label>
+      <%= s.text_field :address, placeholder:"住所を入力して下さい", class: "form-control" %>
+      <button id="searchAddressBtn" type="button" value="search" class="btn btn-info">検索する</button>
+    </div>
+
+    <!--Google MAPの画像を表示-->
+    <div id="map" style='width: 100%; height: 500px;'></div>
+      <script type="text/javascript">
+        function initMap(){
+          // 最初にGoogleMAPに表示しておく場所
+          map = new google.maps.Map(document.getElementById('map'), {
+              //latが緯度、lngが経度を示す
+              center: {lat: 35.6585805, lng: 139.7432442},
+              //数値は0〜21まで指定できる。数値が大きいほど拡大される
+              zoom: 15,
+          });
+        }
+        // 検索ボタンを押した場所の表示
+        $(function(){
+          $('#searchAddressBtn').click(function() {
+            var address = $('#post_summary_post_outside_attributes_address').val();
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode(
+              {
+                'address' : address,
+                'region' : 'jp'
+              },
+              function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                  // 住所のデータを取得できた時
+                  // 取得した座標をマップに反映
+                  map.setCenter(results[0].geometry.location);
+                  // 取得した座標をマーカーに反映
+                  var pos = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+                  // gMarkerCenter.setPosition(pos);
+                  var markerCenter = new google.maps.Marker({
+                    position: pos,
+                    map: map,
+                  });
+                } else {
+                  // 失敗した時
+                  alert('住所検索に失敗しました。<br>住所が正しいか確認してください');
+                }
+              });
+            });
+          });
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
+<% end %>

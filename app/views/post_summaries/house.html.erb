@@ -8,22 +8,8 @@
     <!--日本語化↓-->
     <!--<= f.select :category, PostSummary.categories.keys.map {|k| [I18n.t("enums.post_summary.category.#{k}"), k]}, {include_blank: "選択してください"} %>-->
 
-      <div class= "form-group">
-        <label>タイトル</label>
-        <%= f.text_field :title, class: "form-control" %>
-      </div>
-      <div class= "form-group">
-        <label>画像</label>
-        <%= f.attachment_field :post_images_images, multiple: true, class: "form-control" %>
-      </div>
-      <div class= "form-group">
-        <label>見出し</label>
-        <%= f.text_field :headline, class: "form-control" %>
-      </div>
-      <div class= "form-group">
-        <label>紹介文</label>
-        <%= f.text_area :introduction, class: "form-control" %>
-      </div>
+      <%= render 'post_summaries/form', f:f %>
+
       <%= f.fields_for :post_house do |s| %>
         <div class= "form-group">
           <label>リンク</label>

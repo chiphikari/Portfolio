@@ -23,7 +23,7 @@
             <div>紹介</div>
             <%= @post_summary.introduction %>
 
-            <!--post_houseのテーブルのカラムLinkに値があれば表示-->
+            <!--post_houseのテーブルのカラムlinkに値があれば表示-->
             <% if @post_summary.post_house.present? %>
                 <div>リンク</div>
                 <%= @post_summary.post_house.link %>
@@ -33,6 +33,7 @@
             <% unless @post_summary.post_outside.blank? %>
                 <div>住所</div>
                 <%= @post_summary.post_outside.address %>
+                <!--GoogleMAP-->
                 <div id="map" style='width: 100%; height: 500px;'></div>
                     <script type="text/javascript">
                     function initMap(){
@@ -57,6 +58,81 @@
                     <%= link_to "削除する", post_summary_path(@post_summary.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
                 <% end %>
             </div>
+
+            <!--レビュー----------------------------------------------------------------------------->
+            <p>レビューを書く</p>
+            <%= form_with(model:[@post_summaries, @review]) do |f| %>
+
+             <%= f.hidden_field :post_summariest_id, value: @post_summaries.id %>
+
+              <!-- 評価 -->
+              <div class="form-group row" id="star">
+                <%= f.label :score,'評価 ', class:'col-md-3 col-form-label' %>
+                <%= f.hidden_field :score, id: :review_star %>
+              </div>
+
+              <!-- 評価javascript -->
+              <script>
+              $('#star').raty({
+                size     : 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                scoreName: 'review[score]',
+                half: true,
+              });
+              </script>
+
+              <!-- 口コミ -->
+              <div class="form-group row">
+                <%= f.label :content, '口コミ内容 ', class:'col-md-3 col-form-label' %>
+                <div class="col-md-9">
+                  <%= f.text_field :content, class: "form-control", rows: "8",
+                    placeholder:'口コミ内容がなくても、タイトルと評価のみで投稿できます。' %>
+                </div>
+              </div>
+
+              <!-- 確認ボタン -->
+              <div class="form-group row justify-content-end">
+                <div class="col-md-9">
+                  <%= f.submit '投稿する', class:"btn btn-success" %>
+                </div>
+              </div>
+
+            <% end %>
+            <!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--レビュー一覧-->
+            <% if @reviews.present? %>
+              <% @reviews.each do |reviews| %>
+                <%= reviews.user.user_name %>
+                <%= attachment_image_tag reviews.user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", size: "100x100" %>
+
+                <p>評価</p>
+                <%= reviews.score %>点
+
+                <p>コメント</p>
+                <%= reviews.content %>
+
+                <!--星評価-->
+                 <div id="star-rate-<%= reviews.id %>"></div>
+                  <script>
+                  $('#star-rate-<%= reviews.id %>').raty({
+                    size: 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    half: true,
+                    readOnly: true,
+                    score: <%= reviews.score %>,
+                  });
+                  </script>
+
+                <% if current_user == reviews.user %>
+                  <%= link_to '口コミを削除', post_summary_review_path(reviews.id), method: :delete, class:'btn btn-default' %>
+                <% end %>
+              <% end %>
+            <% end %>
+
 
             <div>投稿者</div>
             <p><%= @user.user_name %></p>

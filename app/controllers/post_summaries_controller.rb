@@ -49,6 +49,7 @@ class PostSummariesController < ApplicationController
         @post_summary = PostSummary.find(params[:id])
         @user = @post_summary.user
         @review = Review.new
+        @reviews = @post_summary.reviews
     end
 
     def edit

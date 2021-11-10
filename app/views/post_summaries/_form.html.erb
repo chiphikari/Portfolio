@@ -1,0 +1,16 @@
+<div class= "form-group">
+    <label>タイトル</label>
+    <%= f.text_field :title, class: "form-control" %>
+</div>
+<div class= "form-group">
+    <label>画像</label>
+    <%= f.attachment_field :post_images_images, multiple: true, class: "form-control" %>
+</div>
+<div class= "form-group">
+    <label>見出し</label>
+    <%= f.text_field :headline, class: "form-control" %>
+</div>
+<div class= "form-group">
+    <label>紹介文</label>
+    <%= f.text_area :introduction, class: "form-control" %>
+</div>

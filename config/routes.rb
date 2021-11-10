@@ -12,7 +12,7 @@ Rails.application.routes.draw do
             get :house
             get :outside
         end
-        resources :reviews, only: [:index, :create, :show]
+        resources :reviews, only: [:create, :destroy]
     end
 
 
