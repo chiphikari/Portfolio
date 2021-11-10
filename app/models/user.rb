@@ -13,5 +13,6 @@ class User < ApplicationRecord
   has_many :post_summaries, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
 end

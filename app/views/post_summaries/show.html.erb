@@ -123,8 +123,13 @@
              </div>
 
              <!--プックマークする-->
-            <div id="bookmark_button_<%= @post_summary.id %>">
+            <div id="bookmark_buttons_<%= @post_summary.id %>">
               <%= render "bookmarks/bookmark", post_summary: @post_summary %>
+            </div>
+
+            <!--いいね-->
+            <div id="favorite_buttons_<%= @post_summary.id %>">
+              <%= render "favorites/favorite", post_summary: @post_summary %>
             </div>
 
             <!--投稿者情報-->

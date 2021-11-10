@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         end
         resources :reviews, only: [:create, :destroy]
         resource :bookmarks, only: [:create, :destroy]
+        resource :favorites, only: [:create, :destroy]
     end
 
 
