@@ -13,6 +13,7 @@ Rails.application.routes.draw do
             get :outside
         end
         resources :reviews, only: [:create, :destroy]
+        resource :bookmarks, only: [:create, :destroy]
     end
 
 

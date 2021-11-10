@@ -12,5 +12,6 @@ class User < ApplicationRecord
   attachment :profile_image
   has_many :post_summaries, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
 end

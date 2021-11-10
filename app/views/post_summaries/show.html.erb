@@ -1,7 +1,7 @@
-<%= flash[:notice] %>
 <div class="container">
     <div class="row">
         <div class="col">
+          <!--投稿詳細--------------------------------------------------------------------------------------------------------------------------------->
             <h3>投稿詳細</h3>
 
             <div>タイトル</div>
@@ -58,82 +58,76 @@
                     <%= link_to "削除する", post_summary_path(@post_summary.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
                 <% end %>
             </div>
+            <!-------------------------------------------------------------------------------------------------------------------------------------------->
 
-            <!--レビュー----------------------------------------------------------------------------->
-            <p>レビューを書く</p>
-            <%= form_with(model:[@post_summaries, @review]) do |f| %>
+            <!--レビュー新規投稿-------------------------------------------------------------------------------------------------------------------------->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+              レビューする
+            </button>
 
-             <%= f.hidden_field :post_summariest_id, value: @post_summaries.id %>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">レビューを書く</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <%= form_with(model:[@post_summaries, @review], remote: true) do |f| %>
+                    <div class="modal-body">
+                      <%= f.hidden_field :post_summaries_id, value: @post_summaries.id %>
+                      <%= f.hidden_field :user_id, value: @post_summaries.user_id %>
 
-              <!-- 評価 -->
-              <div class="form-group row" id="star">
-                <%= f.label :score,'評価 ', class:'col-md-3 col-form-label' %>
-                <%= f.hidden_field :score, id: :review_star %>
-              </div>
+                      <!-- 評価 -->
+                      <div class="form-group row" id="star">
+                        <%= f.label :score,'評価 ', class:'col-md-3 col-form-label' %>
+                        <%= f.hidden_field :score, id: :review_star %>
+                      </div>
 
-              <!-- 評価javascript -->
-              <script>
-              $('#star').raty({
-                size     : 36,
-                starOff:  '<%= asset_path('star-off.png') %>',
-                starOn : '<%= asset_path('star-on.png') %>',
-                starHalf: '<%= asset_path('star-half.png') %>',
-                scoreName: 'review[score]',
-                half: true,
-              });
-              </script>
+                      <!-- 評価javascript -->
+                      <script>
+                      $('#star').raty({
+                        size     : 36,
+                        starOff:  '<%= asset_path('star-off.png') %>',
+                        starOn : '<%= asset_path('star-on.png') %>',
+                        starHalf: '<%= asset_path('star-half.png') %>',
+                        scoreName: 'review[score]',
+                        half: true,
+                      });
+                      </script>
 
-              <!-- 口コミ -->
-              <div class="form-group row">
-                <%= f.label :content, '口コミ内容 ', class:'col-md-3 col-form-label' %>
-                <div class="col-md-9">
-                  <%= f.text_field :content, class: "form-control", rows: "8",
-                    placeholder:'口コミ内容がなくても、タイトルと評価のみで投稿できます。' %>
+                      <!-- 口コミ -->
+                      <div class="form-group row">
+                        <%= f.label :content, '口コミ内容 ', class:'col-md-3 col-form-label' %>
+                        <div class="col-md-9">
+                          <%= f.text_area :content, class: "form-control", rows: "8",
+                            placeholder:'口コミ内容がなくても、評価のみで投稿できます。' %>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                      <%= f.submit "投稿する", class:"btn btn-primary" %>
+                    </div>
+                  <% end %>
                 </div>
               </div>
+            </div>
+            <!---------------------------------------------------------------------------------------------------------------------------------------------------->
 
-              <!-- 確認ボタン -->
-              <div class="form-group row justify-content-end">
-                <div class="col-md-9">
-                  <%= f.submit '投稿する', class:"btn btn-success" %>
-                </div>
-              </div>
+             <!--レビュー一覧-->
+             <div class= "review">
+               <%= render 'reviews/review', reviews: @reviews %>
+             </div>
 
-            <% end %>
-            <!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
-            <!--レビュー一覧-->
-            <% if @reviews.present? %>
-              <% @reviews.each do |reviews| %>
-                <%= reviews.user.user_name %>
-                <%= attachment_image_tag reviews.user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", size: "100x100" %>
+             <!--プックマークする-->
+            <div id="bookmark_button_<%= @post_summary.id %>">
+              <%= render "bookmarks/bookmark", post_summary: @post_summary %>
+            </div>
 
-                <p>評価</p>
-                <%= reviews.score %>点
-
-                <p>コメント</p>
-                <%= reviews.content %>
-
-                <!--星評価-->
-                 <div id="star-rate-<%= reviews.id %>"></div>
-                  <script>
-                  $('#star-rate-<%= reviews.id %>').raty({
-                    size: 36,
-                    starOff:  '<%= asset_path('star-off.png') %>',
-                    starOn : '<%= asset_path('star-on.png') %>',
-                    starHalf: '<%= asset_path('star-half.png') %>',
-                    half: true,
-                    readOnly: true,
-                    score: <%= reviews.score %>,
-                  });
-                  </script>
-
-                <% if current_user == reviews.user %>
-                  <%= link_to '口コミを削除', post_summary_review_path(reviews.id), method: :delete, class:'btn btn-default' %>
-                <% end %>
-              <% end %>
-            <% end %>
-
-
+            <!--投稿者情報-->
             <div>投稿者</div>
             <p><%= @user.user_name %></p>
             <%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", size: "100x100" %>

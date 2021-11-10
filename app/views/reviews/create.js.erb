@@ -1,0 +1,8 @@
+<!--text_areaを空にする-->
+$("textarea").val("");
+<!--inputタグを空にする-->
+$("input").val("");
+<!--id=exampleModalが新規登録された際に隠すようにする動作-->
+$('#exampleModal').modal('hide')
+<!--投稿したレビューをSHOWに表示させる-->
+$('.review').html("<%= escape_javascript(render 'reviews/review', reviews: @reviews) %>")

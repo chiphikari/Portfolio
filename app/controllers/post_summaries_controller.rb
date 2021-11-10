@@ -1,6 +1,6 @@
 class PostSummariesController < ApplicationController
     before_action :exist_item?, only: [:show, :edit, :update, :destroy]
-    before_action :move_to_signed_in, except: [:index, :show]
+    before_action :authenticate_user!, except: [:index, :show]
 
     def index
             # ?=category_id=..がなくかつユーザーがサインインしていない時
@@ -94,7 +94,7 @@ class PostSummariesController < ApplicationController
         end
     end
 
-    def move_to_signed_in
+    def authenticate_user!
         unless user_signed_in?
           #サインインしていないユーザーはログインページが表示される
           redirect_to  new_user_session_path

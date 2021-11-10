@@ -1,0 +1,5 @@
+<% if post_summary.bookmarked_by?(current_user) %>
+  <%= link_to "ブックマーク解除", post_summary_bookmarks_path(post_summary), method: :delete, remote: true, class: "fas fa-bookmark" %></td>
+<% else %>
+  <%= link_to "ブックマーク登録", post_summary_bookmarks_path(post_summary), method: :post, remote: true, class: "far fa-bookmark" %></td>
+<% end %>

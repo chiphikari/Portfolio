@@ -1,7 +1,8 @@
 class PostSummary < ApplicationRecord
   belongs_to :user
   has_many :reviews, dependent: :destroy
-
+  has_many :bookmarks, dependent: :destroy
+  
   has_one :post_house, dependent: :destroy
   accepts_nested_attributes_for :post_house
 
@@ -10,20 +11,16 @@ class PostSummary < ApplicationRecord
 
   has_many :post_images, dependent: :destroy
   accepts_attachments_for :post_images, attachment: :image, append: true
+  
+  # 既にブックマークしていないか検証
+  def bookmarked_by?(user)
+    bookmarks.where(user_id: user).exists?
+  end
 
   # validates :title, presence: true
   # validates :headline, presence: true
   # validates :introduction, presence: true
   # validates :category, presence: true
-
-  # enum category: {
-  #   video: 0,
-  #   book: 1,
-  #   other: 2,
-  #   place: 3,
-  #   cafe: 4,
-  #   walk: 5
-  # }
 
   enum category: {
     動画・映画: 0,
