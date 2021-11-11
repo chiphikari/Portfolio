@@ -1,8 +1,10 @@
 <!--text_areaを空にする-->
 $("textarea").val("");
-<!--inputタグを空にする-->
-$("input").val("");
+<!--starを空にする-->
+$(".star").val("");
 <!--id=exampleModalが新規登録された際に隠すようにする動作-->
-$('#exampleModal').modal('hide')
+$('#exampleModal').hide();
+$("body").removeClass("modal-open");
+$(".modal-backdrop").remove();
 <!--投稿したレビューをSHOWに表示させる-->
-$('.review').html("<%= escape_javascript(render 'reviews/review', reviews: @reviews) %>")
+$('#review').html("<%= escape_javascript(render 'reviews/review', reviews: @reviews) %>")

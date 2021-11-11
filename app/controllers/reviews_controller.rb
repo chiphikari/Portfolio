@@ -1,16 +1,16 @@
 class ReviewsController < ApplicationController
+  before_action :authenticate_user!
 
   def create
-    @review = Review.new(review_params)
     @post_summary = PostSummary.find(params[:post_summary_id])
-    @review.user_id = current_user.id
-    @review.post_summary_id = @post_summary.id
+    review = Review.new(review_params)
+    review.user_id = current_user.id
+    review.post_summary_id = @post_summary.id
     review_count = Review.where(post_summary: params[:post_summary_id]).where(user_id: current_user.id).count
-    if @review.valid?
+    if review.valid?
       if review_count < 1
         flash[:notice] = "レビューを保存しました"
         @review.save
-        redirect_to request.referer
       else
         flash[:notice] = "レビューの投稿は一度までです"
         redirect_to request.referer
