@@ -18,7 +18,7 @@
 <%= link_to "外で楽しめる投稿", outside_post_summaries_path, class: "btn btn-dark" %>
 
 <script type="text/javascript">
-  window.onload = function showElementAnimation() {
+document.addEventListener("turbolinks:load", function() {
   var element = document.getElementsByClassName('animation');
   if(!element) return;
   var showTiming = window.innerHeight > 768 ? 200 : 40; // 要素が出てくるタイミングはここで調整
@@ -30,5 +30,5 @@
       element[i].classList.remove('is-show');
     }
   }
-}
+})
 </script>

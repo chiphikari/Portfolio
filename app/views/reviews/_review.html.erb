@@ -24,7 +24,8 @@
       </script>
 
     <% if current_user == review.user %>
-      <%= link_to '口コミを削除', post_summary_review_path(review.id), method: :delete, class:'btn btn-default' %>
+    <!--review.post_summary.idはアソシエーションしているのでこの書き方でOK-->
+      <%= link_to '口コミを削除', post_summary_review_path(review.post_summary.id, review.id), method: :delete, class:'btn btn-default' %>
     <% end %>
   <% end %>
 <% end %>

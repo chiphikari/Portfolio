@@ -37,7 +37,7 @@ class PostSummariesController < ApplicationController
         post_summary = PostSummary.new(post_summary_params)
         # belongs_toでユーザーを関連つけしているためuser.idがnilになる
         post_summary.user = current_user
-        tag_list = params[:post_summary][:tag_name].delete(' ').delete('　').split(',')
+        tag_list = params[:post_summary][:tag_name].delete(' ').delete('　').split('#')
         if post_summary.save
             post_summary.save_post_summaries(tag_list)
             flash[:notice] = "投稿できました！！"
@@ -56,7 +56,7 @@ class PostSummariesController < ApplicationController
 
     def edit
         @post_summary = PostSummary.find(params[:id])
-        @tag_list = @post_summary.tags.pluck(:tag_name).join(',')
+        @tag_list = @post_summary.tags.pluck(:tag_name).join('#')
         if @post_summary.user == current_user
             render :edit
         else
@@ -66,7 +66,7 @@ class PostSummariesController < ApplicationController
 
     def update
         post_summary = PostSummary.find(params[:id])
-        tag_list = params[:post_summary][:tag_name].delete(' ').delete('　').split(',')
+        tag_list = params[:post_summary][:tag_name].delete(' ').delete('　').split('#')
         if post_summary.update(post_summary_params)
             post_summary.save_post_summaries(tag_list)
             flash[:notice] = "更新に成功しました！"

@@ -121,8 +121,6 @@ ActiveRecord::Schema.define(version: 2021_11_09_080833) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "user_name", null: false
-    t.string "postal_code", null: false
-    t.string "address", null: false
     t.string "profile_image_id"
     t.boolean "status", default: true, null: false
     t.datetime "created_at", null: false
