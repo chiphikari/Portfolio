@@ -39,21 +39,25 @@ class PostSummary < ApplicationRecord
     おすすめ散歩: 5
   }
 
-  def save_post_summaries(tags)
+  def save_tag(tags)
+    # 現在存在するタグの取得
     current_tags = self.tags.pluck(:tag_name) unless self.tags.nil?
-    # 今postが持っているタグと今回保存されたものの差を既にあるタグとし、古いタグは消す
     old_tags = current_tags - tags
-    # 今回保存されたものと現在の差を新しいタグとし、新しいタグは保存
     new_tags = tags - current_tags
 
-    old_tags.each do |old_name|
-      self.tags.delete Tag.find_by(tag_name: old_name)
+   old_tags.each do |old|
+    tag = Tag.find_by(tag_name: old)
+    # 合致した中間テーブルの組み合わせごと削除
+     PostTag.where(tag_id: tag.id, post_summary_id: self.id).destroy_all
+      if PostTag.where(tag_id: tag.id).blank?
+        # 中間テーブルに例：＃ccがなければ削除する
+        tag.destroy
+      end
     end
 
-    new_tags.each do |new_name|
-      post_tag = Tag.find_or_create_by(tag_name: new_name)
-      # 配列に保存
-      self.tags << post_tag
+    new_tags.each do |new|
+      new_post_tag = Tag.find_or_create_by(tag_name: new)
+      self.tags << new_post_tag
     end
   end
 end

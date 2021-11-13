@@ -1,0 +1,17 @@
+<% if @model == 'user' %>
+  <h3>【タグの検索結果】検索ワード：<%= @content %></h3>
+    <table class="table">
+        <thead>
+            <tr>
+              <th>タイトル</th>
+              <th>ヘッドライン</th>
+              <th>紹介文</th>
+            </tr>
+        </thead>
+      <%= @records.each do |tag| %>
+        <tbody>
+          <tr>
+            <%= tag.post_summary.name %>
+          </tr>
+        </tbody>
+<% end %>

@@ -38,8 +38,9 @@ class PostSummariesController < ApplicationController
         # belongs_toでユーザーを関連つけしているためuser.idがnilになる
         post_summary.user = current_user
         tag_list = params[:post_summary][:tag_name].delete(' ').delete('　').split('#')
+        tag_list.delete("")
         if post_summary.save
-            post_summary.save_post_summaries(tag_list)
+            post_summary.save_tag(tag_list)
             flash[:notice] = "投稿できました！！"
             redirect_to post_summary_path(post_summary.id)
         else
@@ -50,6 +51,7 @@ class PostSummariesController < ApplicationController
     def show
         @post_summary = PostSummary.find(params[:id])
         @user = @post_summary.user
+        @tags = @post_summary.tags
         @review = Review.new
         @reviews = @post_summary.reviews.includes(:user)
     end
@@ -66,9 +68,11 @@ class PostSummariesController < ApplicationController
 
     def update
         post_summary = PostSummary.find(params[:id])
+        post_summary.user = current_user
         tag_list = params[:post_summary][:tag_name].delete(' ').delete('　').split('#')
+        tag_list.delete("")
         if post_summary.update(post_summary_params)
-            post_summary.save_post_summaries(tag_list)
+            post_summary.save_tag(tag_list)
             flash[:notice] = "更新に成功しました！"
             redirect_to post_summary_path(post_summary.id)
         else
