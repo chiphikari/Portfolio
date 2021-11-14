@@ -1,4 +1,4 @@
-<% if @model == 'user' %>
+<% if @model == 'tag' %>
   <h3>【タグの検索結果】検索ワード：<%= @content %></h3>
     <table class="table">
         <thead>
@@ -8,10 +8,32 @@
               <th>紹介文</th>
             </tr>
         </thead>
-      <%= @records.each do |tag| %>
+        <tbody>
+        <% @records.each do |tag| %>
+          <% tag.post_summaries.each do |post_summary| %>
+            <tr>
+              <td><%= post_summary.title %></td>
+            </tr>
+          <% end %>
+        <% end %>
+        </tbody>
+<% else @model == 'post_outside' %>
+  <h3>【住所の検索結果】検索ワード：<%= @content %></h3>
+    <table class="table">
+        <thead>
+            <tr>
+              <th>タイトル</th>
+              <th>ヘッドライン</th>
+              <th>住所</th>
+            </tr>
+        </thead>
+      <% @records.each do |tag| %>
         <tbody>
           <tr>
-            <%= tag.post_summary.name %>
+            <td><%= tag.post_summary.title %></td>
+            <td><%= tag.post_summary.headline %></td>
+            <td><%= tag.address %></td>
           </tr>
         </tbody>
+      <% end %>
 <% end %>

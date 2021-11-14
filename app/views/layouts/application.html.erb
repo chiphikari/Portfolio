@@ -42,10 +42,8 @@
               <% end %>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
               <%= form_tag(search_path, method: :get) do %>
                 <%= text_field_tag 'content' %>
-              </div>
                 <%= select_tag 'model', options_for_select({"タグ検索" => "tag", "住所検索" => "post_outside"}) %>
                 <%= submit_tag '検索' %>
               <% end %>

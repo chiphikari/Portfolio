@@ -15,6 +15,22 @@
                     <% end %>
                 <div><%= link_to "もっと詳しく見る", post_summary_path(post.id) %></div>
                 <% end %>
+                <%= paginate @post_summaries %>
+
+                <h3>いいね投稿一覧</h3>
+                <% @all_ranks.each do |post| %>
+                    <h4><%= post.title %></h4>
+                    <h4><%= post.headline %></h4>
+                    <% if post.post_images.present? %>
+                        <% post.post_images.each do |image| %>
+                            <%= attachment_image_tag image, :image, fallback: "noimage.jpg", width: "300" %>
+                        <% end %>
+                    <% else %>
+                      <%= image_tag 'noimage.jpg', width: "300" %>
+                    <% end %>
+                <div><%= link_to "もっと詳しく見る", post_summary_path(post.id) %></div>
+                <% end %>
+                <%= paginate @all_ranks %>
             </div>
         </div>
     </div>

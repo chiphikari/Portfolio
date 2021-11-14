@@ -8,9 +8,9 @@ class SearchsController < ApplicationController
   private
   def search_for(model, content)
     if model == 'tag'
-      Tag.where("tag_name LIKE ?", '%'+content+'%')
+        Tag.where('tag_name LIKE ?', '%'+content+'%')
     elsif model == 'post_outside'
-      PostOutside.where("address LIKE ?", '%'+content+'%')
+        PostOutside.where('address LIKE ?', '%'+content+'%')
     end
   end
 end

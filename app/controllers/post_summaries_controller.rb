@@ -3,19 +3,25 @@ class PostSummariesController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
 
     def index
-            # ?=category_id=..がなくかつユーザーがサインインしていない時
-        if params[:category].blank? && !user_signed_in?
-            @post_summaries = PostSummary.all
-        else
-            # ?=category_id=..がなくかつユーザーがサインインしている時
-            if params[:category].blank? && user_signed_in?
-                @post_summaries = PostSummary.where(user_id: current_user.id)
+        if params[:category].blank?
+            if user_signed_in?
+                @post_summaries = PostSummary.where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(1)
+                all_ranks = PostSummary.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
+                @all_ranks = Kaminari.paginate_array(all_ranks).page(params[:page]).per(1)
             else
-                # ?=category_id=が指定されている時
-                # params:[:category]はlink_toの（category: 0..)のcategoryと連携している。なのでparams:[:hoge]としてもlink_toを（hoge: 0..)にしても動作はする
-                @post_summaries = PostSummary.where(category: params[:category])
+                @post_summaries = PostSummary.page(params[:page]).per(1).order(created_at: :desc)
+                all_ranks = PostSummary.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
+                @all_ranks = Kaminari.paginate_array(all_ranks).page(params[:page]).per(1)
             end
+        else
+            # ?=category_id=が指定されている時
+            # params:[:category]はlink_toの（category: 0..)のcategoryと連携している。なのでparams:[:hoge]としてもlink_toを（hoge: 0..)にしても動作はする
+            @post_summaries = PostSummary.where(category: params[:category]).order(created_at: :desc).page(params[:page]).per(1)
+            # all_ranks = @post_summaries.find(Favorite.group(:post_summary_id).order('count(post_summary_id) desc').pluck(:post_summary_id))
+            all_ranks = PostSummary.where(category: params[:category]).includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
+            @all_ranks = Kaminari.paginate_array(all_ranks).page(params[:page]).per(1)
         end
+
     end
 
     def new

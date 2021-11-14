@@ -58,84 +58,89 @@
                     <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
             <% end %>
             <div>
+              <% if user_signed_in? %>
                 <% if @user.id == current_user.id %>
                     <%= link_to "編集する", edit_post_summary_path(@post_summary.id), class: "btn btn-success" %>
                     <%= link_to "削除する", post_summary_path(@post_summary.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
                 <% end %>
+              <% end %>
             </div>
             <!-------------------------------------------------------------------------------------------------------------------------------------------->
+            <% if user_signed_in? %>
+                <% if @user.id == current_user.id %>
+                  <!--レビュー新規投稿-------------------------------------------------------------------------------------------------------------------------->
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    レビューする
+                  </button>
 
-            <!--レビュー新規投稿-------------------------------------------------------------------------------------------------------------------------->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-              レビューする
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">レビューを書く</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <%= form_with(model:[@post_summaries, @review], remote: true) do |f| %>
-                    <div class="modal-body">
-                      <%= f.hidden_field :post_summaries_id, value: @post_summaries.id %>
-                      <%= f.hidden_field :user_id, value: @post_summaries.user_id %>
-
-                      <!-- 評価 -->
-                      <div class="form-group row" id="star">
-                        <%= f.label :score,'評価 ', class:'col-md-3 col-form-label' %>
-                        <%= f.hidden_field :score, id: :review_star %>
-                      </div>
-
-                      <!-- 評価javascript -->
-                      <script>
-                      $('#star').raty({
-                        size     : 36,
-                        starOff:  '<%= asset_path('star-off.png') %>',
-                        starOn : '<%= asset_path('star-on.png') %>',
-                        starHalf: '<%= asset_path('star-half.png') %>',
-                        scoreName: 'review[score]',
-                        half: true,
-                      });
-                      </script>
-
-                      <!-- 口コミ -->
-                      <div class="form-group row">
-                        <%= f.label :content, '口コミ内容 ', class:'col-md-3 col-form-label' %>
-                        <div class="col-md-9">
-                          <%= f.text_area :content, class: "form-control", rows: "8",
-                            placeholder:'口コミ内容がなくても、評価のみで投稿できます。' %>
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">レビューを書く</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
                         </div>
+                        <%= form_with(model:[@post_summaries, @review], remote: true) do |f| %>
+                          <div class="modal-body">
+                            <%= f.hidden_field :post_summaries_id, value: @post_summaries.id %>
+                            <%= f.hidden_field :user_id, value: @post_summaries.user_id %>
+
+                            <!-- 評価 -->
+                            <div class="form-group row" id="star">
+                              <%= f.label :score,'評価 ', class:'col-md-3 col-form-label' %>
+                              <%= f.hidden_field :score, id: :review_star %>
+                            </div>
+
+                            <!-- 評価javascript -->
+                            <script>
+                            $('#star').raty({
+                              size     : 36,
+                              starOff:  '<%= asset_path('star-off.png') %>',
+                              starOn : '<%= asset_path('star-on.png') %>',
+                              starHalf: '<%= asset_path('star-half.png') %>',
+                              scoreName: 'review[score]',
+                              half: true,
+                            });
+                            </script>
+
+                            <!-- 口コミ -->
+                            <div class="form-group row">
+                              <%= f.label :content, '口コミ内容 ', class:'col-md-3 col-form-label' %>
+                              <div class="col-md-9">
+                                <%= f.text_area :content, class: "form-control", rows: "8",
+                                  placeholder:'口コミ内容がなくても、評価のみで投稿できます。' %>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                            <%= f.submit "投稿する", class:"btn btn-primary" %>
+                          </div>
+                        <% end %>
                       </div>
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                      <%= f.submit "投稿する", class:"btn btn-primary" %>
-                    </div>
-                  <% end %>
+                  </div>
+                  <!---------------------------------------------------------------------------------------------------------------------------------------------------->
+
+                 <!--レビュー一覧-->
+                 <div id= "review">
+                   <%= render 'reviews/review', reviews: @reviews %>
+                 </div>
+
+                 <!--プックマークする-->
+                <div id="bookmark_buttons_<%= @post_summary.id %>">
+                  <%= render "bookmarks/bookmark", post_summary: @post_summary %>
                 </div>
-              </div>
-            </div>
-            <!---------------------------------------------------------------------------------------------------------------------------------------------------->
 
-             <!--レビュー一覧-->
-             <div id= "review">
-               <%= render 'reviews/review', reviews: @reviews %>
-             </div>
-
-             <!--プックマークする-->
-            <div id="bookmark_buttons_<%= @post_summary.id %>">
-              <%= render "bookmarks/bookmark", post_summary: @post_summary %>
-            </div>
-
-            <!--いいね-->
-            <div id="favorite_buttons_<%= @post_summary.id %>">
-              <%= render "favorites/favorite", post_summary: @post_summary %>
-            </div>
+                <!--いいね-->
+                <div id="favorite_buttons_<%= @post_summary.id %>">
+                  <%= render "favorites/favorite", post_summary: @post_summary %>
+                </div>
+              <% end %>
+            <% end %>
 
             <!--投稿者情報-->
             <div>投稿者</div>
