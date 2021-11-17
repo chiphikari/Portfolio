@@ -17,7 +17,7 @@
       <% if request.path == '/' %>
         <%= render 'top_header' %>
       <% else %>
-       <nav class="navbar navbar-expand-lg navbar-light" style="background-image: linear-gradient(to right, #304352 0%, #d7d2cc 100%);">
+       <nav class="navbar navbar-expand-lg navbar-dark" style="background-image: linear-gradient(to right, #304352 0%, #d7d2cc 100%);">
           <a class="navbar-brand" href="/"><%= image_tag 'logo.png', style: "width: 100px; height: 50px;" %></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -58,13 +58,13 @@
                 <% end %>
               </div>
         </nav>
-      <% end %>
     </head>
     <% if flash[:notice] %>
         <p style="background-color: #00BFFF; color: white; text-align: center;"><%= notice %></p>
     <% end %>
     <% if flash[:alert] %>
-        <p style="background-color: #FF69B4; color: white;"><%= alert %></p>
+        <p style="background-color: #FF69B4; color: white; text-align: center;"><%= alert %></p>
+    <% end %>
     <% end %>
       <%= yield %>
 

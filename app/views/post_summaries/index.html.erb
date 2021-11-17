@@ -1,36 +1,53 @@
-<div class="container">
+<div class="container mx-auto">
+    <h3>投稿一覧</h3>
         <div class="row">
             <div class="col">
-
-                <h3>投稿一覧</h3>
                 <% @post_summaries.each do |post| %>
-                    <h4><%= post.title %></h4>
-                    <h4><%= post.headline %></h4>
-                    <% if post.post_images.present? %>
-                        <% post.post_images.each do |image| %>
-                            <%= attachment_image_tag image, :image, fallback: "noimage.jpg", width: "300" %>
+                <div class= "d-flex p-4">
+                    <span>
+                        <% if post.post_images.present? %>
+                            <% post.post_images.each do |image| %>
+                                <%= attachment_image_tag image, :image, fallback: "noimage.jpg", width: "200" %>
+                            <% end %>
+                        <% else %>
+                            <%= image_tag 'noimage.jpg', width: "200" %>
                         <% end %>
-                    <% else %>
-                      <%= image_tag 'noimage.jpg', width: "300" %>
-                    <% end %>
-                <div><%= link_to "もっと詳しく見る", post_summary_path(post.id) %></div>
+                    </span>
+                    <span class="p-5">
+                        <p><%= post.title %></p>
+                        <p><%= post.headline %></p>
+                        <p><%= link_to "もっと詳しく見る", post_summary_path(post.id) %></p>
+                    </span>
+                </div>
                 <% end %>
-                <%= paginate @post_summaries %>
-
-                <h3>いいね投稿一覧</h3>
-                <% @all_ranks.each do |post| %>
-                    <h4><%= post.title %></h4>
-                    <h4><%= post.headline %></h4>
-                    <% if post.post_images.present? %>
-                        <% post.post_images.each do |image| %>
-                            <%= attachment_image_tag image, :image, fallback: "noimage.jpg", width: "300" %>
-                        <% end %>
-                    <% else %>
-                      <%= image_tag 'noimage.jpg', width: "300" %>
-                    <% end %>
-                <div><%= link_to "もっと詳しく見る", post_summary_path(post.id) %></div>
-                <% end %>
-                <%= paginate @all_ranks %>
             </div>
         </div>
+        <%= paginate @post_summaries %>
     </div>
+
+<div class="container mx-auto">
+    <h3>いいね投稿一覧</h3>
+        <div class="row">
+            <div class="col">
+                <% @all_ranks.each do |post| %>
+                <div class= "d-flex p-4">
+                    <span>
+                        <% if post.post_images.present? %>
+                            <% post.post_images.each do |image| %>
+                                <%= attachment_image_tag image, :image, fallback: "noimage.jpg", width: "200" %>
+                            <% end %>
+                        <% else %>
+                            <%= image_tag 'noimage.jpg', width: "200" %>
+                        <% end %>
+                    </span>
+                    <span class="p-5">
+                        <p><%= post.title %></p>
+                        <p><%= post.headline %></p>
+                        <p><%= link_to "もっと詳しく見る", post_summary_path(post.id) %></p>
+                    </span>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    <span><%= paginate @all_ranks %></span>
+</div>
