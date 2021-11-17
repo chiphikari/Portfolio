@@ -23,3 +23,55 @@
   padding: 0;
   box-sizing: border-box;
  }
+
+ head{
+   //position: fixed;
+ }
+
+ .navi{
+   text-decoration: none;
+   color: white ;
+ }
+
+.pagination>li>a {
+  border: none;     /*枠線をなくす*/
+  color: #696969;   /*文字の色を変える*/
+}
+
+/* 表示しているページ番号のデザイン */
+.pagination>.active>a {
+  background: #93c9ff;     /*背景の色を変える*/
+  border-radius: 15px;     /*角を丸くする*/
+}
+
+/*ホバー時のデザイン*/
+.pagination>li>a:hover {
+  border-radius: 15px;    /*角を丸くする*/
+}
+
+.btn-real-dent {
+  /*ボタン自体*/
+  // position: absolute;
+  content: '';
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  left: 30px;
+  top: 9px;
+  border-radius: 50%;
+  font-size: 20px;
+  background-image: linear-gradient(#e8e8e8 0%, #d6d6d6 100%);
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.66);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.5), 0 2px 2px rgba(0, 0, 0, 0.19);
+  border-bottom: solid 2px #b5b5b5;
+  color: rgba(3, 169, 244, 0.54);
+}
+
+.btn-real-dent .fa:active {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 2px rgba(0, 0, 0, 0.19);
+  border-bottom: solid 2px #d8d8d8;
+}
+
+body{
+  width: 100%;
+}

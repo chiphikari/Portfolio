@@ -1,6 +1,60 @@
-<h3><%= link_to "動画・映画一覧", post_summaries_path(category: 0) %></h3>
-<h3><%= link_to "本・書籍一覧", post_summaries_path(category: 1) %></h3>
-<h3><%= link_to "その他一覧", post_summaries_path(category: 2) %></h3>
-<h3><%= link_to "隠れおすすめスポット一覧", post_summaries_path(category: 3) %></h3>
-<h3><%= link_to "隠れ喫茶店一覧", post_summaries_path(category: 4) %></h3>
-<h3><%= link_to "おすすめ散歩一覧", post_summaries_path(category: 5) %></h3>
+<p class="introduction">
+    このサイトではその暇な時を一人で過ごしたい楽しい日にできるようプチ楽しい情報が投稿されています。<br />
+    以外と近所にあった知らない場所でのプチ楽しい時間、家の中でできるプチ楽しい時間をなど様々なことが共有されています。<br />
+    見つけてあなたも楽しんでみてください。
+</p>
+
+<div class="container mx-auto">
+    <div class="row">
+        <div class="col-12 text-center">
+                <p>test</p>
+                <ul class= "feature">
+                    <li class= "features-item">
+                        <div><%= link_to post_summaries_path(category: 0) do%><%= image_tag 'movie.jpg', class: "picture" %><% end %></div>
+                        <div class= "features-item-body">
+                            <h4 class= "top-title">動画・映画</h4>
+                            <p style="font-size: 16px;">楽しめる動画や映画が紹介されています。</p>
+                        </div>
+                    </li>
+                    <li class= "features-item">
+                        <div><%= link_to post_summaries_path(category: 1) do%><%= image_tag 'book.jpg', class: "picture" %><% end %></div>
+                        <div class= "features-item-body-2">
+                            <h4 class= "top-title">本・電子書籍</h4>
+                            <p style="font-size: 16px;">あっという間に没頭できる本や電子書籍を紹介</p>
+                        </div>
+                    </li>
+                    <li class= "features-item">
+                        <div><%= link_to post_summaries_path(category: 2) do%><%= image_tag 'art.jpg', class: "picture" %><% end %></div>
+                        <div class= "features-item-body">
+                            <h4 class= "top-title">アクティビティ</h4>
+                            <p style="font-size: 16px;">塗り絵、エクササイズなど家でできるアクティビティを紹介</p>
+                        </div>
+                    </li>
+                </ul>
+                <p>test</p>
+                <ul class= "feature">
+                    <li class= "features-item">
+                        <div><%= link_to post_summaries_path(category: 3) do%><%= image_tag 'deer.jpg', class: "picture" %><% end %></div>
+                        <div class= "features-item-body">
+                            <h4 class= "top-title">おすすめスポット</h4>
+                            <p style="font-size: 16px;">楽しめる動画や映画が紹介されています。</p>
+                        </div>
+                    </li>
+                    <li class= "features-item">
+                        <div><%= link_to post_summaries_path(category: 4) do%><%= image_tag 'cafe.jpg', class: "picture" %><% end %></div>
+                        <div class= "features-item-body-2">
+                            <h4 class= "top-title">隠れ喫茶店</h4>
+                            <p style="font-size: 16px;">楽しめる動画や映画が紹介されています。</p>
+                        </div>
+                    </li>
+                    <li class= "features-item">
+                        <div><%= link_to post_summaries_path(category: 5) do%><%= image_tag 'walk.jpg', class: "picture" %><% end %></div>
+                        <div class= "features-item-body">
+                            <h4 class= "top-title">おすすめ散歩一覧</h4>
+                            <p style="font-size: 16px;">楽しめる動画や映画が紹介されています。</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+    </div>
+</div>

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
     <title>SeekHobby</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,45 +14,51 @@
 
   <body>
     <head>
-     <nav class="navbar navbar-expand-lg navbar-light" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
-        <a class="navbar-brand" href="/"><%= image_tag 'logo.png', style: "width: 100px; height: 50px;" %></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <% if request.path == '/' %>
+        <%= render 'top_header' %>
+      <% else %>
+       <nav class="navbar navbar-expand-lg navbar-light" style="background-image: linear-gradient(to right, #304352 0%, #d7d2cc 100%);">
+          <a class="navbar-brand" href="/"><%= image_tag 'logo.png', style: "width: 100px; height: 50px;" %></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-              <a class="nav-link" href="/about">このサイトについて<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Menu
-              </a>
-              <% if user_signed_in? %>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="/users/<%= current_user.id %>">マイページ</a>
-                  <a class="dropdown-item" href="/post_summaries/new">新規投稿</a>
-                  <a class="dropdown-item" href="/post_summaries">投稿一覧</a>
-                  <a class="dropdown-item" data-method="delete" href="/users/sign_out">ログアウト</a>
-                </div>
-              <% else%>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="/users/sign_in">ログイン</a>
-                  <a class="dropdown-item" href="/users/sign_up">新規登録</a>
-                  <a class="dropdown-item" href="/post_summaries">最新投稿一覧</a>
-                </div>
-              <% end %>
-            </li>
-          </ul>
-              <%= form_tag(search_path, method: :get) do %>
-                <%= text_field_tag 'content' %>
-                <%= select_tag 'model', options_for_select({"タグ検索" => "tag", "住所検索" => "post_outside"}) %>
-                <%= submit_tag '検索' %>
-              <% end %>
-          </form>
-        </div>
-      </nav>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item active">
+                <a class="navi nav-link" href="/about">このサイトについて<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="navi nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Menu
+                </a>
+                <% if user_signed_in? %>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/users/<%= current_user.id %>">マイページ</a>
+                    <a class="dropdown-item" href="/post_summaries/new">新規投稿</a>
+                    <a class="dropdown-item" href="/post_summaries">投稿一覧</a>
+                    <a class="dropdown-item" data-method="delete" href="/users/sign_out">ログアウト</a>
+                  </div>
+                <% else%>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/users/sign_in">ログイン</a>
+                    <a class="dropdown-item" href="/users/sign_up">新規登録</a>
+                    <a class="dropdown-item" href="/post_summaries">最新投稿一覧</a>
+                  </div>
+                <% end %>
+              </li>
+            </ul>
+              <div class= "form-group">
+                <%= form_with url:search_path, method: :get, local: true do |f| %>
+                  <%= f.text_field 'content' %>
+                  <%= f.select 'model', options_for_select({"タグ検索" => "tag", "住所検索" => "post_outside"}) %>
+                  <%= f.button :type => "submit", style: 'border-style: none;', class: "btn-real-dent" do %>
+                    <i class="fas fa-search"></i>
+                  <% end %>
+                <% end %>
+              </div>
+        </nav>
+      <% end %>
     </head>
     <% if flash[:notice] %>
         <p style="background-color: #00BFFF; color: white; text-align: center;"><%= notice %></p>
@@ -57,7 +66,7 @@
     <% if flash[:alert] %>
         <p style="background-color: #FF69B4; color: white;"><%= alert %></p>
     <% end %>
-    <%= yield %>
+      <%= yield %>
 
   </body>
 </html>

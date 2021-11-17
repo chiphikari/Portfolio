@@ -1,0 +1,47 @@
+<div class="top-page-header fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-light nav-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01" style="background-color:transparent;">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                  <a class="navi nav-link" href="/about">このサイトについて<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="navi nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Menu
+                  </a>
+                  <% if user_signed_in? %>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="/users/<%= current_user.id %>">マイページ</a>
+                      <a class="dropdown-item" href="/post_summaries/new">新規投稿</a>
+                      <a class="dropdown-item" href="/post_summaries">投稿一覧</a>
+                      <a class="dropdown-item" data-method="delete" href="/users/sign_out">ログアウト</a>
+                    </div>
+                  <% else%>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="/users/sign_in">ログイン</a>
+                      <a class="dropdown-item" href="/users/sign_up">新規登録</a>
+                      <a class="dropdown-item" href="/post_summaries">最新投稿一覧</a>
+                    </div>
+                  <% end %>
+                </li>
+          </ul>
+          <div class= "form-group">
+            <%= form_with url:search_path, method: :get, local: true do |f| %>
+              <%= f.text_field 'content' %>
+                <%= f.select 'model', options_for_select({"タグ検索" => "tag", "住所検索" => "post_outside"}) %>
+                <%= f.button :type => "submit", style: 'border-style: none;', class: "btn-real-dent" do %>
+                  <i class="fas fa-search"></i>
+                <% end %>
+              <% end %>
+          </div>
+        </div>
+      </nav>
+    <div class="header-center">
+      <div class="header-center-top"><%= image_tag 'logo-2.png', style: "width: 300px; height: 150px;" %></div>
+      <div class="header-center-bottom">暇すぎる？<br/>
+      それをプチ楽しい時間に変えよう</div>
+    </div>
+</div>
