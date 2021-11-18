@@ -4,14 +4,15 @@ Rails.application.routes.draw do
     get '/search' => 'searchs#search'
 
     devise_for :users
-    resources :users
-    get '/users/withdraw' => 'users#withdraw'
-    patch '/users/withdraw' => 'users#withdraw'
+    resources :users, only: [:show, :edit, :update]
+    get '/users/:id/withdraw' => 'users#unsubscribe', as: 'unsubscribe'
+    patch '/users/:id/withdraw' => 'users#withdraw', as: 'withdraw'
 
     resources :post_summaries do
         collection do
             get :house
             get :outside
+            get :like
         end
         resources :reviews, only: [:create, :destroy]
         resource :bookmarks, only: [:create, :destroy]

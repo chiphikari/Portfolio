@@ -14,5 +14,8 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :favorites, dependent: :destroy
-
+  
+  def active_for_authentication?
+    super && (status == true)
+  end
 end

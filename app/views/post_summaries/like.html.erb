@@ -1,21 +1,13 @@
-<%= form_tag post_summaries_path, method: :get do %>
-    <%= select_tag :search_flag, options_for_select({"いいね一覧" => "like", "投稿一覧" => "updated"}) %>
-<% end %>
-
-<% if user_signed_in? %>
-    <h1 class= "list"><%= current_user.user_name %>さんが投稿した一覧</h1>
-<% else %>
-    <h1 class= "list">投稿一覧</h1>
-<% end %>
+<h1 class= "list">いいね投稿一覧</h1>
 <div class="container mx-auto" style="background-color: rgba( 255, 255, 255, 0.8 );">
         <div class="row">
             <div class="col">
-                <% @post_summaries.each do |post| %>
+                <% @all_ranks.each do |post| %>
                 <div class= "d-flex p-4">
                     <div class="slider">
                         <% if post.post_images.present? %>
                             <% post.post_images.each do |image| %>
-                                <%= attachment_image_tag image, :image, fallback: "noimage.jpg"%>
+                                <%= attachment_image_tag image, :image, fallback: "noimage.jpg", width: "200" %>
                             <% end %>
                         <% else %>
                             <%= image_tag 'noimage.jpg', width: "200" %>
@@ -24,11 +16,11 @@
                     <span class="p-5">
                         <p><%= link_to post.title, post_summary_path(post.id) %></p>
                         <p><%= post.headline %></p>
-                        <p><%= post.introduction.truncate(15) %></p>
+                        <p><%= post.title.truncate(15) %></p>
                     </span>
-                </div>
+                    </div>
                 <% end %>
             </div>
         </div>
-    </div>
-<%= paginate @post_summaries %>
+</div>
+<span><%= paginate @all_ranks %></span>

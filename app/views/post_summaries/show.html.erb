@@ -1,45 +1,66 @@
-<div class="container">
-    <div class="row">
-        <div class="col">
-          <!--投稿詳細--------------------------------------------------------------------------------------------------------------------------------->
-            <h3>投稿詳細</h3>
-
-            <div>タグ</div>
+<h1>タイトル：<%= @post_summary.title %></h1>
+<div class="container mx-auto" style="background-color: rgba(192,192,192,0.8);">
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex">
+      <!--画像-->
+        <div class="slider">
+          <% if @post_summary.post_images.present? %>
+            <% @post_summary.post_images.each do |image| %>
+             <%= attachment_image_tag image, :image, fallback: "noimage.jpg", size: '200x200' %>
+            <% end %>
+          <% else %>
+            <%= image_tag 'noimage.jpg', width: "300" %>
+          <% end %>
+        </div>
+        <div style="margin: 30px; overflow-wrap-normal">
+          <div class="subtitle"><i class="fas fa-tags"></i>タグ</div>
+          <p class="w-nomal">
             <% @tags.each do |tag| %>
               #<%= tag.tag_name %>
             <% end %>
+          </p>
 
-            <div>タイトル</div>
-            <%= @post_summary.title %>
+          <div class="subtitle"><i class="fas fa-angle-double-right"></i>ヘッドライン</div>
+          <p class="w-nomal"><%= @post_summary.headline %></p>
 
-            <div>ヘッドライン</div>
-            <%= @post_summary.headline %>
+          <div class="subtitle"><i class="fas fa-angle-double-right"></i>紹介</div>
+          <p class="w-nomal"><%= @post_summary.introduction %></p>
 
-            <div>投稿画像</div>
-            <% if @post_summary.post_images.present? %>
-                <% @post_summary.post_images.each do |image| %>
-                    <%= attachment_image_tag image, :image, fallback: "noimage.jpg", width: "300", class: "default_image" %>
-                <% end %>
-            <% else %>
-              <%= image_tag 'noimage.jpg', width: "300" %>
+          <div class="subtitle"><i class="fas fa-user-astronaut"></i>投稿者</div>
+          <span>
+            <p class="w-nomal"><%= @user.user_name %></p>
+            <p><%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg" %></p>
+          </span>
+          <span>
+            <% if user_signed_in? %>
+              <% if @user.id == current_user.id %>
+                <%= link_to "編集する", edit_post_summary_path(@post_summary.id), class: "btn btn-success" %>
+                <%= link_to "削除する", post_summary_path(@post_summary.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+              <% end %>
             <% end %>
-
-
-            <div>紹介</div>
-            <%= @post_summary.introduction %>
-
-            <!--post_houseのテーブルのカラムlinkに値があれば表示-->
+          </span>
+<!--post_houseのリンクを記入していれば-->
+          <span>
             <% if @post_summary.post_house.present? %>
-                <div>リンク</div>
-                <%= @post_summary.post_house.link %>
+              <h5>リンク</h5>
+              <%= @post_summary.post_house.link %>
             <% end %>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-            <!--post_outsideのテーブルのカラムaddressに値があれば表示-->
+<div class="container mx-auto">
+  <div class="row">
+    <div class="col map" style="text-align: center;">
+  <!--post_outsideのテーブルのカラムaddressに値があれば表示--------------------------------------------------------------------------------------------->
             <% unless @post_summary.post_outside.blank? %>
-                <div>住所</div>
                 <%= @post_summary.post_outside.address %>
                 <!--GoogleMAP-->
-                <div id="map" style='width: 100%; height: 500px;'></div>
+                <div id="map" style='width: 100%; height: 400px;'></div>
                     <script type="text/javascript">
                     function initMap(){
                       map = new google.maps.Map(document.getElementById('map'), {
@@ -57,96 +78,85 @@
                     </script>
                     <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
             <% end %>
-            <div>
-              <% if user_signed_in? %>
-                <% if @user.id == current_user.id %>
-                    <%= link_to "編集する", edit_post_summary_path(@post_summary.id), class: "btn btn-success" %>
-                    <%= link_to "削除する", post_summary_path(@post_summary.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
-                <% end %>
-              <% end %>
-            </div>
-            <!-------------------------------------------------------------------------------------------------------------------------------------------->
-            <% if user_signed_in? %>
-                <% if @user.id == current_user.id %>
-                  <!--レビュー新規投稿-------------------------------------------------------------------------------------------------------------------------->
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    レビューする
-                  </button>
-
-                  <!-- Modal -->
-                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">レビューを書く</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <%= form_with(model:[@post_summaries, @review], remote: true) do |f| %>
-                          <div class="modal-body">
-                            <%= f.hidden_field :post_summaries_id, value: @post_summaries.id %>
-                            <%= f.hidden_field :user_id, value: @post_summaries.user_id %>
-
-                            <!-- 評価 -->
-                            <div class="form-group row" id="star">
-                              <%= f.label :score,'評価 ', class:'col-md-3 col-form-label' %>
-                              <%= f.hidden_field :score, id: :review_star %>
-                            </div>
-
-                            <!-- 評価javascript -->
-                            <script>
-                            $('#star').raty({
-                              size     : 36,
-                              starOff:  '<%= asset_path('star-off.png') %>',
-                              starOn : '<%= asset_path('star-on.png') %>',
-                              starHalf: '<%= asset_path('star-half.png') %>',
-                              scoreName: 'review[score]',
-                              half: true,
-                            });
-                            </script>
-
-                            <!-- 口コミ -->
-                            <div class="form-group row">
-                              <%= f.label :content, '口コミ内容 ', class:'col-md-3 col-form-label' %>
-                              <div class="col-md-9">
-                                <%= f.text_area :content, class: "form-control", rows: "8",
-                                  placeholder:'口コミ内容がなくても、評価のみで投稿できます。' %>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                            <%= f.submit "投稿する", class:"btn btn-primary" %>
-                          </div>
-                        <% end %>
-                      </div>
-                    </div>
-                  </div>
-                  <!---------------------------------------------------------------------------------------------------------------------------------------------------->
-
-                 <!--レビュー一覧-->
-                 <div id= "review">
-                   <%= render 'reviews/review', reviews: @reviews %>
-                 </div>
-
-                 <!--プックマークする-->
-                <div id="bookmark_buttons_<%= @post_summary.id %>">
-                  <%= render "bookmarks/bookmark", post_summary: @post_summary %>
-                </div>
-
-                <!--いいね-->
-                <div id="favorite_buttons_<%= @post_summary.id %>">
-                  <%= render "favorites/favorite", post_summary: @post_summary %>
-                </div>
-              <% end %>
-            <% end %>
-
-            <!--投稿者情報-->
-            <div>投稿者</div>
-            <p><%= @user.user_name %></p>
-            <%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", size: "100x100" %>
-
-        </div>
+<!------------------------------------------------------------------------------------------------------------------------------------------------------>
     </div>
+  </div>
 </div>
+<div class="container mx-auto">
+  <div class="row">
+    <div class="col evaluation" style="text-align: center;">
+    <% if user_signed_in? %>
+    <!--プックマークする-->
+      <div id="bookmark_buttons_<%= @post_summary.id %>">
+        <%= render "bookmarks/bookmark", post_summary: @post_summary %>
+      </div>
+    <!--いいね-->
+      <div id="favorite_buttons_<%= @post_summary.id %>">
+        <%= render "favorites/favorite", post_summary: @post_summary %>
+      </div>
+
+    <!--レビュー新規投稿-------------------------------------------------------------------------------------------------------------------------->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        レビューする
+      </button>
+
+    <!-- Modal -->
+     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">レビューを書く</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <%= form_with(model:[@post_summaries, @review], remote: true) do |f| %>
+           <div class="modal-body">
+             <%= f.hidden_field :post_summaries_id, value: @post_summaries.id %>
+             <%= f.hidden_field :user_id, value: @post_summaries.user_id %>
+
+             <!-- 評価 -->
+             <div class="form-group row" id="star">
+              <%= f.label :score,'評価 ', class:'col-md-3 col-form-label' %>
+              <%= f.hidden_field :score, id: :review_star %>
+             </div>
+
+             <!-- 評価javascript -->
+             <script>
+             $('#star').raty({
+                size     : 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                scoreName: 'review[score]',
+                half: true,
+             });
+             </script>
+
+             <!-- 口コミ -->
+             <div class="form-group row">
+              <%= f.label :content, '口コミ内容 ', class:'col-md-3 col-form-label' %>
+              <div class="col-md-9">
+                <%= f.text_area :content, class: "form-control", rows: "8",
+                    placeholder:'口コミ内容がなくても、評価のみで投稿できます。' %>
+              </div>
+             </div>
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+             <%= f.submit "投稿する", class:"btn btn-primary" %>
+           </div>
+         <% end %>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+      <!--レビュー一覧-->
+      <div id= "review">
+        <%= render 'reviews/review', reviews: @reviews %>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,7 +1,6 @@
 class BookmarksController < ApplicationController
   before_action :post_summary_params
-  before_action :authenticate_user!
-
+  
   def create
     bookmark = @post_summary.bookmarks.new(user_id: current_user.id)
     bookmark.save

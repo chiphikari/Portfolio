@@ -18,8 +18,25 @@
 //= require activestorage
 //= require turbolinks
 
+//= require jquery.jscroll.min.js
+
 //= require jquery
 //= require jquery.raty.js
 //= require jquery_ujs
 // = require_tree .
+
+// $(function() {
+//   $('.jscroll').jscroll({
+//     contentSelector: '.col',
+//     nextSelector: 'a.page-aaa'
+//   });
+// });
+
+document.addEventListener("turbolinks:load", function(){
+  $('.slider').slick({
+    autoplay:true,
+    autoplaySpeed:5000,
+    dots:true,
+  });
+});
 

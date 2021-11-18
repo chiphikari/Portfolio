@@ -33,3 +33,86 @@
   padding: 0.5rem;
   width: 25%;
 }
+
+// indexタイトル
+.list{
+  margin: 30px auto;
+  width: 30%;
+  text-align: center;
+  position:  relative;        /* 位置調整 */
+  background-color: #feeaac;  /* 背景色指定 */
+  padding:  10px;             /* 余白指定 */
+  margin-bottom: 15px;        /* 周りの余白指定 */
+  border-radius:  2px;        /* 角丸指定 */
+
+  &::before{
+    content:  '';               /* 空白の要素を作る */
+    background-color: #b3b3b3;  /* 背景色指定 */
+    display:  block;            /* ブロック要素にする */
+    position:  absolute;        /* 位置調整 */
+    left: 50%;                  /* 位置調整 */
+    height: 60%;                /* 高さ指定 */
+    top: 26%;                   /* 位置調整 */
+    z-index:  -1;               /* 重なり調整 */
+    width: 46%;                 /* 幅指定 */
+    box-shadow: 0 0 8px 8px #b3b3b3;/* 影指定 */
+    transform: rotate(3deg);    /* 回転 */
+  }
+}
+
+// 画像スライド
+.slider{
+    margin: 50px;
+    width: 50%;
+    height: 70%;
+}
+// .slider img{
+//     height: 100px;
+//     width: 100px;
+// }
+
+.slick-prev:before,
+.slick-next:before {
+    color: #000;
+}
+
+// 地図表示
+.map{
+  margin: 30px;
+}
+
+// いいね、ブックマーク、レビュー
+.evaluation{
+  margin: 30px;
+}
+
+//
+.subtitle {
+  position: relative;
+  display: inline-block;
+  margin: 1.5em 0;
+  padding: 7px 10px;
+  min-width: 120px;
+  max-width: 100%;
+  color: #555;
+  font-size: 20px;
+  background: #e0edff;
+  border-radius: 10px;
+  overflow-wrap: normal;
+
+  &::before{
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -15px;
+    border: 15px solid transparent;
+    border-top: 15px solid #e0edff;
+  }
+}
+
+.w-nomal {
+  width: 300px;
+  color: white;
+  word-wrap: normal;
+}

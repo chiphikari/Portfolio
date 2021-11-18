@@ -7,7 +7,7 @@
       <%= f.select :category, [["隠れおすすめスポット", "隠れおすすめスポット"], ["隠れ喫茶店","隠れ喫茶店"],["おすすめ散歩","おすすめ散歩"]], {include_blank: "選択してください"}, class: "form-control" %>
       <!--日本語化↓-->
       <!--<= f.select :category, PostSummary.categories.keys.map {|k| [I18n.t("enums.post_summary.category.#{k}"), k]}, {include_blank: "選択してください"} %>-->
-      
+
         <%= render 'post_summaries/form', f:f %>
 
         <%= render 'post_summaries/map', f:f %>
