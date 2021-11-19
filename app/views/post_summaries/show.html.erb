@@ -1,18 +1,23 @@
 <h1>タイトル：<%= @post_summary.title %></h1>
 <div class="container mx-auto" style="background-color: rgba(192,192,192,0.8);">
   <div class="row">
-    <div class="col-12">
-      <div class="d-flex">
-      <!--画像-->
+    <div class="col-6">
+        <!--画像-->
         <div class="slider">
           <% if @post_summary.post_images.present? %>
             <% @post_summary.post_images.each do |image| %>
-             <%= attachment_image_tag image, :image, fallback: "noimage.jpg", size: '200x200' %>
+             <%= attachment_image_tag image, :image, fallback: "noimage.jpg" %>
             <% end %>
           <% else %>
             <%= image_tag 'noimage.jpg', width: "300" %>
           <% end %>
         </div>
+        <div class="subtitle"><i class="fas fa-user-astronaut"></i>投稿者</div>
+          <span>
+            <p><%= @user.user_name %><%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", width: "100" %></p>
+          </span>
+        </div>
+    <div class="col-6">
         <div style="margin: 30px; overflow-wrap-normal">
           <div class="subtitle"><i class="fas fa-tags"></i>タグ</div>
           <p class="w-nomal">
@@ -27,11 +32,6 @@
           <div class="subtitle"><i class="fas fa-angle-double-right"></i>紹介</div>
           <p class="w-nomal"><%= @post_summary.introduction %></p>
 
-          <div class="subtitle"><i class="fas fa-user-astronaut"></i>投稿者</div>
-          <span>
-            <p class="w-nomal"><%= @user.user_name %></p>
-            <p><%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg" %></p>
-          </span>
           <span>
             <% if user_signed_in? %>
               <% if @user.id == current_user.id %>
@@ -49,9 +49,8 @@
           </span>
         </div>
       </div>
-    </div>
   </div>
-</div>
+  </div>
 
 <div class="container mx-auto">
   <div class="row">

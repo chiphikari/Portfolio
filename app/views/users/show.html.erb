@@ -1,5 +1,49 @@
-<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", size: "100x100" %>
-<p><%= @user.user_name %></p>
-<p><%= @user.email %></p>
+<div class="container mx-auto">
+  <div class="row">
+    <div class="col text-center">
+      <%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", width: "300", class: "box"  %>
+      <table class= "table offset-md-3 col-md-6 offset-sm-2 col-sm-7">
+        <tbody>
+          <tr>
+            <td><p class="table__user-info">ユーザー名：</p></td>
+            <td><p class="table__user-detail"><%= @user.user_name %></p></td>
+          </tr>
+          <tr>
+            <td><p class="table__user-info">メールアドレス：</p></td>
+            <td><p class="table__user-detail"><%= @user.email %></p></td>
+          </tr>
+        </tbody>
+      </table>
+      <%= link_to "編集する", edit_user_path(@user.id), class: "btn btn-info" %>
+    </div>
+  </div>
+</div>
 
-<%= link_to "編集する", edit_user_path(@user.id) %>
+<div class="container mx-auto">
+  <div class="row">
+    <div class="col text-center">
+      <table class="table offset-md-2 col-md-8 offset-sm-2 col-sm-7">
+        <thead>
+          <tr>
+            <th style="width: 200px;">カテゴリー</th>
+            <th>タイトル</th>
+            <th>本文</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @bookmarks.each do |bookmark| %>
+            <tr>
+              <td><%= bookmark.post_summary.category %></td>
+              <td>
+                <%= link_to post_summary_path(bookmark.post_summary) do %>
+                  <%= bookmark.post_summary.title.truncate(15) %>
+                <% end %>
+              </td>
+              <td><%= bookmark.post_summary.introduction.truncate(15) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -89,3 +89,10 @@ body{
     background-position: right bottom;
   }
 }
+
+@media screen and (max-width:420px){
+  body{
+    background-size: cover;
+    background-position: center;
+  }
+}

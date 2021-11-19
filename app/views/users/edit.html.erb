@@ -1,3 +1,6 @@
+<% @user.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+  <% end %>
 <%= form_with model:@user, local:true do |f| %>
 <div class= "form-group">
   <label>プロフィール画像</label>
