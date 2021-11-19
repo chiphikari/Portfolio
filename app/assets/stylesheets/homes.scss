@@ -11,58 +11,48 @@
   padding-top: 420px;
 }
 
+.img-responsive{
+    width: 300px;
+    height: 130px;
+}
+
 // ヘッダー
 .top-page-header{
     width: 100%;
-    height: 350px;
+    height: 500px;
     background-image: url('22017170_m.jpg');
     background-repeat: repeat;
     background-position: bottom;
 
     &__header-center{
-        padding: 10px;
-        width: 33%;
-        background-color: rgba( 255, 255, 255, 0.45 );
+        padding-top: 100px;
+        height: 100px;
+        width: 37%;
 
-        &__bottom{
-            font-size: 35px;
-            color: #191970;
-            padding-left: 40px;
-            font-family: 'M PLUS Rounded 1c', sans-serif;
+        &__surround{
+            background-color: rgba( 255, 255, 255, 0.45 );
+
+            &__bottom{
+                font-size: 30px;
+                color: #191970;
+                padding-left: 40px;
+                font-family: 'M PLUS Rounded 1c', sans-serif;
+            }
         }
     }
 }
 
 .introduction{
     width: 100%;
-    height: 55vh;
+    height: 200px;
     background-color: #fffaf0;
     color: #778899;
     font-size: 20px;
-    padding-top: 380px;
+    padding-top: 50px;
     text-align: center;
     line-height: 45px;
     font-family: 'M PLUS Rounded 1c', sans-serif;
 }
-
-@media screen and (max-width:1025px) {
-    .introduction{
-       // margin-top: 400px;
-    }
-}
-
-@media screen and (max-width:768px) {
-    .introduction{
-       // margin-top: 430px;
-    }
-}
-
-@media screen and (max-width:540px){
-    .introduction{
-        //margin-top: 400px;
-    }
-}
-
 
 // カテゴリー一覧
 .feature{
@@ -84,30 +74,32 @@
 
         &--body{
             position: absolute;
-            top: 60%;
+            top: 50%;
             left: 350px;
             background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
-            padding: 10px;
-            width: 35%;
+            width: 40%;
             font-family: 'Yomogi', cursive;
 
             &--title{
-                font-size:  24px;
+                font-weight: bolder;
+                font-size:  25px;
                 position:  relative;
                 font-weight:  normal;
                 margin: 20px 0 20px 0;
                 border-radius:  2px;
-                position: relative;
+            }
+
+            &--content{
+                font-size: 18px;
             }
         }
 
         &--body2{
             position: absolute;
-            top: 60%;
+            top: 50%;
             right: 350px;
             background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
-            padding: 10px;
-            width: 35%;
+            width: 40%;
             font-family: 'Yomogi', cursive;
         }
     }
@@ -125,7 +117,7 @@
 .title2{
     position: relative;
     text-align: center;
-    margin: 100px 0 100px 0;
+    margin: 60px 0;
     font-family: 'Yomogi', cursive;
     &::before{
         position: absolute;
@@ -156,5 +148,360 @@
         color: #fff;
         margin-right: 5px;
         font-family: 'Yomogi', cursive;
+    }
+}
+
+@media screen and (max-width:1370px) {
+    .top-page-header{
+        height: 300px;
+
+        &__header-center{
+        padding-top: 100px;
+        height: 100px;
+        width: 37%;
+
+            &__surround{
+                background-color: rgba( 255, 255, 255, 0.45 );
+
+                &__bottom{
+                    font-size: 30px;
+                    color: #191970;
+                    padding-left: 40px;
+                    font-family: 'M PLUS Rounded 1c', sans-serif;
+                }
+            }
+        }
+
+        .img-responsive{
+            width: 200px;
+            height: 100px;
+        }
+    }
+
+    .introduction{
+        font-size: 22px;
+    }
+
+    .feature{
+
+        &__feature-item{
+
+            &--body{
+                width: 50%;
+
+                &--title{
+                    font-size:  30px;
+                    position:  relative;
+                    font-weight:  normal;
+                    margin: 20px 0 20px 0;
+                    border-radius:  2px;
+                    position: relative;
+                }
+
+                &--content{
+                    font-size: 23px;
+                }
+            }
+
+            &--body2{
+                top: 50%;
+                width: 50%;
+            }
+        }
+
+        &__feature-item:nth-child(2n){
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 0;
+            margin-left: auto;
+        }
+
+    }
+
+
+}
+
+@media screen and (max-width:1024px) {
+
+    .top-page-header{
+        height: 300px;
+        background-image: url('22017170_m.jpg');
+        background-repeat: repeat;
+        background-position: right 15% bottom 10%;
+
+        &__header-center{
+        padding-top: 80px;
+        height: 100px;
+        width: 37%;
+
+            &__surround{
+                background-color: rgba( 255, 255, 255, 0.45 );
+
+                &__bottom{
+                    font-size: 20px;
+                    color: #191970;
+                    padding-left: 40px;
+                    font-family: 'M PLUS Rounded 1c', sans-serif;
+                }
+            }
+        }
+    }
+
+    .introduction{
+        height: 180px;
+        font-size: 17px;
+        padding-top: 30px;
+        line-height: 40px;
+    }
+
+    // カテゴリー一覧
+    .feature{
+        &__feature-item{
+            &--body{
+                width: 43%;
+                }
+
+            &--body2{
+                width: 43%;
+            }
+        }
+
+    }
+
+    .title2{
+        &::before{
+            width: 20%;
+        }
+
+        &::after{
+            width: 20%;
+        }
+    }
+
+}
+
+@media screen and (max-width:960px) {
+    .img-responsive{
+        width: 200px;
+        height: 100px;
+    }
+
+    .introduction{
+        font-size: 13px;
+    }
+
+    .title2{
+        &::before{
+            width: 20%;
+        }
+
+        &::after{
+            width: 20%;
+        }
+
+    }
+
+    .feature{
+        &__feature-item{
+
+            &--body{
+                position: absolute;
+                top: 50%;
+                left: 350px;
+                background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
+                width: 50%;
+                font-family: 'Yomogi', cursive;
+
+                &--title{
+                    font-size:  25px;
+                }
+
+                &--content{
+                    font-size: 20px;
+                }
+            }
+
+            &--body2{
+                width: 50%;
+            }
+        }
+
+    }
+
+    .top-page-header{
+        height: 300px;
+
+        &__header-center{
+            width: 40%;
+        }
+    }
+}
+
+@media screen and (max-width:770px){
+    .title2{
+        &::before{
+            width: 0%;
+        }
+
+        &::after{
+            width: 0%;
+        }
+    }
+
+    .top-page-header{
+
+        &__header-center{
+            width: 45%;
+        }
+    }
+}
+
+@media screen and (max-width:420px){
+    .img-responsive{
+        width: 100px;
+        height: 50px;
+    }
+
+    .top-page-header{
+        .img-responsive{
+            width: 100px;
+            height: 50px;
+            padding-left: 10px;
+        }
+
+        width: 100%;
+        height: 200px;
+        background-image: url('22017170_m.jpg');
+        background-repeat: repeat;
+        background-size: cover;
+
+        &__header-center{
+            padding-top: 70px;
+            height: 100px;
+            width: 50%;
+
+            &__surround{
+                background-color: rgba( 255, 255, 255, 0.45 );
+
+                &__bottom{
+                    font-size: 2px;
+                    color: #191970;
+                    padding-left: 10px;
+                    font-family: 'M PLUS Rounded 1c', sans-serif;
+                }
+            }
+        }
+    }
+
+    .introduction{
+        width: 100%;
+        height: 120px;
+        background-color: #fffaf0;
+        color: #778899;
+        font-size: 2px;
+        padding-top: 20px;
+        text-align: center;
+        line-height: 15px;
+    }
+
+
+    .feature{
+        &__feature-item{
+            flex-direction: column;
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            padding: 30px 0 30px 0;
+            margin-right: 150px;
+
+            &--picture{
+                width: 250px;
+                height: 150px;
+                box-shadow:10px 10px 20px #000000;
+            }
+
+            &--body{
+                position: absolute;
+                top: 55%;
+                left: 90px;
+                background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
+                height: 55px;
+                width: 200px;
+                font-family: 'Yomogi', cursive;
+
+                &--title{
+                    font-weight: bolder;
+                    font-size:  4px;
+                    position:  relative;
+                    font-weight:  normal;
+                    margin: 5px 0 5px 0;
+                    border-radius:  2px;
+                }
+
+                &--content{
+                    font-size: 4px;
+                }
+            }
+
+            &--body2{
+                position: absolute;
+                top: 55%;
+                right: 90px;
+                background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
+                width: 200px;
+                font-family: 'Yomogi', cursive;
+            }
+        }
+
+        &__feature-item:nth-child(2n){
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 0;
+            margin-left: auto;
+        }
+
+    }
+
+    .title2{
+        position: relative;
+        text-align: center;
+        margin: 20px 0;
+        font-family: 'Yomogi', cursive;
+        display: flex;
+        &::before{
+            position: absolute;
+            top: 50%;
+            content: '';
+            display: block;
+            width: 0%;
+            height: 10px;
+            background-color: gray;
+        }
+
+        &::after{
+            position: absolute;
+            top: 50%;
+            right: 0%;
+            content: '';
+            display: block;
+            width: 0%;
+            height: 10px;
+            background-color: gray;
+        }
+
+        &__title-point{
+            background-color: #2196F3;
+            border-radius:  50%;
+            padding:  10px;
+            font-size: 20px;
+            color: #fff;
+            margin-right: 5px;
+            font-family: 'Yomogi', cursive;
+
+            &--small{
+                font-size: 20px;
+                padding-top: 10px;
+            }
+        }
     }
 }
