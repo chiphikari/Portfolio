@@ -1,59 +1,60 @@
 <% if reviews.present? %>
-  <div class="card mx-auto" style="width: 35rem;">
-  <div class="card-body">
-    <h5 class="card-title">レビュー一覧</h5>
-    <div class="d-flex">
-      <div id= "data-score-<%= @post_summary.id %>"></div>
-      <p><%= @post_summary.avg_score %></p>
-    </div>
+      <div class="card mx-auto">
+        <div class="card-body" style="background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+          <h5 class="card-title">レビュー一覧</h5>
+          <div class="d-flex justify-content-center">
+            <div id= "data-score-<%= @post_summary.id %>"></div>
+            <p style="font-size: 20px; padding-left: 10px;"><%= @post_summary.avg_score %></p>
+          </div>
 
 
-    <script>
-      $('#data-score-<%= @post_summary.id %>').raty({
-        readOnly: true,
-        starOff:  '<%= asset_path('star-off.png') %>',
-        starOn : '<%= asset_path('star-on.png') %>',
-        starHalf: '<%= asset_path('star-half.png') %>',
-        half: true,
-        score: <%= @post_summary.reviews.average(:score).round(1).to_f %>,
-      });
-    </script>
-  </div>
-  <ul class="list-group list-group-flush">
-  <% reviews.each do |review| %>
-    <li class="list-group-item">
-      <!--星評価-->
-       <div id="star-rate-<%= review.id %>"></div>
-        <script>
-        $('#star-rate-<%= review.id %>').raty({
-          size: 36,
-          starOff:  '<%= asset_path('star-off.png') %>',
-          starOn : '<%= asset_path('star-on.png') %>',
-          starHalf: '<%= asset_path('star-half.png') %>',
-          half: true,
-          readOnly: true,
-          score: <%= review.score %>,
-        });
-        </script>
-      <%= review.user.user_name %>
-      <p>評価: <%= review.score %>点</p>
+          <script>
+            $('#data-score-<%= @post_summary.id %>').raty({
+              readOnly: true,
+              starOff:  '<%= asset_path('star-off.png') %>',
+              starOn : '<%= asset_path('star-on.png') %>',
+              starHalf: '<%= asset_path('star-half.png') %>',
+              half: true,
+              score: <%= @post_summary.reviews.average(:score).round(1).to_f %>,
+            });
+          </script>
+        </div>
+        <ul class="list-group list-group-flush" style="text-align: start;">
+        <% reviews.each do |review| %>
+          <li class="list-group-item">
+            <!--星評価-->
+             <div id="star-rate-<%= review.id %>"></div>
+              <script>
+              $('#star-rate-<%= review.id %>').raty({
+                size: 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                half: true,
+                readOnly: true,
+                score: <%= review.score %>,
+              });
+              </script>
+            <p style="font-size: 20px;"><%= review.user.user_name %></p>
+            <p>評価: <%= review.score %>点</p>
 
-      <p>コメント:</p>
-      <% if review.content.present? %>
-        <%= review.content %>
-      <% else %>
-        コメントはありません。
-      <% end %>
+            <p>コメント:
+            <% if review.content.present? %>
+              <%= review.content %>
+            <% else %>
+              コメントはありません。
+            <% end %>
+            </p>
 
-      <p>
-         <% if current_user == review.user %>
-      <!--review.post_summary.idはアソシエーションしているのでこの書き方でOK-->
-        <%= link_to '口コミを削除', post_summary_review_path(review.post_summary.id, review.id), method: :delete, class:'btn btn-danger' %>
-      <% end %>
-      </p>
+            <p>
+               <% if current_user == review.user %>
+            <!--review.post_summary.idはアソシエーションしているのでこの書き方でOK-->
+              <%= link_to '口コミを削除', post_summary_review_path(review.post_summary.id, review.id), method: :delete, class:'btn btn-danger' %>
+            <% end %>
+            </p>
 
-    </li>
-  <% end %>
-  </ul>
-</div>
+          </li>
+        <% end %>
+        </ul>
+      </div>
 <% end %>

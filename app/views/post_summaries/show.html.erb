@@ -1,63 +1,64 @@
-<h1>タイトル：<%= @post_summary.title %></h1>
-<div class="container mx-auto" style="background-color: rgba(192,192,192,0.8);">
+<h1 class="title-post"><%= @post_summary.title %></h1>
+<div class="container mx-auto pb-5" style="background-color: rgba(0,0,0,0.4);">
   <div class="row">
-    <div class="col-6">
-        <!--画像-->
-        <div class="slider">
-          <% if @post_summary.post_images.present? %>
-            <% @post_summary.post_images.each do |image| %>
-             <%= attachment_image_tag image, :image, fallback: "noimage.jpg" %>
-            <% end %>
-          <% else %>
-            <%= image_tag 'noimage.jpg', width: "300" %>
+    <div class="col-md-5 mt-3">
+      <div class="subtitle"><span><i class="fas fa-tags"></i></span>タグ</div>
+        <p class="w-nomal">
+          <% @tags.each do |tag| %>
+            #<%= tag.tag_name %>
           <% end %>
-        </div>
-        <div class="subtitle"><i class="fas fa-user-astronaut"></i>投稿者</div>
-          <span>
-            <p><%= @user.user_name %><%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", width: "100" %></p>
-          </span>
-        </div>
-    <div class="col-6">
-        <div style="margin: 30px; overflow-wrap-normal">
-          <div class="subtitle"><i class="fas fa-tags"></i>タグ</div>
-          <p class="w-nomal">
-            <% @tags.each do |tag| %>
-              #<%= tag.tag_name %>
-            <% end %>
-          </p>
+        </p>
+      <!--画像-->
+      <div class="slider">
+        <% if @post_summary.post_images.present? %>
+          <% @post_summary.post_images.each do |image| %>
+            <%= attachment_image_tag image, :image, fallback: "noimage.jpg" %>
+          <% end %>
+        <% else %>
+          <%= image_tag 'noimage.jpg', width: "200" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div style="margin: 20px; overflow-wrap-normal">
+        <div class="subtitle"><span><i class="fas fa-angle-double-right"></i></span>CSS見出し</div>
+        <p class="w-nomal"><%= @post_summary.headline %></p>
 
-          <div class="subtitle"><i class="fas fa-angle-double-right"></i>ヘッドライン</div>
-          <p class="w-nomal"><%= @post_summary.headline %></p>
+        <div class="subtitle"><span><i class="fas fa-angle-double-right"></i></span>紹介</div>
+        <p class="w-nomal"><%= @post_summary.introduction %></p>
 
-          <div class="subtitle"><i class="fas fa-angle-double-right"></i>紹介</div>
-          <p class="w-nomal"><%= @post_summary.introduction %></p>
-
-          <span>
-            <% if user_signed_in? %>
-              <% if @user.id == current_user.id %>
-                <%= link_to "編集する", edit_post_summary_path(@post_summary.id), class: "btn btn-success" %>
-                <%= link_to "削除する", post_summary_path(@post_summary.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
-              <% end %>
-            <% end %>
-          </span>
-<!--post_houseのリンクを記入していれば-->
+        <!--post_houseのリンクを記入していれば-->
           <span>
             <% if @post_summary.post_house.present? %>
-              <h5>リンク</h5>
-              <%= @post_summary.post_house.link %>
+              <div class="subtitle"><span><i class="fas fa-angle-double-right"></i></span>リンク</div>
+              <p><%= @post_summary.post_house.link %></p>
             <% end %>
           </span>
+
+        <div class="subtitle"><span><i class="fas fa-user-astronaut"></i></span>投稿者</div>
+        <span>
+          <p><%= @user.user_name %><%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", width: "100" %></p>
+        </span>
+
+        <span>
+          <% if user_signed_in? %>
+            <% if @user.id == current_user.id %>
+              <%= link_to "編集する", edit_post_summary_path(@post_summary.id), class: "btn btn-success" %>
+              <%= link_to "削除する", post_summary_path(@post_summary.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+            <% end %>
+          <% end %>
+        </span>
         </div>
-      </div>
+    </div>
   </div>
-  </div>
+</div>
 
 <div class="container mx-auto">
   <div class="row">
-    <div class="col map" style="text-align: center;">
+    <div class="offset-md-2 col-md-8 map" style="text-align: center;">
   <!--post_outsideのテーブルのカラムaddressに値があれば表示--------------------------------------------------------------------------------------------->
             <% unless @post_summary.post_outside.blank? %>
-                <%= @post_summary.post_outside.address %>
+              <h2 class="address"><span><%= @post_summary.post_outside.address %></span></h2>
                 <!--GoogleMAP-->
                 <div id="map" style='width: 100%; height: 400px;'></div>
                     <script type="text/javascript">
@@ -81,21 +82,29 @@
     </div>
   </div>
 </div>
-<div class="container mx-auto">
+<div class="container mx-auto my-4">
   <div class="row">
-    <div class="col evaluation" style="text-align: center;">
-    <% if user_signed_in? %>
+    <div class="offset-md-2 col-md-4" style="text-align: center;">
+  <% if user_signed_in? %>
     <!--プックマークする-->
-      <div id="bookmark_buttons_<%= @post_summary.id %>">
+      <div id="bookmark_buttons_<%= @post_summary.id %>" class="put-on">
         <%= render "bookmarks/bookmark", post_summary: @post_summary %>
       </div>
-    <!--いいね-->
-      <div id="favorite_buttons_<%= @post_summary.id %>">
+    </div>
+    <div class="col-md-3" style="text-align: center;">
+      <!--いいね-->
+      <div id="favorite_buttons_<%= @post_summary.id %>" class="put-on">
         <%= render "favorites/favorite", post_summary: @post_summary %>
       </div>
+    </div>
+  </div>
+</div>
 
+<div class="container mx-auto">
+  <div class="row">
+    <div class="offset-md-2 col-md-8" style="text-align: center;">
     <!--レビュー新規投稿-------------------------------------------------------------------------------------------------------------------------->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">
         レビューする
       </button>
 
@@ -145,7 +154,6 @@
              <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
              <%= f.submit "投稿する", class:"btn btn-primary" %>
            </div>
-         <% end %>
     <% end %>
     </div>
   </div>
@@ -155,7 +163,9 @@
       <div id= "review">
         <%= render 'reviews/review', reviews: @reviews %>
       </div>
+  <% end %>
     </div>
   </div>
 </div>
+
 

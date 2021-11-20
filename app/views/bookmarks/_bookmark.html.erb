@@ -1,5 +1,13 @@
 <% if post_summary.bookmarked_by?(current_user) %>
-  <%= link_to "ブックマーク解除", post_summary_bookmarks_path(post_summary), method: :delete, remote: true, class: "fas fa-bookmark" %></td>
+  <p>
+    <span>
+      <i class="fas fa-bookmark"></i>
+    </span><%= link_to "ブックマーク解除", post_summary_bookmarks_path(post_summary), method: :delete, remote: true%>
+  </p>
 <% else %>
-  <%= link_to "ブックマーク登録", post_summary_bookmarks_path(post_summary), method: :post, remote: true, class: "far fa-bookmark" %></td>
+  <p>
+    <span>
+      <i class="far fa-bookmark"></i>
+    </span><%= link_to "ブックマーク登録", post_summary_bookmarks_path(post_summary), method: :post, remote: true%>
+  </p>
 <% end %>

@@ -1,13 +1,13 @@
 <% if post_summary.favorited_by?(current_user) %>
   <p>
-    <%= link_to post_summary_favorites_path(post_summary), method: :delete, remote: true, class: "fas fa-thumbs-up" do %>
-      <%= post_summary.favorites.count %>
-    <% end %>
+    <span>
+      <i class="fas fa-thumbs-up"></i><%= post_summary.favorites.count %>
+    </span><%= link_to "いいね！", post_summary_favorites_path(post_summary), method: :delete, remote: true %>
   </p>
-  <% else %>
+<% else %>
   <p>
-    <%= link_to post_summary_favorites_path(post_summary), method: :post, remote: true,  class: "far fa-thumbs-up" do %>
-      <%= post_summary.favorites.count %>
-    <% end %>
+    <span>
+      <i class="far fa-thumbs-up"></i><%= post_summary.favorites.count %>
+    </span><%= link_to "いいね！", post_summary_favorites_path(post_summary), method: :post, remote: true%>
   </p>
 <% end %>

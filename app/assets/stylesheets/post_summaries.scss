@@ -63,17 +63,17 @@
 // 画像スライド
 .slider{
     margin: 50px;
-    width: 50%;
-    height: 40%;
+    width: 80%;
+    height: 70%;
 }
-.slider img{
-    height: 100px;
-    width: 100px;
-}
+// .slider img{
+//     height: 150px;
+//     width: 100px;
+// }
 
-.slick-prev:before,
-.slick-next:before {
-    color: #000;
+button.slick-prev:before,
+button.slick-next:before {
+    color: black;
 }
 
 // 地図表示
@@ -81,38 +81,101 @@
   margin: 30px;
 }
 
-// いいね、ブックマーク、レビュー
-.evaluation{
-  margin: 30px;
-}
-
-//
+//見出し
 .subtitle {
   position: relative;
-  display: inline-block;
-  margin: 1.5em 0;
-  padding: 7px 10px;
-  min-width: 120px;
-  max-width: 100%;
-  color: #555;
-  font-size: 20px;
-  background: #e0edff;
-  border-radius: 10px;
-  overflow-wrap: normal;
+  overflow: hidden;
+  padding: 5px 20px 10px 70px;
+  word-break: break-all;
+  border-top: 3px solid #000;
+  border-radius: 12px 0 0 0;
+}
 
-  &::before{
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -15px;
-    border: 15px solid transparent;
-    border-top: 15px solid #e0edff;
-  }
+.subtitle span {
+  font-size: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  padding: 3px 20px;
+  color: #fff;
+  border-radius: 10px 0 20px 10px;
+  background: #000;
 }
 
 .w-nomal {
-  width: 300px;
   color: white;
-  word-wrap: normal;
+}
+
+
+.put-on{
+    font-size: 25px;
+    position: relative;
+    padding-left: 3em;
+    margin: 30px 0;
+
+    span {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 0 1.5rem;
+      color: #fff;
+      border-radius: 10px;
+      background: #0075a9;
+    }
+
+    span i {
+      margin-right: 1rem;
+    }
+
+    span:after {
+      position: absolute;
+      top: calc(50% - 7px);
+      right: -11px;
+      width: 0;
+      height: 0;
+      content: '';
+      border-width: 7px 0 7px 12px;
+      border-style: solid;
+      border-color: transparent transparent transparent #0075a9;
+    }
+}
+
+// 投稿タイトル
+.title-post{
+  position: relative;
+  padding: 1rem 2rem calc(1rem + 10px);
+  background: #fff100;
+  width: 60%;
+  margin:  0 auto;
+  text-align: center;
+
+  &::before {
+    position: absolute;
+    top: -7px;
+    left: -7px;
+    width: 90%;
+    height: 100%;
+    content: '';
+    border: 4px solid #000;
+  }
+}
+
+// 住所
+.address{
+  position: relative;
+  padding: 1.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+
+  &::before {
+    position: absolute;
+    bottom: -10px;
+    left: calc(35% - 30px);
+    width: 250px;
+    height: 5px;
+    content: '';
+    border-radius: 3px;
+    background: #ffff00;
+  }
 }
