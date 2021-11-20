@@ -62,14 +62,19 @@
 
 // 画像スライド
 .slider{
-    margin: 50px;
-    width: 80%;
-    height: 70%;
+    margin: 40px;
+    width: 90%;
 }
-// .slider img{
-//     height: 150px;
-//     width: 100px;
-// }
+
+button.slick-prev:before,
+button.slick-next:before {
+    color: black;
+}
+
+.slider02{
+    margin: 50px;
+    width: 30%;
+}
 
 button.slick-prev:before,
 button.slick-next:before {
@@ -89,24 +94,19 @@ button.slick-next:before {
   word-break: break-all;
   border-top: 3px solid #000;
   border-radius: 12px 0 0 0;
-}
 
-.subtitle span {
-  font-size: 20px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  padding: 3px 20px;
-  color: #fff;
-  border-radius: 10px 0 20px 10px;
-  background: #000;
+   span {
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    padding: 3px 20px;
+    color: #fff;
+    border-radius: 10px 0 20px 10px;
+    background: #000;
+  }
 }
-
-.w-nomal {
-  color: white;
-}
-
 
 .put-on{
     font-size: 25px;
@@ -178,4 +178,53 @@ button.slick-next:before {
     border-radius: 3px;
     background: #ffff00;
   }
+}
+
+// プルダウン
+.cp_ipselect {
+	overflow: hidden;
+	width: 30%;
+	height: 40px;
+	margin: 2em;
+	text-align: center;
+}
+.cp_ipselect select {
+	width: 100%;
+	padding-right: 1em;
+	cursor: pointer;
+	text-indent: 0.01px;
+	text-overflow: ellipsis;
+	border: none;
+	outline: none;
+	background: transparent;
+	background-image: none;
+	box-shadow: none;
+	-webkit-appearance: none;
+	appearance: none;
+}
+.cp_ipselect select::-ms-expand {
+    display: none;
+}
+.cp_ipselect.cp_sl05 {
+	position: relative;
+	border-radius: 2px;
+  border-radius: 50px;
+	background: #f0f8ff;
+}
+.cp_ipselect.cp_sl05::before {
+	position: absolute;
+	top: 0.8em;
+	right: 0.8em;
+	width: 0;
+	height: 0;
+	padding: 0;
+	content: '';
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid #ffffff;
+	pointer-events: none;
+}
+.cp_ipselect.cp_sl05 select {
+	padding: 8px 38px 8px 8px;
+	color: #ffffff;
 }

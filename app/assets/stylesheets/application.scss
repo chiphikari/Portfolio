@@ -29,26 +29,6 @@
    color: white ;
  }
 
- .pagination {
-  justify-content: center;
-}
-
-.pagination>li>a {
-  border: none;     /*枠線をなくす*/
-  color: #696969;   /*文字の色を変える*/
-}
-
-/* 表示しているページ番号のデザイン */
-.pagination>.active>a {
-  background: #93c9ff;     /*背景の色を変える*/
-  border-radius: 15px;     /*角を丸くする*/
-}
-
-/*ホバー時のデザイン*/
-.pagination>li>a:hover {
-  border-radius: 15px;    /*角を丸くする*/
-}
-
 .btn-real-dent {
   /*ボタン自体*/
   // position: absolute;
@@ -81,6 +61,16 @@ body{
   height: 100%;
   background-color: rgba( 255, 255, 255, 0.5 );
   background-blend-mode: lighten;
+  position: relative;
+  padding-bottom: 100px;
+}
+
+footer{
+  width: 100%;
+  text-align: center;
+  padding: 50px 0 30px 0;
+  position: absolute;/*←絶対位置*/
+  bottom: 0; /*下に固定*/
 }
 
 @media screen and (max-width:1370px) {

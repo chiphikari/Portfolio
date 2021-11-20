@@ -10,27 +10,19 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+
+//= require rails-ujs
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
 
-//= require rails-ujs
 //= require activestorage
 //= require turbolinks
 
 //= require jquery.jscroll.min.js
-
-//= require jquery
 //= require jquery.raty.js
-//= require jquery_ujs
-// = require_tree .
 
-// $(function() {
-//   $('.jscroll').jscroll({
-//     contentSelector: '.col',
-//     nextSelector: 'a.page-aaa'
-//   });
-// });
+// = require_tree .
 
 document.addEventListener("turbolinks:load", function(){
   $('.slider').slick({
@@ -40,3 +32,26 @@ document.addEventListener("turbolinks:load", function(){
   });
 });
 
+document.addEventListener("turbolinks:load", function(){
+  $('.slider02').slick({
+    autoplay:true,
+    autoplaySpeed:5000,
+    dots:true,
+  });
+});
+
+
+
+
+$(window).on('scroll', function() {
+    scrollHeight = $(document).height();
+    scrollPosition = $(window).height() + $(window).scrollTop();
+
+    if ( (scrollHeight - scrollPosition) / scrollHeight <= 0.05) {
+
+          $('.jscroll').jscroll({
+            contentSelector: '.skill-list',
+            nextSelector: "nav ul li a[rel=next]",
+          });
+    }
+});

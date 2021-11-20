@@ -12,7 +12,12 @@ class PostSummariesController < ApplicationController
                     @post_summaries = PostSummary.where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(4)
                 end
             else
-                @post_summaries = PostSummary.page(params[:page]).per(4).order(created_at: :desc)
+                if params[:search_flag] == 'like'
+                    all_ranks = PostSummary.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
+                    @post_summaries = Kaminari.paginate_array(all_ranks).page(params[:page]).per(4)
+                else
+                    @post_summaries = PostSummary.page(params[:page]).per(4).order(created_at: :desc)
+                end
             end
         else
             @category = params[:category]
@@ -20,9 +25,7 @@ class PostSummariesController < ApplicationController
                 all_ranks = PostSummary.where(category: params[:category]).includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
                 @post_summaries = Kaminari.paginate_array(all_ranks).page(params[:page]).per(4)
             else
-            # ?=category_id=が指定されている時
-            # params:[:category]はlink_toの（category: 0..)のcategoryと連携している。なのでparams:[:hoge]としてもlink_toを（hoge: 0..)にしても動作はする
-            @post_summaries = PostSummary.where(category: params[:category]).order(created_at: :desc).page(params[:page]).per(4)
+               @post_summaries = PostSummary.page(params[:page]).per(4).order(created_at: :desc)
             end
         end
     end
