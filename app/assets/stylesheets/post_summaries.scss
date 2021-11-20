@@ -34,6 +34,14 @@
   width: 25%;
 }
 
+// indexのカテゴリー名
+.category{
+  padding: 1rem 2rem;
+  border-top: 6px double #000;
+  border-bottom: 6px double #000;
+  width: 350px
+}
+
 // indexタイトル
 .list{
   margin: 30px auto;
@@ -227,4 +235,50 @@ button.slick-next:before {
 .cp_ipselect.cp_sl05 select {
 	padding: 8px 38px 8px 8px;
 	color: #ffffff;
+}
+
+@media screen and (max-width:1370px) {
+  .specefic{
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width:960px) {
+  .specefic{
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width:770px){
+  .specefic{
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width:420px){
+  .list{
+    font-size: 20px;
+    width: 50%;
+  }
+
+  .slider02{
+    margin: 10px;
+    width: 30%;
+    padding-top: 30%;
+  }
+
+  .specefic{
+    font-size: 12px;
+  }
+
+  .category{
+    padding: 1rem 2rem;
+    border-top: 6px double #000;
+    border-bottom: 6px double #000;
+    width: 230px
+  }
+
+  .card{
+    margin-left: 0px;
+  }
 }

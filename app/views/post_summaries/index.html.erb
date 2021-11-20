@@ -3,11 +3,11 @@
         <%= form_tag post_summaries_path, method: :get do %>
             <%= select_tag :search_flag, options_for_select({"いいねランキング一覧" => "like", "最新投稿一覧" => "updated"}), class: "cp_ipselect cp_sl05"%>
             <%= hidden_field_tag 'category', @category %>
-            <input type="submit">
+            <input type="submit" class="btn btn-dark">
         <% end %>
     </div>
 
-    <div class="card text-white bg-info mb-3 ml-5" style="max-width: 18rem;">
+    <div class="card text-white bg-info mb-3 ml-4" style="max-width: 18rem;">
       <div class="card-header">カテゴリー一覧</div>
       <div class="card-body">
         <div class="card-text">
@@ -33,8 +33,8 @@
 </h1>
 <div class="skill-list jscroll" style="background-color: rgba( 255, 255, 255, 0.8 );">
     <% @post_summaries.each do |post| %>
+    <h6 class="category">カテゴリー：<%= post.category %></h6>
     <div style="display: flex;">
-        <p>カテゴリー：<%= post.category %></p>
         <span class="slider02">
             <% if post.post_images.present? %>
                 <% post.post_images.each do |image| %>
@@ -44,17 +44,17 @@
                 <%= image_tag 'noimage.jpg'%>
             <% end %>
         </span>
-        <span style="margin: 50px;">
-            <p><%= link_to post.title, post_summary_path(post.id) %></p>
-            <p><%= post.headline %></p>
-            <p><%= post.introduction.truncate(15) %></p>
-            <p>投稿者：<%= post.user.user_name %></p>
-            <p>いいね数：<%= post.favorites.count %></p>
-            <p>投稿日：<%= post.created_at %></p>
+        <span style="margin: 50px; width: 600px;">
+            <h3 ><%= link_to post.title, post_summary_path(post.id) %></h3>
+            <p class="specefic">ヘッドライン：<%= post.headline %></p>
+            <p class="specefic">紹介文：<%= post.introduction.truncate(30) %></p>
+            <p class="specefic">投稿者：<%= post.user.user_name %></p>
+            <p class="specefic">いいね数：<%= post.favorites.count %></p>
+            <p class="specefic">投稿日：<%= post.created_at.strftime('%Y/%m/%d') %></p>
         </span>
     </div>
         <% end %>
-        <span style="display: none;"><%= paginate @post_summaries %></span>
+        <span><%= paginate @post_summaries %></span>
     </div>
 </div>
 
