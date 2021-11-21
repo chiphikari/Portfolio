@@ -64,8 +64,18 @@
 // ///////////////////////////////////////////////////////////////////////////
 
 // Index 画面//////////////////////////////////////////////////////////////////
-.box{
+.information{
+    &__specefic{
+      &--user{
+        font-size: 20px;
+      }
+    }
+  }
+
+.box-user{
   border-radius: 50%;
+  width: 100px;
+  height: 100px;
 }
 
 .specefic-2{
@@ -325,6 +335,12 @@ button.slick-next:before {
 }
 
 @media screen and (max-width:420px){
+  .box-user{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
+
   .specefic-2{
     font-size: 12px;
   }
@@ -343,6 +359,10 @@ button.slick-next:before {
   .information{
     &__specefic{
     font-size: 12px;
+
+     &--user{
+       font-size: 12px;
+     }
     }
   }
 
