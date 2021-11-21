@@ -12,11 +12,11 @@ class ReviewsController < ApplicationController
         review.save
         @reviews = @post_summary.reviews.includes(:user)
       else
-        flash[:notice] = "レビューの投稿は一度までです"
+        flash[:notice] = 'レビューの投稿は一度までです'
         redirect_to request.referer
       end
     else
-      flash[:alert] = "レビューの保存に失敗しました。レビューの評価を入力してください"
+      flash[:alert] = 'レビューの保存に失敗しました。レビューの評価を入力してください'
       redirect_to request.referer
     end
   end

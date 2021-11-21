@@ -45,10 +45,10 @@ class PostSummary < ApplicationRecord
     old_tags = current_tags - tags
     new_tags = tags - current_tags
 
-   old_tags.each do |old|
-    tag = Tag.find_by(tag_name: old)
-    # 合致した中間テーブルの組み合わせごと削除
-     PostTag.where(tag_id: tag.id, post_summary_id: self.id).destroy_all
+    old_tags.each do |old|
+      tag = Tag.find_by(tag_name: old)
+      # 合致した中間テーブルの組み合わせごと削除
+      PostTag.where(tag_id: tag.id, post_summary_id: id).destroy_all
       if PostTag.where(tag_id: tag.id).blank?
         # 中間テーブルに例：＃ccがなければ削除する
         tag.destroy
@@ -62,11 +62,10 @@ class PostSummary < ApplicationRecord
   end
 
   def avg_score
-    unless self.reviews.empty?
-      reviews.average(:score).round(1).to_f
-    else
+    if reviews.empty?
       0.0
+    else
+      reviews.average(:score).round(1).to_f
     end
   end
-
 end

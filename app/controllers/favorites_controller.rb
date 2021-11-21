@@ -14,5 +14,4 @@ class FavoritesController < ApplicationController
   def post_summary_params
     @post_summary = PostSummary.find(params[:post_summary_id])
   end
-
 end
