@@ -37,7 +37,7 @@
 
         <div class="post-info__subtitle"><span><i class="fas fa-user-astronaut"></i></span>投稿者</div>
         <span>
-          <p class="post-info__user-info"><%= @user.user_name %>&ensp;<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", width: "100" %></p>
+          <p class="post-info__user-info"><%= @user.user_name %>&ensp;<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", width: "120", style: "border-radius: 50%;" %></p>
         </span>
 
         <span>
@@ -118,7 +118,7 @@
              <span aria-hidden="true">&times;</span>
            </button>
          </div>
-         <%= form_with(model:[@post_summaries, @review], remote: true) do |f| %>
+        <%= form_with(model:[@post_summaries, @review], remote: true) do |f| %>
            <div class="modal-body">
              <%= f.hidden_field :post_summaries_id, value: @post_summaries.id %>
              <%= f.hidden_field :user_id, value: @post_summaries.user_id %>
@@ -154,11 +154,22 @@
              <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
              <%= f.submit "投稿する", class:"btn btn-primary" %>
            </div>
-    <% end %>
+        <% end %>
     </div>
   </div>
 </div>
+    <!--レビュー一覧-->
+      <div id= "review">
+        <%= render 'reviews/review', reviews: @reviews %>
+      </div>
 
+  <% else %>
+      <!--いいね数-->
+        <p style="color: #4169e1;">
+          <span class="favorites">
+            <i class="fas fa-thumbs-up"></i><%= @post_summary.favorites.count %>
+          </span>いいね！
+        </p>
       <!--レビュー一覧-->
       <div id= "review">
         <%= render 'reviews/review', reviews: @reviews %>

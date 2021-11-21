@@ -1,3 +1,33 @@
 // Place all the styles related to the searchs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.table-search{
+  margin-bottom: 500px;
+  width: 100%;
+  border-collapse:separate;
+  border-spacing: 5px;
+}
+
+.table-search th,.table-search td{
+  border-radius: 5px;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.table-search th{
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  color: white;
+  border:solid 1px #927141;
+}
+
+.table-search td{
+  background-color: #afeeee;
+  border:solid 1px #af9d85;
+}
+
+@media screen and (max-width:420px){
+  .table-search{
+    font-size: 10px;
+  }
+}

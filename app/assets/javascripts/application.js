@@ -52,7 +52,7 @@ $(window).on('scroll', function() {
             contentSelector: '.skill-list',
             nextSelector: "nav ul li a[rel=next]",
             callback: function() {
-              $('.slider02').not('.slick-initialized').slick({
+               $('.slider02').not('.slick-initialized').slick({
                 autoplay:true,
                 autoplaySpeed:5000,
                 dots:true,

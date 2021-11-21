@@ -23,9 +23,9 @@
 </div>
 
 <h1 class= "list">
-    <% if params[:search_flag] == 'like' %>
+    <% if !params[:category].blank? && params[:search_flag] == 'like' %>
         いいねランキング一覧
-    <% elsif user_signed_in? %>
+    <% elsif user_signed_in? && params[:category].blank?%>
         <%= current_user.user_name %>さんが投稿した一覧
     <% else %>
         投稿一覧
@@ -52,12 +52,12 @@
                 <h3 class="title-2"><%= link_to post.title, post_summary_path(post.id) %></h3>
                 <h4 class="information__specefic" style="padding-bottom: 4%;"><%= post.headline %></h4>
                 <h5 class="information__specefic" style="padding-bottom: 4%;"><%= post.introduction.truncate(50) %></h5>
-                <p class="information__specefic"><%= post.user.user_name %>&ensp;<%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", width: "100", class: "box"  %></p>
+                <p class="information__specefic"><%= post.user.user_name %>&ensp;<%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", width: "120", class: "box"  %></p>
             </span>
         </div>
     </div>
     <% end %>
-    <span><%= paginate @post_summaries %></span>
+    <span style="display: none;"><%= paginate @post_summaries %></span>
 </div>
 
 

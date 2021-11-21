@@ -33,7 +33,7 @@ class PostSummary < ApplicationRecord
   enum category: {
     動画・映画: 0,
     本・書籍: 1,
-    その他: 2,
+    アクティビティ: 2,
     隠れおすすめスポット: 3,
     隠れ喫茶店: 4,
     おすすめ散歩: 5

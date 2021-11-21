@@ -64,6 +64,10 @@
 // ///////////////////////////////////////////////////////////////////////////
 
 // Index 画面//////////////////////////////////////////////////////////////////
+.box{
+  border-radius: 50%;
+}
+
 .specefic-2{
     font-size: 20px;
   }
@@ -371,6 +375,21 @@ button.slick-next:before {
     -webkit-transition: all 1s;
     transition: all 1s;
     width: 200px;
+  }
+
+
+  .address{
+    font-size: 13px;
+
+    &::before {
+      width: 150px;
+      height: 5px;
+    }
+  }
+
+  .slider{
+    margin: 20px;
+    width: 90%;
   }
 
 }

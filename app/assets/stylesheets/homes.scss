@@ -7,6 +7,8 @@
 // }
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Yomogi&display=swap');
 
+// Topページ////////////////////////////////////////////////////////////////
+
 .page {
   padding-top: 420px;
 }
@@ -150,6 +152,26 @@
         }
     }
 }
+// ////////////////////////////////////////////////////////////////
+
+// Aboutページ////////////////////////////////////////////////////////////////
+.about-image {
+  text-align: center;
+  animation-name:rotateXAnime;
+  animation-duration:1s;
+  animation-fill-mode:forwards;
+}
+
+@keyframes rotateXAnime{
+  from{
+    transform: rotateX(0);
+    }
+  to{
+    transform: rotateX(-360deg);
+    }
+}
+// ////////////////////////////////////////////////////////////////
+
 
 @media screen and (max-width:1370px) {
     .top-page-header{

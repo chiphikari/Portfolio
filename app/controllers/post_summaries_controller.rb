@@ -25,7 +25,7 @@ class PostSummariesController < ApplicationController
                 all_ranks = PostSummary.where(category: params[:category]).includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
                 @post_summaries = Kaminari.paginate_array(all_ranks).page(params[:page]).per(4)
             else
-               @post_summaries = PostSummary.page(params[:page]).per(4).order(created_at: :desc)
+               @post_summaries = PostSummary.where(category: params[:category]).order(created_at: :desc).page(params[:page]).per(4)
             end
         end
     end
