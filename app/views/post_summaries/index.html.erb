@@ -31,31 +31,33 @@
         投稿一覧
     <% end %>
 </h1>
-<div class="skill-list jscroll" style="background-color: rgba( 255, 255, 255, 0.8 );">
+<div class="skill-list jscroll" style="background-color: rgba( 255, 255, 255, 0.8 ); color: #191970;" id="jscroll_top">
     <% @post_summaries.each do |post| %>
-    <h6 class="category">カテゴリー：<%= post.category %></h6>
-    <div style="display: flex;">
-        <span class="slider02">
-            <% if post.post_images.present? %>
-                <% post.post_images.each do |image| %>
-                    <%= attachment_image_tag image, :image, fallback: "noimage.jpg"%>
+    <h6 class="category"><%= post.category %></h6>
+    <div class="box8">
+        <p class="specefic-2">いいね数：<%= post.favorites.count %></p>
+        <p class="specefic-2">投稿日：<%= post.created_at.strftime('%Y/%m/%d') %></p>
+        <div style="display: flex;">
+            <span class="slider02" >
+                <% if post.post_images.present? %>
+                    <% post.post_images.each do |image| %>
+                        <%= attachment_image_tag image, :image, style: "border-radius: 20px;"%>
+                    <% end %>
+                <% else %>
+                    <%= image_tag 'noimage.jpg', style: "border-radius: 20px;"%>
                 <% end %>
-            <% else %>
-                <%= image_tag 'noimage.jpg'%>
-            <% end %>
-        </span>
-        <span style="margin: 50px; width: 600px;">
-            <h3 ><%= link_to post.title, post_summary_path(post.id) %></h3>
-            <p class="specefic">ヘッドライン：<%= post.headline %></p>
-            <p class="specefic">紹介文：<%= post.introduction.truncate(30) %></p>
-            <p class="specefic">投稿者：<%= post.user.user_name %></p>
-            <p class="specefic">いいね数：<%= post.favorites.count %></p>
-            <p class="specefic">投稿日：<%= post.created_at.strftime('%Y/%m/%d') %></p>
-        </span>
+            </span>
+
+            <span class="information"style="margin: 30px; width: 600px;">
+                <h3 class="title-2"><%= link_to post.title, post_summary_path(post.id) %></h3>
+                <h4 class="information__specefic" style="padding-bottom: 4%;"><%= post.headline %></h4>
+                <h5 class="information__specefic" style="padding-bottom: 4%;"><%= post.introduction.truncate(50) %></h5>
+                <p class="information__specefic"><%= post.user.user_name %>&ensp;<%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", width: "100", class: "box"  %></p>
+            </span>
+        </div>
     </div>
-        <% end %>
-        <span><%= paginate @post_summaries %></span>
-    </div>
+    <% end %>
+    <span><%= paginate @post_summaries %></span>
 </div>
 
 

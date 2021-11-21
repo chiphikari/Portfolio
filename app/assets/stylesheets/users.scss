@@ -142,7 +142,6 @@ $primary: #2196F3;
     font-size: 20px;
     padding: 20px 0;
 
-    &::before,
     &::after{
       position: absolute;
       left: 0;
@@ -170,17 +169,41 @@ $primary: #2196F3;
   }
 }
 
-// 画像
-.box{
-
-}
-
 @media screen and (max-width:1370px) {
+  .table{
+    &__user-info{
+      font-size: 30px;
+    }
+
+    &__user-detail{
+      font-size: 30px;
+    }
+  }
+
+  .table-bookmark{
+      font-size: 25px;
+  }
 
 }
 
-@media screen and (max-width:1024px) {
+.bookmark{
+  position: relative;
+  padding: 1.5rem 1rem;
+  font-weight: 600;
 
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    content: '';
+    background-image: -webkit-repeating-linear-gradient(135deg, #000, #000 1px, transparent 2px, transparent 5px);
+    background-image: repeating-linear-gradient(-45deg, #000, #000 1px, transparent 2px, transparent 5px);
+    background-size: 7px 7px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
 }
 
 @media screen and (max-width:960px) {
@@ -194,11 +217,52 @@ $primary: #2196F3;
       font-size: 15px;
     }
   }
+
+  .table-bookmark{
+      font-size: 12px;
+  }
 }
 
 @media screen and (max-width:770px){
+  .table{
+
+    &__user-info{
+      font-size: 20px;
+    }
+
+    &__user-detail{
+      font-size: 20px;
+    }
+  }
+
+  .bookmark{
+    font-size: 22px;
+  }
 
 }
 
 @media screen and (max-width:420px){
+  .box{
+    width: 100px;
+    height: 100px;
+  }
+
+  .table{
+
+    &__user-info{
+      font-size: 13px;
+    }
+
+    &__user-detail{
+      font-size: 13px;
+    }
+  }
+
+  .table-bookmark{
+      font-size: 10px;
+  }
+
+  .bookmark{
+    font-size: 15px;
+  }
 }

@@ -55,11 +55,11 @@
 body{
   width: 100%;
   background-image: url('back.jpg');
-  background-size: contain;
+  background-size: cover;
   background-attachment: fixed;
-  background-position: right;
+  background-position: top;
   height: 100%;
-  background-color: rgba( 255, 255, 255, 0.5 );
+  background-color: rgba( 255, 255, 255, 0.7 );
   background-blend-mode: lighten;
   position: relative;
   padding-bottom: 100px;
@@ -76,13 +76,13 @@ footer{
 @media screen and (max-width:1370px) {
   body{
     background-size: cover;
-    background-position: right bottom;
+    background-position: top;
   }
 }
 
 @media screen and (max-width:420px){
   body{
     background-size: cover;
-    background-position: center;
+    background-position: top;
   }
 }

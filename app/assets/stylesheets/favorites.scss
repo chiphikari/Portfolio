@@ -2,3 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.favorites{
+  margin-left: 50px;
+  font-size: 25px;
+}
+
+@media screen and (max-width:770px){
+  .favorites{
+    margin-left: 50px;
+    font-size: 20px;
+  }
+}

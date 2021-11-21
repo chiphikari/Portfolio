@@ -24,6 +24,7 @@
 
 // = require_tree .
 
+// 画像スライド
 document.addEventListener("turbolinks:load", function(){
   $('.slider').slick({
     autoplay:true,
@@ -32,6 +33,7 @@ document.addEventListener("turbolinks:load", function(){
   });
 });
 
+// 画像スライド
 document.addEventListener("turbolinks:load", function(){
   $('.slider02').slick({
     autoplay:true,
@@ -40,15 +42,22 @@ document.addEventListener("turbolinks:load", function(){
   });
 });
 
-// $(window).on('scroll', function() {
-//     scrollHeight = $(document).height();
-//     scrollPosition = $(window).height() + $(window).scrollTop();
+$(window).on('scroll', function() {
+    scrollHeight = $(document).height();
+    scrollPosition = $(window).height() + $(window).scrollTop();
 
-//     if ( (scrollHeight - scrollPosition) / scrollHeight <= 0.05) {
+    if ( (scrollHeight - scrollPosition) / scrollHeight <= 0.05) {
 
-//           $('.jscroll').jscroll({
-//             contentSelector: '.skill-list',
-//             nextSelector: "nav ul li a[rel=next]",
-//           });
-//     }
-// });
+          $('.jscroll').jscroll({
+            contentSelector: '.skill-list',
+            nextSelector: "nav ul li a[rel=next]",
+            callback: function() {
+              $('.slider02').not('.slick-initialized').slick({
+                autoplay:true,
+                autoplaySpeed:5000,
+                dots:true,
+              });
+            }
+          });
+    }
+});

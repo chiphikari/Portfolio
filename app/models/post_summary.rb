@@ -25,9 +25,9 @@ class PostSummary < ApplicationRecord
     favorites.where(user_id: user.id).exists?
   end
 
-  validates :title, presence: true
-  validates :headline, presence: true
-  validates :introduction, presence: true
+  validates :title, length: { maximum: 50 }, presence: true
+  validates :headline, length: { maximum: 50 }, presence: true
+  validates :introduction, length: { maximum: 200 }, presence: true
   validates :category, presence: true
 
   enum category: {
@@ -60,7 +60,7 @@ class PostSummary < ApplicationRecord
       self.tags << new_post_tag
     end
   end
-  
+
   def avg_score
     unless self.reviews.empty?
       reviews.average(:score).round(1).to_f
@@ -68,5 +68,5 @@ class PostSummary < ApplicationRecord
       0.0
     end
   end
-  
+
 end

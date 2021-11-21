@@ -1,23 +1,23 @@
 <div class="container">
   <div class="row">
-    <div class="col">
-      <h3>家で楽しめる投稿</h3>
-      以下カテゴリーの投稿を希望している方はしたの投稿ボタンをクリックしてください。
+    <div class="col-md-6">
+      <h3 class="new-title">家で楽しめる投稿</h3>
+      <p>以下カテゴリーの投稿を希望している方はしたの投稿ボタンをクリックしてください。</p>
       <ul class="list_design031">
         <li class="animation">動画・映画</li>
         <li class="animation">本・電子書籍</li>
         <li class="animation">その他</li>
       </ul>
-      <%= link_to "お家で楽しめる投稿", house_post_summaries_path, class: "btn btn-dark" %>
+     <p><%= link_to "お家で楽しめる投稿", house_post_summaries_path, class: "btn btn-dark" %></p>
 
-      <h3>外で楽しめる投稿</h3>
-      以下カテゴリーの投稿を希望している方は投稿ボタンをクリックしてください。
+      <h3 class="new-title">外で楽しめる投稿</h3>
+      <p>以下カテゴリーの投稿を希望している方は投稿ボタンをクリックしてください。</p>
       <ul class="list_design031">
         <li class="animation">隠れおすすめスポット</li>
         <li class="animation">隠れ喫茶店</li>
         <li class="animation">おすすめ散歩</li>
       </ul>
-      <%= link_to "外で楽しめる投稿", outside_post_summaries_path, class: "btn btn-dark" %>
+      <p><%= link_to "外で楽しめる投稿", outside_post_summaries_path, class: "btn btn-dark" %></p>
     </div>
   </div>
 </div>

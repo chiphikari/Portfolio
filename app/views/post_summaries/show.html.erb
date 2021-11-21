@@ -2,8 +2,8 @@
 <div class="container mx-auto pb-5" style="background-color: rgba(0,0,0,0.4);">
   <div class="row">
     <div class="col-md-5 mt-3">
-      <div class="subtitle"><span><i class="fas fa-tags"></i></span>タグ</div>
-        <p class="w-nomal">
+      <div class="post-info__subtitle"><span><i class="fas fa-tags"></i></span>タグ</div>
+        <p style="color: #f8f8ff;">
           <% @tags.each do |tag| %>
             #<%= tag.tag_name %>
           <% end %>
@@ -12,32 +12,32 @@
       <div class="slider">
         <% if @post_summary.post_images.present? %>
           <% @post_summary.post_images.each do |image| %>
-            <%= attachment_image_tag image, :image, fallback: "noimage.jpg" %>
+            <%= attachment_image_tag image, :image, style: "border-radius: 20px;" %>
           <% end %>
         <% else %>
-          <%= image_tag 'noimage.jpg', width: "200" %>
+          <%= image_tag 'noimage.jpg', width: "200", style: "border-radius: 20px;" %>
         <% end %>
       </div>
     </div>
-    <div class="col-md-7">
-      <div style="margin: 20px; overflow-wrap-normal">
-        <div class="subtitle"><span><i class="fas fa-angle-double-right"></i></span>CSS見出し</div>
-        <p class="w-nomal"><%= @post_summary.headline %></p>
+    <div class="post-info col-md-7">
+      <div style="margin: 20px;">
+        <div class="post-info__subtitle"><span><i class="fas fa-angle-double-right"></i></span>ヘッドライン</div>
+        <p style="color: #f8f8ff;"><%= @post_summary.headline %></p>
 
-        <div class="subtitle"><span><i class="fas fa-angle-double-right"></i></span>紹介</div>
-        <p class="w-nomal"><%= @post_summary.introduction %></p>
+        <div class="post-info__subtitle"><span><i class="fas fa-angle-double-right"></i></span>紹介</div>
+        <p style="color: #f8f8ff;"><%= @post_summary.introduction %></p>
 
         <!--post_houseのリンクを記入していれば-->
           <span>
             <% if @post_summary.post_house.present? %>
-              <div class="subtitle"><span><i class="fas fa-angle-double-right"></i></span>リンク</div>
-              <p><%= @post_summary.post_house.link %></p>
+              <div class="post-info__subtitle"><span><i class="fas fa-angle-double-right"></i></span>リンク</div>
+              <p style="color: #f8f8ff;"><%= text_url_to_link(h(@post_summary.post_house.link)).html_safe%></p>
             <% end %>
           </span>
 
-        <div class="subtitle"><span><i class="fas fa-user-astronaut"></i></span>投稿者</div>
+        <div class="post-info__subtitle"><span><i class="fas fa-user-astronaut"></i></span>投稿者</div>
         <span>
-          <p><%= @user.user_name %><%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", width: "100" %></p>
+          <p class="post-info__user-info"><%= @user.user_name %>&ensp;<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", width: "100" %></p>
         </span>
 
         <span>
@@ -84,15 +84,15 @@
 </div>
 <div class="container mx-auto my-4">
   <div class="row">
-    <div class="offset-md-2 col-md-4" style="text-align: center;">
+    <div class="col-md-6">
   <% if user_signed_in? %>
-    <!--プックマークする-->
+    <!--プックマークする---------------------------------------------------->
       <div id="bookmark_buttons_<%= @post_summary.id %>" class="put-on">
         <%= render "bookmarks/bookmark", post_summary: @post_summary %>
       </div>
     </div>
-    <div class="col-md-3" style="text-align: center;">
-      <!--いいね-->
+    <div class="col-md-6">
+      <!--いいね------------------------------------------------------------->
       <div id="favorite_buttons_<%= @post_summary.id %>" class="put-on">
         <%= render "favorites/favorite", post_summary: @post_summary %>
       </div>

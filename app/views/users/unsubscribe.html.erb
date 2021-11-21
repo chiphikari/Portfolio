@@ -1,5 +1,13 @@
-<p>退会するとサイトの一部は引き続きアカウントなしで閲覧は可能ですが、投稿することやお気に入りに登録しているものが見れなくなります。
-それでも退会を希望する場合は「退会する」をクリックください。</p>
+<div class="container text-center mx-auto pb-5">
+  <div class="row">
+    <div class="col-md-12 mt-3">
+      <p>退会するとサイトの一部は引き続きアカウントなしで閲覧は可能ですが、投稿することができなくなります。<br />
+      また、お気に入りに登録しているものや過去に投稿したものが見れなくなります。<br />
+      それでも退会を希望する場合は「退会する」をクリックください。</p>
 
-<%= link_to "戻る", user_path(current_user), class: "btn btn-dark" %>
-<%=link_to "退会する", unsubscribe_path, method: :patch, class:"btn btn-danger", data: { confilm: "本当に退会しますか？" } %>
+      <%= link_to "戻る", user_path(current_user), class: "btn btn-dark" %>
+      <%=link_to "退会する", unsubscribe_path, method: :patch, class:"btn btn-danger", data: { confilm: "本当に退会しますか？" } %>
+    </div>
+  </div>
+</div>
+

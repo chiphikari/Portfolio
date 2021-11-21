@@ -2,12 +2,12 @@
   <p>
     <span>
       <i class="fas fa-thumbs-up"></i><%= post_summary.favorites.count %>
-    </span><%= link_to "いいね！", post_summary_favorites_path(post_summary), method: :delete, remote: true %>
+    </span><%= link_to "いいね！", post_summary_favorites_path(post_summary), method: :delete, class: "favorites", remote: true %>
   </p>
 <% else %>
   <p>
     <span>
       <i class="far fa-thumbs-up"></i><%= post_summary.favorites.count %>
-    </span><%= link_to "いいね！", post_summary_favorites_path(post_summary), method: :post, remote: true%>
+    </span><%= link_to "いいね！", post_summary_favorites_path(post_summary), method: :post, class: "favorites", remote: true%>
   </p>
 <% end %>
