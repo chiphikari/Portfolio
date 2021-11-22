@@ -17,8 +17,8 @@
               <td><%= post_summary.headline %></td>
               <td><%= post_summary.introduction.truncate(20) %></td>
               <td>
-                <%= post_summary.tags.each do |tags| %>
-                  <%= tags.tag_name %>
+                <% post_summary.tags.each do |tags| %>
+                  #<%= tags.tag_name %>
                 <% end %>
               </td>
             </tr>
