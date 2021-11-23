@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Yomogi&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&display=swap');
 .page {
   padding-top: 420px; }
 
@@ -15,14 +15,16 @@
   .top-page-header__header-center {
     padding-top: 100px;
     height: 100px;
-    width: 37%; }
-    .top-page-header__header-center__surround {
-      background-color: rgba(255, 255, 255, 0.45); }
+    width: 45%; }
+    .top-page-header__header-center__surround{
+      padding-left: 120px;
+    }
+
       .top-page-header__header-center__surround__bottom {
         font-size: 30px;
-        color: #191970;
+        color: #f8f8ff;
         padding-left: 40px;
-        font-family: 'M PLUS Rounded 1c', sans-serif; }
+        font-family: 'Shippori Antique B1', sans-serif; }
 
 .introduction {
   background-color: #fffaf0;
@@ -30,7 +32,7 @@
   font-size: 20px;
   text-align: center;
   line-height: 45px;
-  font-family: 'M PLUS Rounded 1c', sans-serif; }
+  font-family: 'Shippori Antique B1', sans-serif; }
 
 .feature {
   list-style-type: none; }
@@ -53,7 +55,7 @@
       left: 350px;
       background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
       width: 40%;
-      font-family: 'Yomogi', cursive; }
+      font-family: 'Shippori Antique B1', sans-serif; }
       .feature__feature-item--body--title {
         font-weight: bolder;
         font-size: 25px;
@@ -69,7 +71,7 @@
       right: 350px;
       background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
       width: 40%;
-      font-family: 'Yomogi', cursive; }
+      font-family: 'Shippori Antique B1', sans-serif; }
   .feature__feature-item:nth-child(2n) {
     display: flex;
     justify-content: flex-end;
@@ -80,7 +82,7 @@
   position: relative;
   text-align: center;
   margin: 60px 0;
-  font-family: 'Yomogi', cursive; }
+  font-family: 'Shippori Antique B1', sans-serif; }
   .title2::before {
     position: absolute;
     top: 50%;
@@ -105,7 +107,7 @@
     font-size: 40px;
     color: #fff;
     margin-right: 5px;
-    font-family: 'Yomogi', cursive; }
+    font-family: 'Shippori Antique B1', sans-serif; }
 
 .about-image {
   text-align: center;
@@ -121,17 +123,8 @@
 @media screen and (max-width: 1370px) {
   .top-page-header {
     height: 350px; }
-    .top-page-header__header-center {
-      padding-top: 100px;
-      height: 100px;
-      width: 37%; }
-      .top-page-header__header-center__surround {
-        background-color: rgba(255, 255, 255, 0.45); }
         .top-page-header__header-center__surround__bottom {
-          font-size: 25px;
-          color: #191970;
-          padding-left: 40px;
-          font-family: 'M PLUS Rounded 1c', sans-serif; }
+          font-size: 25px;}
     .top-page-header .img-responsive {
       width: 200px;
       height: 100px; }
@@ -166,15 +159,13 @@
     background-position: right 15% bottom 10%; }
     .top-page-header__header-center {
       padding-top: 80px;
-      height: 100px;
-      width: 37%; }
+      }
       .top-page-header__header-center__surround {
-        background-color: rgba(255, 255, 255, 0.45); }
+        padding-left: 5px;
+         }
         .top-page-header__header-center__surround__bottom {
           font-size: 20px;
-          color: #191970;
-          padding-left: 40px;
-          font-family: 'M PLUS Rounded 1c', sans-serif; }
+        }
 
   .introduction {
     font-size: 17px; }
@@ -200,6 +191,9 @@
     width: 10%; }
   .title2::after {
     width: 10%; }
+  .title2__small{
+    font-size: 20px;
+  }
 
   .feature__feature-item--body {
     position: absolute;
@@ -207,7 +201,7 @@
     left: 350px;
     background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
     width: 50%;
-    font-family: 'Yomogi', cursive; }
+    font-family: 'Shippori Antique B1', sans-serif; }
     .feature__feature-item--body--title {
       font-size: 25px; }
     .feature__feature-item--body--content {
@@ -218,15 +212,13 @@
   .top-page-header {
     height: 300px; }
     .top-page-header__header-center {
-      width: 40%; } }
-@media screen and (max-width: 770px) {
-  .title2::before {
-    width: 10%; }
-  .title2::after {
-    width: 10%; }
-
-  .top-page-header__header-center {
-    width: 45%; } }
+      width: 50%; }
+      .top-page-header__header-center__surround {
+        background-color: rgba(255, 255, 255, 0.45); }
+        .top-page-header__header-center__surround__bottom {
+        color: #000000;
+        }
+  }
 @media screen and (max-width: 420px) {
   .img-responsive {
     width: 100px;
@@ -245,14 +237,15 @@
     .top-page-header__header-center {
       padding-top: 100px;
       height: 100px;
-      width: 50%; }
+      width: 60%; }
       .top-page-header__header-center__surround {
-        background-color: rgba(255, 255, 255, 0.45); }
+        background-color: rgba(255, 255, 255, 0.45);
+        }
         .top-page-header__header-center__surround__bottom {
           font-size: 2px;
-          color: #191970;
+          color: #000000;
           padding-left: 10px;
-          font-family: 'M PLUS Rounded 1c', sans-serif; }
+          font-family: 'Shippori Antique B1', sans-serif; }
 
   .introduction {
     font-size: 2px; }
@@ -275,7 +268,7 @@
       background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
       height: 55px;
       width: 200px;
-      font-family: 'Yomogi', cursive; }
+      font-family: 'Shippori Antique B1', sans-serif; }
       .feature__feature-item--body--title {
         font-weight: bolder;
         font-size: 4px;
@@ -291,7 +284,7 @@
       right: 90px;
       background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
       width: 200px;
-      font-family: 'Yomogi', cursive; }
+      font-family: 'Shippori Antique B1', sans-serif; }
   .feature__feature-item:nth-child(2n) {
     display: flex;
     justify-content: flex-end;
@@ -302,7 +295,7 @@
     position: relative;
     text-align: center;
     margin: 20px 0;
-    font-family: 'Yomogi', cursive; }
+    font-family: 'Shippori Antique B1', sans-serif; }
     .title2::before {
       position: absolute;
       top: 50%;
@@ -330,6 +323,6 @@
         font-size: 20px;
         color: #fff;
         margin-right: 5px;
-        font-family: 'Yomogi', cursive; } }
+        font-family: 'Shippori Antique B1', sans-serif; } }
 
 /*# sourceMappingURL=homes.css.map */
