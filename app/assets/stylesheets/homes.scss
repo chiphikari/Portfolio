@@ -13,18 +13,15 @@
   padding-top: 420px;
 }
 
-.img-responsive{
-    width: 300px;
-    height: 130px;
-}
-
 // ヘッダー
 .top-page-header{
     width: 100%;
-    height: 500px;
-    background-image: image-url('22017170_m.jpg');
-    background-repeat: repeat;
-    background-position: bottom;
+    height: 600px;
+    background-image: image-url('bored.jpg');
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 65% 600px;
+    background-color: black;
 
     &__header-center{
         padding-top: 100px;
@@ -32,15 +29,20 @@
         width: 45%;
 
         &__surround{
-            padding-left: 120px;
+            padding-left: 30px;
 
             &__bottom{
                 font-size: 30px;
                 color: #f8f8ff;
-                padding-left: 40px;
                 font-family: 'ShIPPOrI antique b1', sans-serif;
             }
         }
+    }
+
+    .img-responsive{
+        width: 300px;
+        height: 150px;
+        margin-bottom: 20px;
     }
 }
 
@@ -175,7 +177,8 @@
 
 @media screen and (max-width:1370px) {
     .top-page-header{
-        height: 350px;
+        background-size: 67% 600px;
+        height: 600px;
 
         &__header-center{
 
@@ -239,9 +242,8 @@
 @media screen and (max-width:1024px) {
 
     .top-page-header{
-        height: 300px;
-        background-repeat: repeat;
-        background-position: right 15% bottom 10%;
+        background-size: 75% 600px;
+        height: 600px;
 
         &__header-center{
 
@@ -250,6 +252,7 @@
 
                 &__bottom{
                     font-size: 20px;
+                    width: 50%;
                 }
             }
         }
@@ -287,25 +290,24 @@
 
 @media screen and (max-width:960px) {
     .top-page-header{
+        background-size: contain;
 
         &__header-center{
 
             &__surround{
                 padding-left: 10px;
-                background-color: rgba(255, 255, 255, 0.45);
                 width: 400px;
 
                 &__bottom{
                     font-size: 18px;
-                    color: #000000;
                 }
             }
         }
-    }
 
-    .img-responsive{
-        width: 200px;
-        height: 100px;
+        .img-responsive{
+            width: 150px;
+            height: 80px;
+        }
     }
 
     .introduction{
@@ -331,12 +333,8 @@
         &__feature-item{
 
             &--body{
-                position: absolute;
-                top: 50%;
                 left: 150px;
-                background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
                 width: 80%;
-                font-family: 'Shippori antique B1', sans-serif;
 
                 &--title{
                     font-size:  20px;
@@ -369,39 +367,71 @@
     }
 }
 
-@media screen and (max-width:420px){
-    .img-responsive{
-        width: 100px;
-        height: 50px;
-    }
+@media screen and (max-width:570px){
+.top-page-header{
+        width: 100%;
+        height: 350px;
+        background-repeat: no-repeat;
+        background-size: contain;
 
-    .top-page-header{
+
         .img-responsive{
-            width: 100px;
-            height: 50px;
+            width: 150px;
+            height: 80px;
             padding-left: 10px;
         }
 
-        width: 100%;
-        height: 300px;
-        background-repeat: repeat;
-        background-size: cover;
-
         &__header-center{
-            padding-top: 100px;
+            padding-top: 90px;
+            padding-left: 20px;
             height: 100px;
             width: 50%;
 
             &__surround{
                 padding-left: 10px;
-                background-color: rgba(255, 255, 255, 0.45);
+                width: 200px;
+
+                &__bottom{
+                    font-size: 15px;
+                    color: #000000;
+                    padding-left: 10px;
+                    width: 70%;
+                }
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width:420px){
+
+    .top-page-header{
+        width: 100%;
+        height: 350px;
+        background-repeat: no-repeat;
+        background-size: contain;
+
+
+        .img-responsive{
+            width: 100px;
+            height: 50px;
+            padding-left: 0;
+        }
+
+        &__header-center{
+            padding-top: 90px;
+            height: 100px;
+            width: 50%;
+
+            &__surround{
+                padding-left: 10px;
                 width: 200px;
 
                 &__bottom{
                     font-size: 2px;
-                    color: #000000;
-                    padding-left: 10px;
-                    font-family: 'ShIPPOrI antique b1', sans-serif;
+                    padding-left: 0;
+                    background-color: rgba(255, 255, 255, 0.45);
+                    width: 50%;
                 }
             }
         }
@@ -427,13 +457,10 @@
             }
 
             &--body{
-                position: absolute;
                 top: 55%;
                 left: 90px;
-                background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
                 height: 55px;
                 width: 200px;
-                font-family: 'Shippori antique B1', sans-serif;
 
                 &--title{
                     font-weight: bolder;
@@ -450,12 +477,9 @@
             }
 
             &--body2{
-                position: absolute;
                 top: 55%;
                 right: 90px;
-                background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
                 width: 200px;
-                font-family: 'Shippori antique B1', sans-serif;
             }
         }
 

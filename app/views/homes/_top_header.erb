@@ -6,24 +6,24 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01" style="background-color:transparent;">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                  <a class="navi nav-link" href="/about" style="color: #ff4500;">このサイトについて<span class="sr-only">(current)</span></a>
+                  <a class="navi nav-link" href="/about" style="color: #0000ff">このサイトについて<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown">
-                  <a class="navi nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #ff4500;">
+                  <a class="navi nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #0000ff;">
                     Menu
                   </a>
                   <% if user_signed_in? %>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="/users/<%= current_user.id %>">マイページ</a>
-                      <a class="dropdown-item" href="/post_summaries/new">新規投稿</a>
-                      <a class="dropdown-item" href="/post_summaries">投稿一覧</a>
-                      <a class="dropdown-item" data-method="delete" href="/users/sign_out">ログアウト</a>
+                      <a class="dropdown-item" style="color: #0000ff;" href="/users/<%= current_user.id %>">マイページ</a>
+                      <a class="dropdown-item" style="color: #0000ff;" href="/post_summaries/new">新規投稿</a>
+                      <a class="dropdown-item" style="color: #0000ff;" href="/post_summaries">投稿一覧</a>
+                      <a class="dropdown-item" style="color: #0000ff;" data-method="delete" href="/users/sign_out">ログアウト</a>
                     </div>
                   <% else%>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="/users/sign_in">ログイン</a>
-                      <a class="dropdown-item" href="/users/sign_up">新規登録</a>
-                      <a class="dropdown-item" href="/post_summaries">最新投稿一覧</a>
+                      <a class="dropdown-item" style="color: #0000ff;" href="/users/sign_in">ログイン</a>
+                      <a class="dropdown-item" style="color: #0000ff;" href="/users/sign_up">新規登録</a>
+                      <a class="dropdown-item" style="color: #0000ff;" href="/post_summaries">最新投稿一覧</a>
                     </div>
                   <% end %>
                 </li>

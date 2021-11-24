@@ -26,21 +26,21 @@
       <table class="table table-bookmark offset-md-2 col-md-8 offset-sm-2 col-sm-7">
         <thead>
           <tr>
-            <th>カテゴリー</th>
-            <th>タイトル</th>
-            <th>本文</th>
+            <th style="width: 20%">カテゴリー</th>
+            <th style="width: 40%">タイトル</th>
+            <th style="width: 40%">本文</th>
           </tr>
         </thead>
         <tbody>
           <% @bookmarks.each do |bookmark| %>
             <tr>
-              <td><%= bookmark.post_summary.category %></td>
-              <td>
+              <td style="width: 20%"><%= bookmark.post_summary.category %></td>
+              <td style="width: 40%">
                 <%= link_to post_summary_path(bookmark.post_summary) do %>
                   <%= bookmark.post_summary.title.truncate(15) %>
                 <% end %>
               </td>
-              <td><%= bookmark.post_summary.introduction.truncate(15) %></td>
+              <td style="width: 40%"><%= bookmark.post_summary.introduction.truncate(15) %></td>
             </tr>
           <% end %>
         </tbody>

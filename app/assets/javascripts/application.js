@@ -42,6 +42,7 @@ document.addEventListener("turbolinks:load", function(){
   });
 });
 
+// Kaminari＋jscroll
 $(window).on('scroll', function() {
     scrollHeight = $(document).height();
     scrollPosition = $(window).height() + $(window).scrollTop();
@@ -61,3 +62,5 @@ $(window).on('scroll', function() {
           });
     }
 });
+
+//
