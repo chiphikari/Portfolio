@@ -1,8 +1,8 @@
-<div class="container mx-auto">
+<div class="container mx-auto" style="background-color: rgba( 255, 255, 255, 0.9 );">
   <div class="row">
     <div class="col-md-12 text-center">
       <%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", width: "250", class: "box", style: "margin: 20px;"  %>
-      <table class= "table offset-md-3 col-md-6 offset-sm-2 col-sm-7">
+      <table class= "table offset-md-3 col-md-6 offset-sm-2 col-sm-7" style="background-color: rgba( 255, 255, 255, 0.9 );">
         <tbody>
           <tr>
             <td><p class="table__user-info">ユーザー名：</p></td>
@@ -14,12 +14,12 @@
           </tr>
         </tbody>
       </table>
-      <%= link_to "編集する", edit_user_path(@user.id), class: "btn btn-info" %>
+      <%= link_to "編集する", edit_user_path(@user.id), class: "btn btn-info", style: "margin: 20px; width: 500px;" %>
     </div>
   </div>
 </div>
 
-<div class="container mx-auto">
+<div class="container mx-auto" style="background-color: rgba( 255, 255, 255, 0.9 );">
   <div class="row">
     <div class="col-md-12 text-center">
       <h3 class="bookmark"><i class="fas fa-bookmark"></i><span>ブックマーク一覧</span></h3>

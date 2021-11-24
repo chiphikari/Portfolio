@@ -1,5 +1,5 @@
 # Seek Hobby
-<img width="1400" alt="スクリーンショット 2021-11-22 16 21 19" src="https://user-images.githubusercontent.com/88571532/142820132-f63bee50-1a28-4c88-9714-30cd1fec6c3a.png">
+![スクリーンショット 2021-11-24 22 36 36](https://user-images.githubusercontent.com/88571532/143248559-0c155dd8-53d1-4fe2-b455-a9e22149227a.png)
 
 ## サイト概要
 休みの日に予定がないと暇を持て余すことがあると思います。そんなときのために暇を楽しいに変えられるよう近所の隠れ観光場所・喫茶店・散歩コースや、家で楽しめる本・動画・その他趣味などいろんなユーザーから投稿された記事を参考に、お金をあまり使わずして楽しみを得られるようにする「余暇・休日の楽しみ方レビュー」サイトです。
@@ -22,7 +22,7 @@
 - 自分の楽しみ方や場所を共有したいユーザ
 - 新しい趣味を探しているユーザ
 
-<目指した課題解決>  
+<目指した課題解決>
 その人にあった充実した休みを過ごしリフレッシュできるようにすることです。
 また、一人でも休みを楽しめ、機会があればいろんな人と出会えたり新たな趣味を見つけることができると思います。
 
@@ -65,7 +65,7 @@
 ![スクリーンショット 2021-11-22 16 53 57](https://user-images.githubusercontent.com/88571532/142823600-93b80415-2b1b-4fcb-826d-0ce443834da3.png)
 ・アプリケーション詳細設計 https://docs.google.com/spreadsheets/d/1spP6kh7j0TylcF9Jre5CkfejLvrP9DrSqo7ZOhP1oUc/edit?usp=sharing
 ![スクリーンショット 2021-11-22 17 03 39](https://user-images.githubusercontent.com/88571532/142824876-2df8eea6-9f7f-4e5f-b738-7effe23b3d22.png)
-・テーブル定義書  https://docs.google.com/spreadsheets/d/1TB_KNWTwi3a009Ew4AHoVYVj9CzrMl5sx56fDYFxuZw/edit?usp=sharing  
+・テーブル定義書  https://docs.google.com/spreadsheets/d/1TB_KNWTwi3a009Ew4AHoVYVj9CzrMl5sx56fDYFxuZw/edit?usp=sharing
 ![スクリーンショット 2021-11-22 17 08 28](https://user-images.githubusercontent.com/88571532/142825405-37ab34d1-f219-42f0-8c40-4d8079126240.png)
 
 
