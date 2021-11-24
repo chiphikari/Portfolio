@@ -64,3 +64,22 @@ $(window).on('scroll', function() {
 });
 
 //
+$('top-page-header__header-center__surround__bottom').fadeIn(1500);
+
+//
+$(window).on("scroll", function() {
+  var scroll_top = $(window).scrollTop();
+  $("#scroll span").text(scroll_top);
+
+  $(".feature__feature-item--body").each(function() {
+    var elem_pos = $(this).offset().top;
+    $(this).find(".feature__feature-item--body_pos span").text(Math.floor(elem_pos));
+
+    //どのタイミングでフェードインさせるか
+    if (scroll_top >= elem_pos - window_h+200) {
+      $(this).addClass("fadein");
+    } else {
+      $(this).removeClass("fadein");
+    }
+  });
+});
