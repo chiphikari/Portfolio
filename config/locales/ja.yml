@@ -16,6 +16,13 @@ ja:
         cafe: 隠れ喫茶店
         walk: おすすめ散歩
   activerecord:
+    attributes:
+      post_summary:
+        introduction: 紹介文
+        title: タイトル
+        headline: ヘッドライン
+        tag: タグ
+        link: リンク
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

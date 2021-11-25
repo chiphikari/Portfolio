@@ -51,6 +51,7 @@ class PostSummariesController < ApplicationController
       flash[:notice] = '投稿できました！！'
       redirect_to post_summary_path(post_summary.id)
     else
+      flash[:alert] = '投稿に失敗しました'
       render :new
     end
   end
@@ -74,14 +75,14 @@ class PostSummariesController < ApplicationController
   end
 
   def update
-    post_summary = PostSummary.find(params[:id])
-    post_summary.user = current_user
+    @post_summary = PostSummary.find(params[:id])
+    @post_summary.user = current_user
     tag_list = params[:post_summary][:tag_name].delete(' ').delete('　').split('#')
     tag_list.delete('')
-    if post_summary.update(post_summary_params)
-      post_summary.save_tag(tag_list)
+    if @post_summary.update(post_summary_params)
+      @post_summary.save_tag(tag_list)
       flash[:notice] = '更新に成功しました！'
-      redirect_to post_summary_path(post_summary.id)
+      redirect_to post_summary_path(@post_summary.id)
     else
       render :edit
     end
