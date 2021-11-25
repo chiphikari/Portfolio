@@ -41,10 +41,10 @@
             <span class="slider02" >
                 <% if post.post_images.present? %>
                     <% post.post_images.each do |image| %>
-                        <%= attachment_image_tag image, :image%>
+                        <%= attachment_image_tag image, :image, style: "border-radius: 20px;"%>
                     <% end %>
                 <% else %>
-                    <%= image_tag 'noimage.jpg'%>
+                    <%= image_tag 'noimage.jpg', style: "border-radius: 20px;"%>
                 <% end %>
             </span>
 
