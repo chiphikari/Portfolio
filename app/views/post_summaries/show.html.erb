@@ -1,5 +1,6 @@
 <h1 class="title-post"><%= @post_summary.title %></h1>
-<div class="container mx-auto pb-5" style="background-color: rgba(0,0,0,0.8);">
+<div style="background-color: rgba(0,0,0,0.7);">
+<div class="container mx-auto pb-5">
   <div class="row">
     <div class="col-md-5 mt-3">
       <div class="post-info__subtitle"><span><i class="fas fa-tags"></i></span>タグ</div>
@@ -37,7 +38,7 @@
 
         <div class="post-info__subtitle"><span><i class="fas fa-user-astronaut"></i></span>投稿者</div>
         <span>
-          <p class="post-info__user-info"><%= @user.user_name %>&ensp;<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", class: "box-user" %></p>
+          <p class="post-info__user-info"><%= @user.user_name %>&ensp;<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", class: "box-user", onmouseover: "zoom( this, 150, 150 );", onmouseout: "zoom( this, 50, 50 );" %></p>
         </span>
 
         <span>
@@ -178,5 +179,5 @@
     </div>
   </div>
 </div>
-
+</div>
 

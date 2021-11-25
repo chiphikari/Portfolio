@@ -2,12 +2,12 @@
   <p>
     <span>
       <i class="fas fa-bookmark"></i>
-    </span><%= link_to "ブックマーク解除", post_summary_bookmarks_path(post_summary), method: :delete, class: "bookmarks", remote: true%>
+    </span><%= link_to "ブックマーク解除", post_summary_bookmarks_path(post_summary), method: :delete, class: "bookmarks", remote: true, style: "color: #f0fff0; text-decoration: none;"%>
   </p>
 <% else %>
   <p>
     <span>
       <i class="far fa-bookmark"></i>
-    </span><%= link_to "ブックマーク登録", post_summary_bookmarks_path(post_summary), method: :post, class: "bookmarks", remote: true%>
+    </span><%= link_to "ブックマーク登録", post_summary_bookmarks_path(post_summary), method: :post, class: "bookmarks", remote: true, style: "color: #f0fff0; text-decoration: none;"%>
   </p>
 <% end %>

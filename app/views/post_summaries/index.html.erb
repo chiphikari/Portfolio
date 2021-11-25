@@ -41,10 +41,10 @@
             <span class="slider02" >
                 <% if post.post_images.present? %>
                     <% post.post_images.each do |image| %>
-                        <%= attachment_image_tag image, :image, style: "border-radius: 20px;"%>
+                        <%= attachment_image_tag image, :image%>
                     <% end %>
                 <% else %>
-                    <%= image_tag 'noimage.jpg', style: "border-radius: 20px;"%>
+                    <%= image_tag 'noimage.jpg'%>
                 <% end %>
             </span>
 
@@ -52,7 +52,7 @@
                 <h3 class="title-2"><%= link_to post.title, post_summary_path(post.id) %></h3>
                 <h4 class="information__specefic" style="padding-bottom: 4%;"><%= post.headline %></h4>
                 <h5 class="information__specefic" style="padding-bottom: 4%;"><%= post.introduction.truncate(50) %></h5>
-                <p class="information__specefic--user"><%= post.user.user_name %>&ensp;<%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", class: "box-user"  %></p>
+                <p class="information__specefic--user"><%= post.user.user_name %>&ensp;<%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: "noimage.jpg", class: "box-user", onmouseover: "zoom( this, 150, 150 );", onmouseout: "zoom( this, 50, 50 );"  %></p>
             </span>
         </div>
     </div>

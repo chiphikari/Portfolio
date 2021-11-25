@@ -17,6 +17,7 @@
   -webkit-transition: all 1s;
   transition: all 1s;
   width: 30%;
+  color: #f0ffff;
 }
 
 .list_design031 .animation.is-show {
@@ -40,6 +41,7 @@
   display: inline-block;
   padding: 0 65px;
   text-align: center;
+  color: #f0ffff;
 
   &::before,
   &::after{
@@ -50,6 +52,8 @@
     content: '';
     border-top: solid 2px #000;
     border-bottom: solid 2px #000;
+    border-color: #f0ffff;
+
   }
 
   &::before{
@@ -74,8 +78,8 @@
 
 .box-user{
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
 }
 
 .specefic-2{
@@ -97,8 +101,10 @@
   padding: 1rem 2rem;
   border-top: 6px double #000;
   border-bottom: 6px double #000;
+  border-color: white;
   width: 100%;
   font-size: 22px;
+  color: white;
 }
 
 // indexタイトル
@@ -129,7 +135,8 @@
 
 .slider02{
     margin: 50px;
-    width: 30%;
+    width: 20%;
+    border-radius: 20px;
 }
 
 // プルダウン
@@ -282,9 +289,10 @@ button.slick-next:before {
     overflow: hidden;
     padding: 5px 20px 10px 70px;
     word-break: break-all;
-    border-top: 3px solid #000;
+    border-top: 2px solid #000;
+    border-color: #87cefa;
     border-radius: 12px 0 0 0;
-    color: #f8f8ff;
+    color: #00ffff;
 
      span {
       font-size: 20px;
@@ -295,7 +303,7 @@ button.slick-next:before {
       padding: 3px 20px;
       color: #fff;
       border-radius: 10px 0 20px 10px;
-      background: #000;
+      background: #87cefa;
     }
   }
 

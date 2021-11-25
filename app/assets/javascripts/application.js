@@ -104,3 +104,9 @@ $(window).on("scroll", function() {
   });
 });
 });
+
+
+function zoom( $this, $height, $width ) {
+    $this.style.height = $height + 'px';
+    $this.style.width = $width + 'px';
+}
