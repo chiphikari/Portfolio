@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :user_name, uniqueness: true
+  validates :user_name, uniqueness: true, presence: true
   validates :user_name, length: { in: 2..20 }
 
   scope :only_status, -> { where(status: true) }
