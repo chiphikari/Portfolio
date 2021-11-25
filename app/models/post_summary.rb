@@ -26,8 +26,8 @@ class PostSummary < ApplicationRecord
   end
 
   validates :title, length: { maximum: 50 }, presence: true
-  validates :headline, length: { maximum: 50 }, presence: true
-  validates :introduction, length: { maximum: 200 }, presence: true
+  validates :headline, length: { maximum: 100 }, presence: true
+  validates :introduction, length: { maximum: 500 }, presence: true
   validates :category, presence: true
 
   enum category: {
