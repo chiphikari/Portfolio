@@ -1,7 +1,7 @@
 <div class="container" style="background-color: rgba( 255, 255, 255, 0.9 );">
+  <h3>投稿しよう</h3>
   <div class="row">
     <div class= "col">
-    <h3>投稿しよう</h3>
       <%= form_with model:@post_summary, local:true do |f| %>
 
       <%= f.select :category, [["隠れおすすめスポット", "隠れおすすめスポット"], ["隠れ喫茶店","隠れ喫茶店"],["おすすめ散歩","おすすめ散歩"]], {include_blank: "選択してください"}, class: "form-control" %>

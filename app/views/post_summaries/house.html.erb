@@ -1,7 +1,7 @@
 <div class="container" style="background-color: rgba( 255, 255, 255, 0.9 );">
+  <h3>投稿しよう</h3>
   <div class="row">
-
-    <h3>投稿しよう</h3>
+    <div class= "col">
     <%= form_with model:@post_summary, local:true do |f| %>
 
     <%= f.select :category, [["動画・映画", "動画・映画"], ["本・書籍","本・書籍"],["アクティビティ","アクティビティ"]], {include_blank: "選択してください"}, class: "form-control" %>
@@ -20,5 +20,6 @@
       <%= f.submit "追加", class: "btn btn-primary" %>
 
     <% end %>
+    </div>
   </div>
 </div>
