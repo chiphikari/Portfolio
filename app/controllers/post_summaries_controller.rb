@@ -84,6 +84,7 @@ class PostSummariesController < ApplicationController
       flash[:notice] = '更新に成功しました！'
       redirect_to post_summary_path(@post_summary.id)
     else
+      flash[:alert] = '更新に失敗しました'
       render :edit
     end
   end
