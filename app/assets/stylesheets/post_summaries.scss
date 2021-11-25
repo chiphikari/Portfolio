@@ -215,6 +215,7 @@
   padding: 1.5rem;
   text-align: center;
   margin-bottom: 20px;
+  color: white;
 
   &::before {
     position: absolute;
@@ -224,7 +225,7 @@
     height: 10px;
     content: '';
     border-radius: 3px;
-    background: #ff4500;
+    background: #00ff00;
   }
 }
 
