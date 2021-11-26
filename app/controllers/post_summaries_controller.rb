@@ -3,11 +3,13 @@ class PostSummariesController < ApplicationController
   before_action :authenticate_user!, except: %i[index show like]
 
   def index
-    if params[:category].blank? || params[:search_flag] == 'updated'
+    if params[:category].blank?
       if user_signed_in?
         if params[:search_flag] == 'like'
           all_ranks = PostSummary.includes(:favorites).sort { |a, b| b.favorites.size <=> a.favorites.size }
           @post_summaries = Kaminari.paginate_array(all_ranks).page(params[:page]).per(4)
+        elsif params[:search_flag] == 'updated'
+          @post_summaries = PostSummary.page(params[:page]).per(4).order(created_at: :desc)
         else
           @post_summaries = PostSummary.where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(4)
         end
@@ -22,6 +24,8 @@ class PostSummariesController < ApplicationController
       if params[:search_flag] == 'like'
         all_ranks = PostSummary.where(category: params[:category]).includes(:favorites).sort { |a, b| b.favorites.size <=> a.favorites.size }
         @post_summaries = Kaminari.paginate_array(all_ranks).page(params[:page]).per(4)
+      elsif params[:search_flag] == 'updated'
+        @post_summaries = PostSummary.page(params[:page]).per(4).order(created_at: :desc)
       else
         @post_summaries = PostSummary.where(category: params[:category]).order(created_at: :desc).page(params[:page]).per(4)
       end
