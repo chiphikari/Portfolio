@@ -57,6 +57,13 @@ RSpec.describe 'PostSummaryモデルのテスト', type: :model do
         expect(post_summary.errors.full_messages).to eq ["紹介文は500文字以内で入力してください"]
       end
     end
+
+    context 'attributes' do
+      it 'post_houseのリンクが生成される'
+        post_summary.post_house = FactoryBot.build(:post_summary)
+        is_expected.to eq true
+      end
+    end
   end
 
   describe 'アソシエーションのテスト' do
@@ -89,6 +96,5 @@ RSpec.describe 'PostSummaryモデルのテスト', type: :model do
         expect(PostSummary.reflect_on_association(:post_images).macro).to eq :has_many
       end
     end
-  end
-  
+
 end
