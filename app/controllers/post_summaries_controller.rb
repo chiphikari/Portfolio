@@ -52,7 +52,7 @@ class PostSummariesController < ApplicationController
     tag_list.delete('')
     if post_summary.save
       post_summary.save_tag(tag_list)
-      flash[:notice] = '投稿できました！'
+      flash[:notice] = '投稿できました'
       redirect_to post_summary_path(post_summary.id)
     else
       flash[:alert] = '投稿に失敗しました'
@@ -85,7 +85,7 @@ class PostSummariesController < ApplicationController
     tag_list.delete('')
     if @post_summary.update(post_summary_params)
       @post_summary.save_tag(tag_list)
-      flash[:notice] = '更新に成功しました！'
+      flash[:notice] = '更新に成功しました'
       redirect_to post_summary_path(@post_summary.id)
     else
       flash[:alert] = '更新に失敗しました'
