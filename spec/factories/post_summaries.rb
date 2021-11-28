@@ -8,6 +8,7 @@ FactoryBot.define do
     after(:create) do |post_summary|
       create :post_house, post_summary: post_summary
       create :post_outside, post_summary: post_summary
+      create :post_images, post_summary: post_summary
       create_list(:post_tag, 1, post_summary: post_summary, tag: create(:tag))
     end
   end
