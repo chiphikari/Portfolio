@@ -2,6 +2,6 @@ class Bookmark < ApplicationRecord
   belongs_to :user
   belongs_to :post_summary
 
-  # 重複の投稿を防ぐ
-  validates :user_id, uniqueness: { scope: :post_summary_id }
+  validates :user_id, presence: true
+  validates :post_summary_id, uniqueness: { scope: :user_id }, presence: true
 end

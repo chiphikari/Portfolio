@@ -19,5 +19,4 @@ Rails.application.routes.draw do
     resource :favorites, only: %i[create destroy]
   end
 
-  devise_for :admins
 end
