@@ -12,7 +12,6 @@ Rails.application.routes.draw do
     collection do
       get :house
       get :outside
-      get :like
     end
     resources :reviews, only: %i[create destroy]
     resource :bookmarks, only: %i[create destroy]

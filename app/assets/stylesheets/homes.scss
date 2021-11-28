@@ -441,18 +441,18 @@
                 width: 200px;
 
                 &__bottom{
-                    font-size: 2px;
+                    font-size: 15px;
                     padding-left: 0;
                     color: black;
                     background-color: rgba(255, 255, 255, 0.45);
-                    width: 50%;
+                    width: 70%;
                 }
             }
         }
     }
 
     .introduction{
-        font-size: 2px;
+        font-size: 13px;
     }
 
 
@@ -478,7 +478,7 @@
 
                 &--title{
                     font-weight: bolder;
-                    font-size:  4px;
+                    font-size:  15px;
                     position:  relative;
                     font-weight:  normal;
                     margin: 5px 0 5px 0;
@@ -486,14 +486,14 @@
                 }
 
                 &--content{
-                    font-size: 4px;
+                    font-size: 13px;
                 }
             }
 
             &--body2{
                 top: 55%;
                 right: 90px;
-                width: 200px;
+                width: 240px;
             }
         }
 
