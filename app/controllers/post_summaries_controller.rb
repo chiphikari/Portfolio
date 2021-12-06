@@ -6,15 +6,16 @@ class PostSummariesController < ApplicationController
     if params[:category].blank?
       if user_signed_in?
         if params[:search_flag] == 'like'
-          all_ranks = PostSummary.includes(:favorites).sort { |a, b| b.favorites.size <=> a.favorites.size }
+          all_ranks = PostSummary.left_joins(:favorites).group('post_summaries.id').order(Arel.sql("count('favorites.post_summary_id') desc")).page(params[:page]).per(4)
           @post_summaries = Kaminari.paginate_array(all_ranks).page(params[:page]).per(4)
+
         elsif params[:search_flag] == 'updated'
           @post_summaries = PostSummary.page(params[:page]).per(4).order(created_at: :desc)
         else
           @post_summaries = PostSummary.where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(4)
         end
       elsif params[:search_flag] == 'like'
-        all_ranks = PostSummary.includes(:favorites).sort { |a, b| b.favorites.size <=> a.favorites.size }
+        all_ranks = PostSummary.left_joins(:favorites).group('post_summaries.id').order(Arel.sql("count('favorites.post_summary_id') desc")).page(params[:page]).per(4)
         @post_summaries = Kaminari.paginate_array(all_ranks).page(params[:page]).per(4)
       else
         @post_summaries = PostSummary.page(params[:page]).per(4).order(created_at: :desc)
@@ -22,7 +23,7 @@ class PostSummariesController < ApplicationController
     else
       @category = params[:category]
       if params[:search_flag] == 'like'
-        all_ranks = PostSummary.where(category: params[:category]).includes(:favorites).sort { |a, b| b.favorites.size <=> a.favorites.size }
+        all_ranks = PostSummary.where(category: params[:category]).left_joins(:favorites).group('post_summaries.id').order(Arel.sql("count('favorites.post_summary_id') desc")).page(params[:page]).per(4)
         @post_summaries = Kaminari.paginate_array(all_ranks).page(params[:page]).per(4)
       elsif params[:search_flag] == 'updated'
         @post_summaries = PostSummary.where(category: params[:category]).page(params[:page]).per(4).order(created_at: :desc)
@@ -45,18 +46,22 @@ class PostSummariesController < ApplicationController
   end
 
   def create
-    post_summary = PostSummary.new(post_summary_params)
+    @post_summary = PostSummary.new(post_summary_params)
     # belongs_toでユーザーを関連つけしているためuser.idがnilになる
-    post_summary.user = current_user
-    tag_list = params[:post_summary][:tag_name].delete(' ').delete('　').split('#')
-    tag_list.delete('')
-    if post_summary.save
-      post_summary.save_tag(tag_list)
-      flash[:notice] = '投稿できました'
-      redirect_to post_summary_path(post_summary.id)
+    @post_summary.user = current_user
+    tag_list = params[:post_summary][:tag_name].delete(' ').delete('　').split(',')
+    # tag_list.delete('')
+    if @post_summary.save
+      @post_summary.save_tag(tag_list)
+      flash[:notice] = '投稿できました!'
+      redirect_to post_summary_path(@post_summary.id)
     else
       flash[:alert] = '投稿に失敗しました'
-      render :new
+        if params[:post_summary][:post_outside_attributes]
+          render :outside
+        else
+          render :house
+        end
     end
   end
 
@@ -70,7 +75,7 @@ class PostSummariesController < ApplicationController
 
   def edit
     @post_summary = PostSummary.find(params[:id])
-    @tag_list = @post_summary.tags.pluck(:tag_name).join('#')
+    @tag_list = @post_summary.tags.pluck(:tag_name).join(',')
     if @post_summary.user == current_user
       render :edit
     else
@@ -81,8 +86,8 @@ class PostSummariesController < ApplicationController
   def update
     @post_summary = PostSummary.find(params[:id])
     @post_summary.user = current_user
-    tag_list = params[:post_summary][:tag_name].delete(' ').delete('　').split('#')
-    tag_list.delete('')
+    tag_list = params[:post_summary][:tag_name].delete(' ').delete('　').split(',')
+    # tag_list.delete('')
     if @post_summary.update(post_summary_params)
       @post_summary.save_tag(tag_list)
       flash[:notice] = '更新に成功しました'

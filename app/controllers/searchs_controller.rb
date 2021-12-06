@@ -9,7 +9,7 @@ class SearchsController < ApplicationController
 
   def search_for(model, content)
     if model == 'tag'
-      Tag.where('tag_name LIKE ?', '%' + content + '%')
+      PostSummary.joins(:tags).where("tags.tag_name like ?",'%' + content + '%').distinct
     elsif model == 'post_outside'
       PostOutside.where('address LIKE ?', '%' + content + '%')
     end

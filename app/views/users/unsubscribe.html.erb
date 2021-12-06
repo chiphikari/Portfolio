@@ -6,7 +6,7 @@
       それでも退会を希望する場合は「退会する」をクリックください。</p>
 
       <%= link_to "戻る", user_path(current_user), class: "btn btn-dark" %>
-      <%=link_to "退会する", unsubscribe_path, method: :patch, class:"btn btn-danger", data: { confilm: "本当に退会しますか？" } %>
+      <%=link_to "退会する", withdraw_user_path, method: :patch, class:"btn btn-danger", data: { confilm: "本当に退会しますか？" } %>
     </div>
   </div>
 </div>

@@ -39,10 +39,10 @@
           </div>
         </div>
       </nav>
-    <% if flash[:notice] %>
-        <p style="background-color: #00bfff; color: white; text-align: center;"><%= notice %></p>
-    <% end %>
-    <% if flash[:alert] %>
-        <p style="background-color: #FF69B4; color: white;"><%= alert %></p>
-    <% end %>
+      <% if flash[:notice] %>
+        <p style="background-color: #00bfff; color: white; text-align: center; font-size: 20px;"><%= notice %></p>
+      <% end %>
+      <% if flash[:alert] %>
+        <p style="background-color: #ffa500; color: white; text-align: center; font-size: 20px;"><%= alert %></p>
+      <% end %>
 </div>

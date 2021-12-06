@@ -10,21 +10,20 @@
             </tr>
         </thead>
         <tbody>
-        <% @records.each do |tag| %>
-          <% tag.post_summaries.each do |post_summary| %>
-            <tr>
-              <td><%= link_to post_summary.title, post_summary_path(post_summary.id) %></td>
-              <td><%= post_summary.headline %></td>
-              <td><%= post_summary.introduction.truncate(20) %></td>
-              <td>
-                <% post_summary.tags.each do |tags| %>
-                  #<%= tags.tag_name %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
+        <% @records.each do |post_summary| %>
+          <tr>
+            <td><%= link_to post_summary.title, post_summary_path(post_summary.id) %></td>
+            <td><%= post_summary.headline %></td>
+            <td><%= post_summary.introduction.truncate(20) %></td>
+            <td>
+              <% post_summary.tags.each do |tags| %>
+                #<%= tags.tag_name %>
+              <% end %>
+            </td>
+          </tr>
         <% end %>
         </tbody>
+    </table>
 <% else @model == 'post_outside' %>
   <h3 style="color: white;">【住所の検索結果】検索ワード：<%= @content %></h3>
     <table class="table table-search">
@@ -45,5 +44,6 @@
             <td style="width: 40%"><%= tag.address %></td>
           </tr>
         </tbody>
+    </table>
       <% end %>
 <% end %>

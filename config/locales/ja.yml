@@ -21,8 +21,11 @@ ja:
         introduction: 紹介文
         title: タイトル
         headline: ヘッドライン
-        tag: タグ
+        category: カテゴリー
+      post_house:
         link: リンク
+      post_outside:
+        address: 住所
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

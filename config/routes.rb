@@ -4,9 +4,12 @@ Rails.application.routes.draw do
   get '/search' => 'searchs#search'
 
   devise_for :users
-  resources :users, only: %i[show edit update]
-  get '/users/:id/withdraw' => 'users#unsubscribe', as: 'unsubscribe'
-  patch '/users/:id/withdraw' => 'users#withdraw', as: 'withdraw'
+  resources :users, only: %i[show edit update] do
+    member do
+      get 'unsubscribe'
+      patch 'withdraw'
+    end
+  end
 
   resources :post_summaries do
     collection do

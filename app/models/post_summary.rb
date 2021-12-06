@@ -25,10 +25,12 @@ class PostSummary < ApplicationRecord
     favorites.where(user_id: user.id).exists?
   end
 
-  validates :title, length: { maximum: 50 }, presence: true
-  validates :headline, length: { maximum: 100 }, presence: true
-  validates :introduction, length: { maximum: 500 }, presence: true
-  validates :category, presence: true
+  with_options presence: true do
+    validates :category
+    validates :title, length: { maximum: 50 }
+    validates :headline, length: { maximum: 100 }
+    validates :introduction, length: { maximum: 500 }
+  end
 
   enum category: {
     動画・映画: 0,
