@@ -85,10 +85,10 @@ class PostSummariesController < ApplicationController
 
   def update
     @post_summary = PostSummary.find(params[:id])
-    @post_summary.user = current_user
     tag_list = params[:post_summary][:tag_name].delete(' ').delete('　').split(',')
     # tag_list.delete('')
-    if @post_summary.update(post_summary_params)
+    if @post_summary.user = current_user
+      @post_summary.update(post_summary_params)
       @post_summary.save_tag(tag_list)
       flash[:notice] = '更新に成功しました'
       redirect_to post_summary_path(@post_summary.id)
