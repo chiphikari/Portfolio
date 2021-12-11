@@ -87,11 +87,15 @@ class PostSummariesController < ApplicationController
     @post_summary = PostSummary.find(params[:id])
     tag_list = params[:post_summary][:tag_name].delete(' ').delete('　').split(',')
     # tag_list.delete('')
-    if @post_summary.user = current_user
+    if @post_summary.user != current_user
+      redirect_to root_path
+
+    elsif @post_summary.user = current_user
       @post_summary.update(post_summary_params)
       @post_summary.save_tag(tag_list)
       flash[:notice] = '更新に成功しました'
       redirect_to post_summary_path(@post_summary.id)
+      
     else
       flash[:alert] = '更新に失敗しました'
       render :edit
@@ -100,7 +104,9 @@ class PostSummariesController < ApplicationController
 
   def destroy
     post_summary = PostSummary.find(params[:id])
-    if post_summary.user = current_user
+    if post_summary != current_user
+      redirect_to root_path
+    elsif post_summary.user = current_user
       post_summary.destroy
       redirect_to root_path
     else

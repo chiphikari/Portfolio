@@ -105,6 +105,32 @@ RSpec.describe PostSummariesController, type: :controller do
         end.to_not change(@user.post_summaries, :count)
       end
     end
+
+    context "if logged in user updates another user" do
+      before do
+        @user = FactoryBot.create(:user)
+        other_user = FactoryBot.create(:user)
+        @post_summary = FactoryBot.create(:post_summary, user: other_user, title: "Same Old Name")
+        @post_house_params = FactoryBot.attributes_for(:post_house)
+        @post_outside_params = FactoryBot.attributes_for(:post_outside)
+        @post_images = FactoryBot.attributes_for(:post_image)
+        @tag = FactoryBot.create(:tag)
+        @params_nested = FactoryBot.attributes_for(:post_summary, post_house_attributes: @post_house_params, post_outside_attributes: @post_outside_params, post_images_image: @post_images, tag_name: @tag )
+      end
+
+      it "does not update" do
+        @params_nested = FactoryBot.attributes_for(:post_summary, title: "New Name", post_house_attributes: @post_house_params, post_outside_attributes: @post_outside_params, post_images_image: @post_images, tag_name: @tag )
+        sign_in @user
+        patch :update, params: { id: @post_summary.id, post_summary: @params_nested }
+        expect(@post_summary.reload.title).to eq "Same Old Name"
+      end
+
+      it "redirects to the dashboard" do
+        sign_in @user
+        patch :update, params: { id: @post_summary.id, post_summary: @params_nested }
+        expect(response).to redirect_to root_path
+      end
+    end
     context "unauthorized user" do
       it "return 302" do
         post :create
@@ -207,25 +233,41 @@ RSpec.describe PostSummariesController, type: :controller do
         expect(response).to redirect_to "/post_summaries/1"
       end
     end
-
     context "invalid update" do
       before do
         @user = FactoryBot.create(:user)
-        other_user = FactoryBot.create(:user)
-        @post_summary = FactoryBot.create(:post_summary,
-          user: other_user,
-          title: "Same Old Name")
+        @post_summary = FactoryBot.create(:post_summary, user_id: @user.id)
+        @post_outside_params = FactoryBot.attributes_for(:post_outside)
+        @post_images = FactoryBot.attributes_for(:post_image)
+        @tag = FactoryBot.create(:tag)
+        @params_nested = FactoryBot.attributes_for(:post_summary, post_house_attributes: @post_house_params, post_outside_attributes: @post_outside_params, post_images_image: @post_images, tag_name: @tag )
       end
 
-      it "doese not update" do
-        sign_in @user
-        project_params = FactoryBot.attributes_for(:post_summary, title: "New name", tag_name: "tag-1")
-        patch :update, params: { id: @post_summary.id, post_summary: project_params }
-        expect(@post_summary.reload.title).to eq "Old name"
+      it "return 302" do
+        patch :update, params: {id: @post_summary.id, post_summary: @params_nested}
+        expect(response).to have_http_status "302"
       end
 
       it "redirect_to root_path" do
+        patch :update, params: {id: @post_summary.id, post_summary: @params_nested}
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
 
+  describe "#destroy" do
+    context "if logged in user delete another user" do
+      before do
+        @user = create(:user)
+        other_user = create(:user)
+        @task = FactoryBot.create(:post_summary, user: other_user)
+      end
+
+      it "" do
+        sign_in @user
+        expect{
+          delete :destroy, params: { id: @task.id }
+        }.to_not change(PostSummary, :count)
       end
     end
   end
