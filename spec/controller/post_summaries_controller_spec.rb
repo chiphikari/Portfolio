@@ -105,32 +105,6 @@ RSpec.describe PostSummariesController, type: :controller do
         end.to_not change(@user.post_summaries, :count)
       end
     end
-
-    context "if logged in user updates another user" do
-      before do
-        @user = FactoryBot.create(:user)
-        other_user = FactoryBot.create(:user)
-        @post_summary = FactoryBot.create(:post_summary, user: other_user, title: "Same Old Name")
-        @post_house_params = FactoryBot.attributes_for(:post_house)
-        @post_outside_params = FactoryBot.attributes_for(:post_outside)
-        @post_images = FactoryBot.attributes_for(:post_image)
-        @tag = FactoryBot.create(:tag)
-        @params_nested = FactoryBot.attributes_for(:post_summary, post_house_attributes: @post_house_params, post_outside_attributes: @post_outside_params, post_images_image: @post_images, tag_name: @tag )
-      end
-
-      it "does not update" do
-        @params_nested = FactoryBot.attributes_for(:post_summary, title: "New Name", post_house_attributes: @post_house_params, post_outside_attributes: @post_outside_params, post_images_image: @post_images, tag_name: @tag )
-        sign_in @user
-        patch :update, params: { id: @post_summary.id, post_summary: @params_nested }
-        expect(@post_summary.reload.title).to eq "Same Old Name"
-      end
-
-      it "redirects to the dashboard" do
-        sign_in @user
-        patch :update, params: { id: @post_summary.id, post_summary: @params_nested }
-        expect(response).to redirect_to root_path
-      end
-    end
     context "unauthorized user" do
       it "return 302" do
         post :create
@@ -196,7 +170,7 @@ RSpec.describe PostSummariesController, type: :controller do
       before do
         @user = create(:user)
         @another_user = FactoryBot.create(:user)
-        @post_summary = FactoryBot.create(:post_summary, user_id: @user.id)
+        @post_summary = FactoryBot.create(:post_summary, user: @user)
         @post_house_params = FactoryBot.attributes_for(:post_house)
         @post_outside_params = FactoryBot.attributes_for(:post_outside)
         @post_images = FactoryBot.attributes_for(:post_image)
@@ -230,13 +204,38 @@ RSpec.describe PostSummariesController, type: :controller do
         @params_nested = FactoryBot.attributes_for(:post_summary, title: "New Post Name", post_house_attributes: @post_house_params, post_outside_attributes: @post_outside_params, post_images_image: @post_images, tag_name: @tag)
         sign_in @user
         patch :update, params: {id: @post_summary.id, post_summary: @params_nested}
-        expect(response).to redirect_to "/post_summaries/1"
+        expect(response).to redirect_to post_summary_path(@post_summary.id)
+      end
+    end
+     context "if logged in user updates another user" do
+      before do
+        @user = FactoryBot.create(:user)
+        other_user = FactoryBot.create(:user)
+        @post_summary = FactoryBot.create(:post_summary, user: other_user, title: "Same Old Name")
+        @post_house_params = FactoryBot.attributes_for(:post_house)
+        @post_outside_params = FactoryBot.attributes_for(:post_outside)
+        @post_images = FactoryBot.attributes_for(:post_image)
+        @tag = FactoryBot.create(:tag)
+        @params_nested = FactoryBot.attributes_for(:post_summary, post_house_attributes: @post_house_params, post_outside_attributes: @post_outside_params, post_images_image: @post_images, tag_name: @tag )
+      end
+
+      it "does not update" do
+        @params_nested = FactoryBot.attributes_for(:post_summary, title: "New Name", post_house_attributes: @post_house_params, post_outside_attributes: @post_outside_params, post_images_image: @post_images, tag_name: @tag )
+        sign_in @user
+        patch :update, params: { id: @post_summary.id, post_summary: @params_nested }
+        expect(@post_summary.reload.title).to eq "Same Old Name"
+      end
+
+      it "redirects to show" do
+        sign_in @user
+        patch :update, params: { id: @post_summary.id, post_summary: @params_nested }
+        expect(response).to redirect_to post_summary_path(@post_summary.id)
       end
     end
     context "invalid update" do
       before do
         @user = FactoryBot.create(:user)
-        @post_summary = FactoryBot.create(:post_summary, user_id: @user.id)
+        @post_summary = FactoryBot.create(:post_summary, user: @user)
         @post_outside_params = FactoryBot.attributes_for(:post_outside)
         @post_images = FactoryBot.attributes_for(:post_image)
         @tag = FactoryBot.create(:tag)
@@ -256,17 +255,69 @@ RSpec.describe PostSummariesController, type: :controller do
   end
 
   describe "#destroy" do
+    context "as an authorized user" do
+      before do
+        @user = FactoryBot.create(:user)
+        @post_summary = FactoryBot.create(:post_summary, user: @user)
+      end
+
+      it "deletes a task" do
+        sign_in @user
+        expect {
+          delete :destroy, params: { id: @post_summary.id }
+        }.to change(@user.post_summaries, :count).by(-1)
+      end
+
+      it "redirects to index" do
+        sign_in @user
+        delete :destroy, params: {id: @post_summary.id, post_summary: @params_nested}
+        expect(response).to redirect_to post_summaries_path
+      end
+    end
+
     context "if logged in user delete another user" do
       before do
         @user = create(:user)
         other_user = create(:user)
-        @task = FactoryBot.create(:post_summary, user: other_user)
+        @post_summary = FactoryBot.create(:post_summary, user: other_user)
+        @post_outside_params = FactoryBot.attributes_for(:post_outside)
+        @post_images = FactoryBot.attributes_for(:post_image)
+        @tag = FactoryBot.create(:tag)
+        @params_nested = FactoryBot.attributes_for(:post_summary, post_house_attributes: @post_house_params, post_outside_attributes: @post_outside_params, post_images_image: @post_images, tag_name: @tag )
       end
 
-      it "" do
+      it "does not delete" do
         sign_in @user
         expect{
-          delete :destroy, params: { id: @task.id }
+          delete :destroy, params: {id: @post_summary.id, post_summary: @params_nested}
+        }.to_not change(PostSummary, :count)
+      end
+
+      it "redirects to the dashboard" do
+        sign_in @user
+        delete :destroy, params: {id: @post_summary.id, post_summary: @params_nested}
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "as a user not to login" do
+      before do
+        @post_summary = FactoryBot.create(:post_summary)
+      end
+
+      it "returns a 302 response" do
+        delete :destroy, params: {id: @post_summary.id, post_summary: @params_nested}
+        expect(response).to have_http_status "302"
+      end
+
+      it "redirects to the sign-in page" do
+        delete :destroy, params: {id: @post_summary.id, post_summary: @params_nested}
+        expect(response).to redirect_to new_user_session_path
+      end
+
+      it "does not delete" do
+        expect {
+          delete :destroy, params: {id: @post_summary.id, post_summary: @params_nested}
         }.to_not change(PostSummary, :count)
       end
     end
