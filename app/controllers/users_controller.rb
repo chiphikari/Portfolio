@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :correct_user, only: [:edit, :update, :withdraw, :unsubscribe]
+  before_action :authenticate_user!
+  before_action :correct_user, only: [:show, :edit, :update, :withdraw, :unsubscribe]
 
   def show
     @user = User.find(params[:id])
@@ -37,9 +38,18 @@ class UsersController < ApplicationController
     params.require(:user).permit(:user_name, :profile_image, :email)
   end
 
+  def authenticate_user!
+    unless user_signed_in?
+      flash[:alert] = 'ログインか新規登録してください'
+      redirect_to new_user_session_path
+    end
+  end
+
+
   def correct_user
     @user = User.find(params[:id])
     unless @user == current_user
+      flash[:alert] = '他のユーザーの情報は確認できません'
       redirect_to user_path(current_user)
     end
   end

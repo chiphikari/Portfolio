@@ -169,7 +169,6 @@ RSpec.describe PostSummariesController, type: :controller do
     context "authorized user" do
       before do
         @user = create(:user)
-        @another_user = FactoryBot.create(:user)
         @post_summary = FactoryBot.create(:post_summary, user: @user)
         @post_house_params = FactoryBot.attributes_for(:post_house)
         @post_outside_params = FactoryBot.attributes_for(:post_outside)
