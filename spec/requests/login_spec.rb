@@ -126,18 +126,32 @@ describe 'ユーザログイン' do
 end
 
 describe 'sessions#destroy' do
+  let(:user) {create(:user)}
     context 'ログアウトした場合' do
       before do
-        binding.pry
         @user = FactoryBot.build(:user)
       end
 
       it 'セッション情報が削除されること' do
         delete destroy_user_session_path
-
-        # ひとまずsession.delete(:user_id)されてるので、
-        # ここはsession[:user_id]がnilのはずというテストにする
         expect(session[:user_id]).to eq nil
+      end
+    end
+    context "ログアウト機能のテスト" do
+      before do
+        visit new_user_session_path
+        fill_in 'user[email]', with: user.email
+        fill_in 'user[password]', with: user.password
+        click_button 'ログイン'
+        logout_link = find_all('a')[5].native.inner_text
+        logout_link = logout_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link logout_link
+      end
+      it 'ログアウト後のリダイレクト先においてAbout画面へのリンクが存在する' do
+        expect(page).to have_link '', href: '/about'
+      end
+      it 'ログアウト後のリダイレクト先が、トップになっている' do
+        expect(current_path).to eq '/'
       end
     end
   end

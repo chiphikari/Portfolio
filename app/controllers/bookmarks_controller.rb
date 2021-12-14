@@ -2,17 +2,11 @@ class BookmarksController < ApplicationController
   before_action :post_summary_params
 
   def create
-    bookmark = @post_summary.bookmarks.new(user_id: current_user.id)
-    bookmark.save
+    Bookmark.create(user_id: current_user.id, post_summary_id: params[:post_summary_id])
   end
 
   def destroy
-    bookmark = @post_summary.bookmarks.find_by(user_id: current_user.id)
-    if bookmark.present?
-      bookmark.destroy
-    else
-      redirect_to request.referer
-    end
+    Bookmark.find_by(user_id: current_user.id, post_summary_id: params[:post_summary_id]).destroy
   end
 
   private

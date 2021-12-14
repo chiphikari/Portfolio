@@ -49,7 +49,7 @@
             <p>
                <% if current_user == review.user %>
             <!--review.post_summary.idはアソシエーションしているのでこの書き方でOK-->
-              <%= link_to '口コミを削除', post_summary_review_path(review.post_summary.id, review.id), method: :delete, class:'btn btn-danger' %>
+              <%= link_to '口コミを削除', post_summary_review_path(review.post_summary.id, review.id), method: :delete, class: 'btn btn-danger', remote: true %>
             <% end %>
             </p>
 
