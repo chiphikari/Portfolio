@@ -6,21 +6,24 @@ class PostSummariesController < ApplicationController
     if params[:category].blank?
       if user_signed_in?
         if params[:search_flag] == 'like'
-          @post_summaries = PostSummary.left_joins(:favorites).group('post_summaries.id').order(Arel.sql("count('favorites.post_summary_id') desc")).page(params[:page]).per(4)
+          all_ranks = PostSummary.includes(:favorites).sort { |a, b| b.favorites.size <=> a.favorites.size }
+          @post_summaries = Kaminari.paginate_array(all_ranks).page(params[:page]).per(4)
         elsif params[:search_flag] == 'updated'
           @post_summaries = PostSummary.page(params[:page]).per(4).order(created_at: :desc)
         else
           @post_summaries = PostSummary.where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(4)
         end
       elsif params[:search_flag] == 'like'
-        @post_summaries = PostSummary.left_joins(:favorites).group('post_summaries.id').order(Arel.sql("count('favorites.post_summary_id') desc")).page(params[:page]).per(4)
+        all_ranks = PostSummary.includes(:favorites).sort { |a, b| b.favorites.size <=> a.favorites.size }
+        @post_summaries = Kaminari.paginate_array(all_ranks).page(params[:page]).per(4)
       else
         @post_summaries = PostSummary.page(params[:page]).per(4).order(created_at: :desc)
       end
     else
       @category = params[:category]
       if params[:search_flag] == 'like'
-        @post_summaries = PostSummary.where(category: params[:category]).left_joins(:favorites).group('post_summaries.id').order(Arel.sql("count('favorites.post_summary_id') desc")).page(params[:page]).per(4)
+        all_ranks = PostSummary.where(category: params[:category]).includes(:favorites).sort { |a, b| b.favorites.size <=> a.favorites.size }
+        @post_summaries = Kaminari.paginate_array(all_ranks).page(params[:page]).per(4)
       elsif params[:search_flag] == 'updated'
         @post_summaries = PostSummary.where(category: params[:category]).page(params[:page]).per(4).order(created_at: :desc)
       else
