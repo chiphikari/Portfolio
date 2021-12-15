@@ -122,6 +122,7 @@ RSpec.describe PostSummariesController, type: :controller do
       @user = create(:user)
       @another_user = FactoryBot.create(:user)
       @post_summary = FactoryBot.create(:post_summary, user_id: @user.id)
+      @post_house_params = FactoryBot.attributes_for(:post_house)
       @post_outside_params = FactoryBot.attributes_for(:post_outside)
       @post_images = FactoryBot.attributes_for(:post_image)
       @tag = FactoryBot.create(:tag)
