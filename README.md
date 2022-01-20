@@ -62,7 +62,7 @@
 ![スクリーンショット 2021-11-22 16 40 15](https://user-images.githubusercontent.com/88571532/142821942-52bc1cf2-97d4-4ad1-8c79-424ec7f12d32.png)
 
 ・ワイヤーフレーム  https://drive.google.com/file/d/1j_aNyOd5E9jFWpORuLhHuX8qRQU84pkQ/view?usp=sharing
-![スクリーンショット 2021-11-22 16 53 57](https://user-images.githubusercontent.com/88571532/142823600-93b80415-2b1b-4fcb-826d-0ce443834da3.png)
+![スクリーンショット 2022-01-20 17 45 25](https://user-images.githubusercontent.com/88571532/150304798-22c400bf-190e-4304-a3e1-99df57559c7a.png)
 ・アプリケーション詳細設計  https://docs.google.com/spreadsheets/d/1spP6kh7j0TylcF9Jre5CkfejLvrP9DrSqo7ZOhP1oUc/edit?usp=sharing
 ![スクリーンショット 2021-11-22 17 03 39](https://user-images.githubusercontent.com/88571532/142824876-2df8eea6-9f7f-4e5f-b738-7effe23b3d22.png)
 ・テーブル定義書  https://docs.google.com/spreadsheets/d/1TB_KNWTwi3a009Ew4AHoVYVj9CzrMl5sx56fDYFxuZw/edit?usp=sharing
