@@ -35,15 +35,15 @@
               <th>住所</th>
             </tr>
         </thead>
-      <% @records.each do |tag| %>
         <tbody>
+        <% @records.each do |tag| %>
           <tr>
             <td style="width: 20%"><%= link_to tag.post_summary.title, post_summary_path(tag.post_summary.id) %></td>
             <td style="width: 20%"><%= tag.post_summary.headline %></td>
             <td style="width: 40%"><%= tag.post_summary.introduction.truncate(20) %></td>
             <td style="width: 40%"><%= tag.address %></td>
           </tr>
+        <% end %>
         </tbody>
     </table>
-      <% end %>
 <% end %>
